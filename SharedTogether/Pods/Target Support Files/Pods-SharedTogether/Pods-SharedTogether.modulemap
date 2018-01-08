@@ -1,0 +1,6 @@
+framework module Pods_SharedTogether {
+  umbrella header "Pods-SharedTogether-umbrella.h"
+
+  export *
+  module * { export * }
+}
