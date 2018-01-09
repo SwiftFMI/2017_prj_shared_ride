@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		47C91EEDA311176996B0BCD9 /* Pods_SharedTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */; };
 		A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107C2200365CE00A09311 /* AppDelegate.swift */; };
-		A0A107C5200365CE00A09311 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107C4200365CE00A09311 /* ViewController.swift */; };
+		A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107C4200365CE00A09311 /* WellcomeViewController.swift */; };
 		A0A107C8200365CE00A09311 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A107C6200365CE00A09311 /* Main.storyboard */; };
 		A0A107CA200365CE00A09311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A107C9200365CE00A09311 /* Assets.xcassets */; };
 		A0A107CD200365CE00A09311 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A107CB200365CE00A09311 /* LaunchScreen.storyboard */; };
-		A0A107D920039BC200A09311 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0A107D820039BC200A09311 /* GoogleService-Info.plist */; };
+		A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107E12003C05000A09311 /* SigninViewController.swift */; };
+		A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107E32003C0A500A09311 /* SignupViewController.swift */; };
+		A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107E52003C0B800A09311 /* HomeViewController.swift */; };
+		A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0A107E92003C7D600A09311 /* GoogleService-Info.plist */; };
+		A0A107EC2004DC9400A09311 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107EB2004DC9400A09311 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +26,16 @@
 		91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SharedTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A107BF200365CE00A09311 /* SharedTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SharedTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A107C2200365CE00A09311 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A0A107C4200365CE00A09311 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A0A107C4200365CE00A09311 /* WellcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WellcomeViewController.swift; sourceTree = "<group>"; };
 		A0A107C7200365CE00A09311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0A107C9200365CE00A09311 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0A107CC200365CE00A09311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0A107CE200365CE00A09311 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0A107D820039BC200A09311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A0A107E12003C05000A09311 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		A0A107E32003C0A500A09311 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		A0A107E52003C0B800A09311 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A0A107E92003C7D600A09311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A0A107EB2004DC9400A09311 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +61,7 @@
 		A0A107B6200365CD00A09311 = {
 			isa = PBXGroup;
 			children = (
-				A0A107D820039BC200A09311 /* GoogleService-Info.plist */,
+				A0A107E92003C7D600A09311 /* GoogleService-Info.plist */,
 				A0A107C1200365CE00A09311 /* SharedTogether */,
 				A0A107C0200365CE00A09311 /* Products */,
 				D551EF3F351E2F6F26F014F4 /* Pods */,
@@ -72,14 +80,50 @@
 		A0A107C1200365CE00A09311 /* SharedTogether */ = {
 			isa = PBXGroup;
 			children = (
+				A0A107DC2003BC3000A09311 /* Models */,
+				A0A107DB2003BC2700A09311 /* Views */,
+				A0A107DE2003BC3E00A09311 /* Controllers */,
+				A0A107E02003BD0400A09311 /* Utils */,
 				A0A107C2200365CE00A09311 /* AppDelegate.swift */,
-				A0A107C4200365CE00A09311 /* ViewController.swift */,
 				A0A107C6200365CE00A09311 /* Main.storyboard */,
 				A0A107C9200365CE00A09311 /* Assets.xcassets */,
 				A0A107CB200365CE00A09311 /* LaunchScreen.storyboard */,
 				A0A107CE200365CE00A09311 /* Info.plist */,
 			);
 			path = SharedTogether;
+			sourceTree = "<group>";
+		};
+		A0A107DB2003BC2700A09311 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A0A107DC2003BC3000A09311 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A0A107DE2003BC3E00A09311 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A0A107C4200365CE00A09311 /* WellcomeViewController.swift */,
+				A0A107E12003C05000A09311 /* SigninViewController.swift */,
+				A0A107E32003C0A500A09311 /* SignupViewController.swift */,
+				A0A107E52003C0B800A09311 /* HomeViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A0A107E02003BD0400A09311 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A0A107EB2004DC9400A09311 /* Constants.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		D551EF3F351E2F6F26F014F4 /* Pods */ = {
@@ -154,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A107CD200365CE00A09311 /* LaunchScreen.storyboard in Resources */,
-				A0A107D920039BC200A09311 /* GoogleService-Info.plist in Resources */,
+				A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */,
 				A0A107CA200365CE00A09311 /* Assets.xcassets in Resources */,
 				A0A107C8200365CE00A09311 /* Main.storyboard in Resources */,
 			);
@@ -239,8 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A107C5200365CE00A09311 /* ViewController.swift in Sources */,
+				A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */,
+				A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */,
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
+				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
+				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
+				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

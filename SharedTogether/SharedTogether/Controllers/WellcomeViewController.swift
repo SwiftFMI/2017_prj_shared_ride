@@ -7,8 +7,9 @@
 //
 
 import UIKit
-
-class ViewController: UIViewController {
+//silent sign in
+//https://github.com/firebase/firebase-simple-login/blob/master/docs/v1/providers/anonymous.md
+class WellcomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
