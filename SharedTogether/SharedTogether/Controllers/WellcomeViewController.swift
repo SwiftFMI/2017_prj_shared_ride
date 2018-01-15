@@ -21,10 +21,9 @@ class WellcomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func unwindSegue(_ sender:UIStoryboard) {
+    @IBAction func unwindToWellcome(unwindSegue: UIStoryboardSegue) {
         
     }
-
 
 }
 

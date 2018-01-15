@@ -11,9 +11,17 @@ import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var wellcomeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let user = Auth.auth().currentUser {
+            if !user.isAnonymous {
+                if let userEmail = user.email {
+                    wellcomeLabel.text = userEmail
+                }
+            }
+        }
         // Do any additional setup after loading the view.
     }
 

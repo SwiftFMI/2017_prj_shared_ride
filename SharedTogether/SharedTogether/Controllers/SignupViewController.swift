@@ -21,7 +21,6 @@ class SignupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -62,7 +61,7 @@ class SignupViewController: BaseViewController {
             return
         }
         
-        if password == confirmPassword  {
+        if !(password == confirmPassword)  {
             showAlert("Error", "Passwords dose not match")
             return
         }
@@ -70,48 +69,47 @@ class SignupViewController: BaseViewController {
         if let isAnonymous = Auth.auth().currentUser?.isAnonymous {
             if isAnonymous {
                 let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-                Auth.auth().currentUser?.link(with: credential) { (user, error) in
+                Auth.auth().currentUser?.link(with: credential) {[weak self] (user, error) in
                     if error == nil {
                         let ref = Database.database().reference().root
                         let userDetails = ["email": email, "name": name, "phone": phone]
                         ref.child(Constants.USERS).child((user?.uid)!).setValue(userDetails)
+                        
                     } else {
-                        print(error?.localizedDescription ?? "Something went wrong")
+                        self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
                     }
-                    
-                    
                 }
             } else {
-                Auth.auth().createUser(withEmail: email, password: password, completion: {(user, error) in
+                Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
                     if error == nil {
-
                         if let userUUId = user?.uid {
                             let ref = Database.database().reference().root
                             let userDetails = ["email": email, "name": name, "phone": phone]
                             ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
-                            print("success")
+                            
+//                            self?.performSegue(withIdentifier: "signupToHome", sender: self)
                         } else {
                             print("errpr uuid not found")
                         }
                     } else {
-                        print(error?.localizedDescription ?? "Something went wrong")
+                        self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
                     }
                 })
             }
         } else {
-            Auth.auth().createUser(withEmail: email, password: password, completion: {(user, error) in
+            Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
                 if error == nil {
-                    
                     if let userUUId = user?.uid {
                         let ref = Database.database().reference().root
                         let userDetails = ["email": email, "name": name, "phone": phone]
                         ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
-                        print("success")
+                        
+//                        self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         print("errpr uuid not found")
                     }
                 } else {
-                    print(error?.localizedDescription ?? "Something went wrong")
+                    self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
                 }
             })
         }

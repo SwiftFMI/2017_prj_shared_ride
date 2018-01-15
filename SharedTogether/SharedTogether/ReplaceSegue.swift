@@ -11,9 +11,11 @@ import UIKit
 class ReplaceSegue: UIStoryboardSegue {
     
     override func perform() {
-        if let source = source.navigationController {
-            source.navigationController?.setViewControllers([destination], animated: true)
-        }
+//        if let source = source.navigationController {
+//            source.navigationController?.setViewControllers([destination], animated: true)
+//        }
+        
+        UIApplication.shared.keyWindow?.rootViewController = destination;
     }
 
 }
