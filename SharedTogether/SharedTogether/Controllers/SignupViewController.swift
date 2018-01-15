@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class SignupViewController: UIViewController {
+class SignupViewController: BaseViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -30,6 +30,11 @@ class SignupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        phoneTextField.resignFirstResponder()
+    }
+    
+    
     @IBAction func signup(_ sender: Any) {
         guard let email = emailTextField.text else {
             return
@@ -47,7 +52,20 @@ class SignupViewController: UIViewController {
             return
         }
         
-        //TODO: add validation
+        if  email.isEmpty || password.isEmpty || confirmPassword.isEmpty || name.isEmpty || phone.isEmpty {
+            showAlert("Error", "Please fill all fields")
+            return;
+        }
+        
+        if !email.isValidEmail() {
+            showAlert("Error", "Invalid email")
+            return
+        }
+        
+        if password == confirmPassword  {
+            showAlert("Error", "Passwords dose not match")
+            return
+        }
         
         if let isAnonymous = Auth.auth().currentUser?.isAnonymous {
             if isAnonymous {

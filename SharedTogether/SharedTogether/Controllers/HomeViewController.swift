@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
@@ -21,7 +22,15 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func logout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            // TODO: redirect to wellcome VC
+        } catch {
+            
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -12,6 +12,7 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    //change root view controller on window
     var window: UIWindow?
 
 
