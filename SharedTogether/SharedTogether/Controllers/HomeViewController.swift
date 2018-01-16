@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     @IBAction func logout(_ sender: Any) {
         do {
             try Auth.auth().signOut()
+            performSegue(withIdentifier: "goToWellcome", sender: self)
             // TODO: redirect to wellcome VC
         } catch {
             

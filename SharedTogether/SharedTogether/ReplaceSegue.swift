@@ -15,7 +15,7 @@ class ReplaceSegue: UIStoryboardSegue {
 //            source.navigationController?.setViewControllers([destination], animated: true)
 //        }
         
-        UIApplication.shared.keyWindow?.rootViewController = destination;
+        UIApplication.shared.keyWindow?.rootViewController = destination
     }
 
 }

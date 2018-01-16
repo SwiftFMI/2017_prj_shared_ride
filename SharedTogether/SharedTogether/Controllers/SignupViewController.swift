@@ -74,7 +74,7 @@ class SignupViewController: BaseViewController {
                         let ref = Database.database().reference().root
                         let userDetails = ["email": email, "name": name, "phone": phone]
                         ref.child(Constants.USERS).child((user?.uid)!).setValue(userDetails)
-                        
+                        self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
                     }
@@ -86,8 +86,7 @@ class SignupViewController: BaseViewController {
                             let ref = Database.database().reference().root
                             let userDetails = ["email": email, "name": name, "phone": phone]
                             ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
-                            
-//                            self?.performSegue(withIdentifier: "signupToHome", sender: self)
+                            self?.performSegue(withIdentifier: "signupToHome", sender: self)
                         } else {
                             print("errpr uuid not found")
                         }
@@ -103,8 +102,7 @@ class SignupViewController: BaseViewController {
                         let ref = Database.database().reference().root
                         let userDetails = ["email": email, "name": name, "phone": phone]
                         ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
-                        
-//                        self?.performSegue(withIdentifier: "signupToHome", sender: self)
+                        self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         print("errpr uuid not found")
                     }
