@@ -10,4 +10,5 @@ import Foundation
 
 struct Constants {
     static let USERS = "users"
+    static let RIDES = "rides"
 }

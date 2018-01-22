@@ -1,21 +1,97 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RideTableTableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="RidesCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="RidesCell" rowHeight="124" id="KGk-i7-Jjw" customClass="RideTableTableViewCell" customModule="SharedTogether" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="428" height="123.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFm-rd-eWF">
+                        <rect key="frame" x="20" y="11" width="388" height="102"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hft-ec-t71">
+                                <rect key="frame" x="0.0" y="0.0" width="314" height="102"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Student Town" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNh-EI-SkS">
+                                        <rect key="frame" x="0.0" y="0.0" width="149" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination Bansko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNH-5Q-Rdi">
+                                        <rect key="frame" x="0.0" y="34" width="147" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver: Pencho" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHP-Ch-q0d">
+                                        <rect key="frame" x="0.0" y="68" width="112.5" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zXt-qs-HxC">
+                                <rect key="frame" x="314" y="0.0" width="74" height="102"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sy-H8-bs3">
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="34"/>
+                                        <state key="normal" title="Join"/>
+                                        <connections>
+                                            <action selector="onJoinTab:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Y2b-B3-Q0f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMm-xF-5w5">
+                                        <rect key="frame" x="0.0" y="34" width="74" height="34"/>
+                                        <state key="normal" title="Leave"/>
+                                        <connections>
+                                            <action selector="onLeaveTab:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="d11-pn-CEB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Bz-Tn-Qtf">
+                                        <rect key="frame" x="0.0" y="68" width="74" height="34"/>
+                                        <state key="normal" title="Open Chat"/>
+                                        <connections>
+                                            <action selector="onOpenChatTab:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AIv-sw-k6E"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HFm-rd-eWF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0fe-8h-9Ib"/>
+                    <constraint firstItem="HFm-rd-eWF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="0jH-Fh-Kky"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HFm-rd-eWF" secondAttribute="bottom" id="8lC-c6-1Re"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="HFm-rd-eWF" secondAttribute="trailing" id="S1i-wX-RLO"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="destinationLabel" destination="QNH-5Q-Rdi" id="36j-vb-K4P"/>
+                <outlet property="driverNameLabel" destination="yHP-Ch-q0d" id="A3m-qq-Qtb"/>
+                <outlet property="fromLabel" destination="QNh-EI-SkS" id="YAB-sf-sv3"/>
+                <outlet property="joinButton" destination="6Sy-H8-bs3" id="nHb-XR-9cM"/>
+                <outlet property="leaveButton" destination="jMm-xF-5w5" id="EYe-uH-vcR"/>
+                <outlet property="openChatButton" destination="7Bz-Tn-Qtf" id="IPh-Zk-Shj"/>
+            </connections>
+            <point key="canvasLocation" x="88" y="80"/>
         </tableViewCell>
     </objects>
 </document>
