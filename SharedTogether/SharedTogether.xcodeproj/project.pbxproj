@@ -15,6 +15,7 @@
 		A0890677200E50550073BC3F /* RideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0890675200E50550073BC3F /* RideTableViewCell.xib */; };
 		A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */; };
 		A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138E200CAD4D00D8B145 /* Extensions.swift */; };
+		A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D12018ECA000E32209 /* ChatViewController.swift */; };
 		A092C393200FB50300472619 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A092C392200FB50300472619 /* CreateRideViewController.swift */; };
 		A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107C2200365CE00A09311 /* AppDelegate.swift */; };
 		A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107C4200365CE00A09311 /* WellcomeViewController.swift */; };
@@ -39,6 +40,7 @@
 		A0890675200E50550073BC3F /* RideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideTableViewCell.xib; sourceTree = "<group>"; };
 		A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		A08B138E200CAD4D00D8B145 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A08DB8D12018ECA000E32209 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		A092C392200FB50300472619 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		A0A107BF200365CE00A09311 /* SharedTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SharedTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A107C2200365CE00A09311 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				A0A107E52003C0B800A09311 /* HomeViewController.swift */,
 				A0890672200CC6590073BC3F /* BaseViewController.swift */,
 				A092C392200FB50300472619 /* CreateRideViewController.swift */,
+				A08DB8D12018ECA000E32209 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
 				A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */,
 				A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */,
+				A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */,
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
 				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,

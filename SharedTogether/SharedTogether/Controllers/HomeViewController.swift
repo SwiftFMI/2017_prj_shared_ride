@@ -147,9 +147,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 
             cell.configureCell(fromLocation: from, destination: dest, driverName: driver)
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.delegate = self
             return cell;
         } else {
             return UITableViewCell()
         }
     }
+}
+
+extension HomeViewController: RideCellItemsTap {
+    func joinTab(cell: RideTableViewCell) {
+        performSegue(withIdentifier: "HomeToChat", sender: self)
+    }
+    
+    func onLeaveTab(cell: RideTableViewCell) {
+        performSegue(withIdentifier: "HomeToChat", sender: self)
+    }
+    
+    func onOpenChatTab(cell: RideTableViewCell) {
+        performSegue(withIdentifier: "HomeToChat", sender: self)
+    }
+    
+    
 }

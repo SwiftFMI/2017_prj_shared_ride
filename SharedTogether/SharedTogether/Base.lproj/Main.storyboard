@@ -71,7 +71,7 @@
         <!--Home-->
         <scene sceneID="6vL-hc-dns">
             <objects>
-                <viewController id="LEy-2t-3aZ" customClass="HomeViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController id="LEy-2t-3aZ" customClass="HomeViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rlS-o8-ebV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,6 +79,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ba5-O9-BrJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="dfb-fw-zzz" userLabel="Footer">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGj-OJ-ATT">
                                 <rect key="frame" x="166.5" y="323" width="42" height="21"/>
@@ -109,6 +114,7 @@
                         <outlet property="ridesTableView" destination="ba5-O9-BrJ" id="MrN-fe-22y"/>
                         <outlet property="wellcomeLabel" destination="zGj-OJ-ATT" id="gRX-0F-ir8"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="goToWellcome" customClass="ReplaceSegue" customModule="SharedTogether" customModuleProvider="target" id="u4U-dx-58T"/>
+                        <segue destination="2T4-JR-vNH" kind="show" identifier="HomeToChat" id="Xot-C0-jcC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWX-sT-kZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,6 +310,79 @@ Create New Ride</string>
             </objects>
             <point key="canvasLocation" x="519" y="669"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="wuA-wS-jHO">
+            <objects>
+                <viewController id="2T4-JR-vNH" customClass="ChatViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lbv-j6-ygh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c2m-zA-oCU">
+                                <rect key="frame" x="0.0" y="578" width="375" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N16-vQ-6Vf">
+                                        <rect key="frame" x="0.0" y="9" width="30" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="8UW-r0-L1O"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="ic_attach_file"/>
+                                        <connections>
+                                            <action selector="sendFile:" destination="2T4-JR-vNH" eventType="touchUpInside" id="fgd-ze-p8m"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-EK-2la">
+                                        <rect key="frame" x="30" y="5" width="315" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N02-ej-J9Q">
+                                        <rect key="frame" x="345" y="9" width="30" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="3aw-09-YKk"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="ic_send"/>
+                                        <connections>
+                                            <action selector="sendMessage:" destination="2T4-JR-vNH" eventType="touchUpInside" id="m0f-43-JkN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1ZB-cG-bPo"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZN5-v4-Nqe">
+                                <rect key="frame" x="0.0" y="64" width="375" height="514"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="YS7-Er-XtO" userLabel="Footer">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Zho-61-9X7" firstAttribute="trailing" secondItem="c2m-zA-oCU" secondAttribute="trailing" id="7ib-bR-gE9"/>
+                            <constraint firstItem="Zho-61-9X7" firstAttribute="bottom" secondItem="c2m-zA-oCU" secondAttribute="bottom" id="Dz3-pY-N3N"/>
+                            <constraint firstItem="c2m-zA-oCU" firstAttribute="leading" secondItem="Zho-61-9X7" secondAttribute="leading" id="ES0-bp-kHS"/>
+                            <constraint firstItem="Zho-61-9X7" firstAttribute="trailing" secondItem="ZN5-v4-Nqe" secondAttribute="trailing" id="Gy9-87-T7e"/>
+                            <constraint firstItem="c2m-zA-oCU" firstAttribute="top" secondItem="ZN5-v4-Nqe" secondAttribute="bottom" id="JeQ-Xn-YQz"/>
+                            <constraint firstItem="ZN5-v4-Nqe" firstAttribute="top" secondItem="Zho-61-9X7" secondAttribute="top" id="Ort-S8-8k6"/>
+                            <constraint firstItem="ZN5-v4-Nqe" firstAttribute="leading" secondItem="Zho-61-9X7" secondAttribute="leading" id="cx9-8w-wH2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zho-61-9X7"/>
+                    </view>
+                    <connections>
+                        <outlet property="chatTableView" destination="ZN5-v4-Nqe" id="MZL-Ra-Ssa"/>
+                        <outlet property="userMessageLabel" destination="xLa-EK-2la" id="Jcx-Jh-FqT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5bI-qR-qKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6130" y="-151"/>
+        </scene>
         <!--Signin View Controller-->
         <scene sceneID="eyz-tq-LKX">
             <objects>
@@ -483,7 +562,7 @@ Create New Ride</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvV-ng-Uzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2425" y="-1495"/>
+            <point key="canvasLocation" x="2516" y="-917"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vnJ-7j-l5o">
@@ -524,6 +603,10 @@ Create New Ride</string>
             <point key="canvasLocation" x="3992" y="-148.42578710644679"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_attach_file" width="22" height="22"/>
+        <image name="ic_send" width="22" height="22"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9a8-Vl-hNZ"/>
     </inferredMetricsTieBreakers>

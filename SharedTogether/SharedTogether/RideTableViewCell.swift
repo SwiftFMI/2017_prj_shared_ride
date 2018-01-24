@@ -18,6 +18,8 @@ class RideTableViewCell: UITableViewCell {
     @IBOutlet weak var leaveButton: UIButton!
     @IBOutlet weak var openChatButton: UIButton!
     
+    weak var delegate: RideCellItemsTap?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,11 +40,28 @@ class RideTableViewCell: UITableViewCell {
     
     //how to handle click on deiferent data items
     @IBAction func onJoinTab(_ sender: UIButton) {
+        if let callback = delegate {
+            callback.joinTab(cell: self)
+        }
     }
     
     @IBAction func onLeaveTab(_ sender: UIButton) {
+        if let callback = delegate {
+            callback.onLeaveTab(cell: self)
+        }
     }
     
     @IBAction func onOpenChatTab(_ sender: UIButton) {
+        if let callback = delegate {
+            callback.onOpenChatTab(cell: self)
+        }
     }
+}
+
+protocol RideCellItemsTap: NSObjectProtocol {
+    func joinTab(cell: RideTableViewCell)
+    
+    func onLeaveTab(cell: RideTableViewCell)
+    
+    func onOpenChatTab(cell: RideTableViewCell)
 }
