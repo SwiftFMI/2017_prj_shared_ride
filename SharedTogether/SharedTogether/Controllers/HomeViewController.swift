@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+private let reuseIdentifier = "RidesCell"
+
 class HomeViewController: UIViewController {
 //    present pop Over VC
     
@@ -24,7 +26,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.ridesTableView.register(RideTableTableViewCell.self, forCellReuseIdentifier: "RidesCell")
+        // Do any additional setup after loading the view.
+        let cellNib = UINib(nibName: "RideTableViewCell", bundle: nil)
+        ridesTableView.register(cellNib, forCellReuseIdentifier: reuseIdentifier)
         
         if let user = Auth.auth().currentUser {
             if !user.isAnonymous {
@@ -123,7 +127,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "RidesCell", for: indexPath) as? RideTableTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RideTableViewCell {
             let ride = rides[indexPath.row]
             
             var from = "";
@@ -145,7 +149,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(fromLocation: from, destination: dest, driverName: driver)
             return cell;
         } else {
-            return RideTableTableViewCell()
+            return UITableViewCell()
         }
     }
 }

@@ -13,7 +13,7 @@
         <!--Wellcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WellcomeViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WellcomeViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,7 +71,7 @@
         <!--Home-->
         <scene sceneID="6vL-hc-dns">
             <objects>
-                <viewController id="LEy-2t-3aZ" customClass="HomeViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LEy-2t-3aZ" customClass="HomeViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rlS-o8-ebV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
         <!--Create-->
         <scene sceneID="sRw-bx-VOe">
             <objects>
-                <viewController id="QQb-do-oRY" customClass="CreateRideViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QQb-do-oRY" customClass="CreateRideViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cce-pL-M0A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -189,7 +189,7 @@ Create New Ride</string>
         <!--Signup View Controller-->
         <scene sceneID="atE-27-mrk">
             <objects>
-                <viewController id="NLH-NZ-sIf" customClass="SignupViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NLH-NZ-sIf" customClass="SignupViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x9w-xd-9Th">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -307,7 +307,7 @@ Create New Ride</string>
         <!--Signin View Controller-->
         <scene sceneID="eyz-tq-LKX">
             <objects>
-                <viewController id="2eE-99-CAp" customClass="SigninViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2eE-99-CAp" customClass="SigninViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LyN-Ra-Z7d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -402,7 +402,7 @@ Create New Ride</string>
         <!--View Controller-->
         <scene sceneID="RcV-IS-KdQ">
             <objects>
-                <viewController id="UJf-rs-wuc" sceneMemberID="viewController">
+                <viewController id="UJf-rs-wuc" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hT9-YH-bz6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -488,7 +488,7 @@ Create New Ride</string>
         <!--Tab Bar Controller-->
         <scene sceneID="vnJ-7j-l5o">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M6b-DA-9Tq" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M6b-DA-9Tq" propertyAccessControl="all" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LyE-jB-A80">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -507,7 +507,7 @@ Create New Ride</string>
         <!--Home-->
         <scene sceneID="Oar-WY-G0f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mB0-QG-nCZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mB0-QG-nCZ" propertyAccessControl="all" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="LwR-B8-Kh2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="422-Gz-sJk">
@@ -525,6 +525,6 @@ Create New Ride</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xrs-mM-ETz"/>
+        <segue reference="9a8-Vl-hNZ"/>
     </inferredMetricsTieBreakers>
 </document>

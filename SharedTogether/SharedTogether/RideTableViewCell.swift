@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RideTableTableViewCell: UITableViewCell {
+class RideTableViewCell: UITableViewCell {
 
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
@@ -29,7 +29,7 @@ class RideTableTableViewCell: UITableViewCell {
     }
     
     func configureCell(fromLocation: String, destination: String, driverName: String) {
-        if fromLabel != nil && destinationLabel != nil && driverNameLabel != nill {
+        if fromLabel != nil && destinationLabel != nil && driverNameLabel != nil {
             fromLabel.text=fromLocation
             destinationLabel.text=destination
             driverNameLabel.text=driverName

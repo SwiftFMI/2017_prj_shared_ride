@@ -11,8 +11,8 @@
 		A032C47B2012428C00C6975F /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032C47A2012428C00C6975F /* Ride.swift */; };
 		A0890671200CC5740073BC3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890670200CC5740073BC3F /* Utils.swift */; };
 		A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890672200CC6590073BC3F /* BaseViewController.swift */; };
-		A0890676200E50550073BC3F /* RideTableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890674200E50550073BC3F /* RideTableTableViewCell.swift */; };
-		A0890677200E50550073BC3F /* RideTableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0890675200E50550073BC3F /* RideTableTableViewCell.xib */; };
+		A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890674200E50550073BC3F /* RideTableViewCell.swift */; };
+		A0890677200E50550073BC3F /* RideTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0890675200E50550073BC3F /* RideTableViewCell.xib */; };
 		A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */; };
 		A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138E200CAD4D00D8B145 /* Extensions.swift */; };
 		A092C393200FB50300472619 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A092C392200FB50300472619 /* CreateRideViewController.swift */; };
@@ -35,8 +35,8 @@
 		A032C47A2012428C00C6975F /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		A0890670200CC5740073BC3F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A0890672200CC6590073BC3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		A0890674200E50550073BC3F /* RideTableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableTableViewCell.swift; sourceTree = "<group>"; };
-		A0890675200E50550073BC3F /* RideTableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideTableTableViewCell.xib; sourceTree = "<group>"; };
+		A0890674200E50550073BC3F /* RideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableViewCell.swift; sourceTree = "<group>"; };
+		A0890675200E50550073BC3F /* RideTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideTableViewCell.xib; sourceTree = "<group>"; };
 		A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		A08B138E200CAD4D00D8B145 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A092C392200FB50300472619 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +112,8 @@
 		A0A107DB2003BC2700A09311 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A0890674200E50550073BC3F /* RideTableTableViewCell.swift */,
-				A0890675200E50550073BC3F /* RideTableTableViewCell.xib */,
+				A0890674200E50550073BC3F /* RideTableViewCell.swift */,
+				A0890675200E50550073BC3F /* RideTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */,
 				A0A107CA200365CE00A09311 /* Assets.xcassets in Resources */,
 				A0A107C8200365CE00A09311 /* Main.storyboard in Resources */,
-				A0890677200E50550073BC3F /* RideTableTableViewCell.xib in Resources */,
+				A0890677200E50550073BC3F /* RideTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +312,7 @@
 				A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */,
 				A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */,
 				A0890671200CC5740073BC3F /* Utils.swift in Sources */,
-				A0890676200E50550073BC3F /* RideTableTableViewCell.swift in Sources */,
+				A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */,
 				A032C47B2012428C00C6975F /* Ride.swift in Sources */,
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
