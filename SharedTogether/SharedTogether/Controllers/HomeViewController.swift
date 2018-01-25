@@ -41,17 +41,19 @@ class HomeViewController: UIViewController {
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
         
-        ridesReference = Database.database().reference().child(Constants.RIDES)
+        ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
         
         if let ref = ridesReference {
             // Listen for new comments in the Firebase database
             ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
                 let nsDik = snapshot.value as? NSDictionary
                 if let nd = nsDik {
-                    let freePlaces = nd["freePlaces"] as! String
-                    let destination = nd["destination"] as! String
-                    let from = nd["from"] as! String
-                    let ride = Ride(from: from, destination: destination, driver: "", freePlaces: freePlaces)
+                    let freePlaces = nd[Constants.Rides.FREEPLACES] as! String
+                    let destination = nd[Constants.Rides.DESTINATION] as! String
+                    let from = nd[Constants.Rides.FROM] as! String
+                    let driver = nd[Constants.Rides.DRIVER] as! String
+                    let chatId = nd[Constants.Rides.GROUP_CHAT_ID] as! String
+                    let ride = Ride(from: from, destination: destination, driver: driver, freePlaces: freePlaces, groupChatId: chatId)
                     self?.rides.append(ride)
                     self?.ridesTableView.reloadData()
                 }
@@ -118,9 +120,25 @@ class HomeViewController: UIViewController {
             
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let ride = sender as? Ride {
+            let chatVc = segue.destination as! ChatViewController
+            
+            chatVc.groupId = ride.groupChatId
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let ride = rides[(indexPath as NSIndexPath).row]
+        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rides.count
     }

@@ -45,8 +45,12 @@ class SigninViewController: BaseViewController {
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
-            if error == nil {
-                self?.performSegue(withIdentifier: "loginToHome", sender: self)
+            if error == nil, let wUser = user {
+                Utils.getUserDetails(uuid: wUser.uid, callBack: { user in
+                    UserDefaults.standard.set(user.name, forKey: Constants.UserDefaults.USER)
+                    self?.performSegue(withIdentifier: "loginToHome", sender: self)
+                })
+                
             } else {
                 self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
             }

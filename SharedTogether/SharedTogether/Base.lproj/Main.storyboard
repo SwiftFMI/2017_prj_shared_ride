@@ -586,7 +586,7 @@ Create New Ride</string>
         <!--Home-->
         <scene sceneID="Oar-WY-G0f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mB0-QG-nCZ" propertyAccessControl="all" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="mB0-QG-nCZ" propertyAccessControl="all" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="LwR-B8-Kh2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="422-Gz-sJk">

@@ -13,4 +13,5 @@ struct Ride: Codable {
     var destination: String?
     var driver: String?
     var freePlaces: String?
+    var groupChatId: String?
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class CreateRideViewController: BaseViewController {
     
@@ -53,10 +54,41 @@ class CreateRideViewController: BaseViewController {
         }
         
         let ref = Database.database().reference()
+        let rideGroupChatRef = createGroupChat(dbRef: ref)
         
-        let newRide = ["from": from, "destination": destination, "freePlaces": freePlaces]
-        let newRideRef = ref.child(Constants.RIDES).childByAutoId()
+        let driver = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? "test"
+        
+        let newRide =
+            [Constants.Rides.FROM: from,
+             Constants.Rides.DESTINATION: destination,
+             Constants.Rides.FREEPLACES: freePlaces,
+             Constants.Rides.DRIVER: driver,
+             Constants.Rides.GROUP_CHAT_ID: rideGroupChatRef.key]
+        
+        let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
+    }
+    
+    func createGroupChat(dbRef: DatabaseReference) -> DatabaseReference {
+//        let user = UserDefaults.standard.object(forKey: Constants.UserDefaults.USER) as! User
+        
+        let userId = Auth.auth().currentUser?.uid ?? "0"
+        let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? "test"
+        
+        //userId: name
+        let newGroupChat: [String:String] = [userId: name]
+        
+        // userId : message
+        let messagess = [String:String]()
+        
+        let newRideGroup =
+            [Constants.RidesGroupChat.CHAT_MEMBERS: newGroupChat, Constants.RidesGroupChat.MESSAGESS: messagess]
+        
+        let newRideGroupRef = dbRef.child(Constants.RidesGroupChat.ROOT).childByAutoId()
+        
+        newRideGroupRef.setValue(newRideGroup)
+        
+        return newRideGroupRef
     }
     
     /*

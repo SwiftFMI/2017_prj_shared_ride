@@ -13,6 +13,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var userMessageLabel: UITextField!
     
+    var groupId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         chatTableView.delegate = self

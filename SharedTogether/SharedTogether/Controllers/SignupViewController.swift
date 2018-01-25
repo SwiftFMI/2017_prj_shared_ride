@@ -72,8 +72,8 @@ class SignupViewController: BaseViewController {
                 Auth.auth().currentUser?.link(with: credential) {[weak self] (user, error) in
                     if error == nil {
                         let ref = Database.database().reference().root
-                        let userDetails = ["email": email, "name": name, "phone": phone]
-                        ref.child(Constants.USERS).child((user?.uid)!).setValue(userDetails)
+                        let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                        ref.child(Constants.Users.ROOT).child((user?.uid)!).setValue(userDetails)
                         self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
@@ -84,8 +84,8 @@ class SignupViewController: BaseViewController {
                     if error == nil {
                         if let userUUId = user?.uid {
                             let ref = Database.database().reference().root
-                            let userDetails = ["email": email, "name": name, "phone": phone]
-                            ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
+                            let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                            ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
                             self?.performSegue(withIdentifier: "signupToHome", sender: self)
                         } else {
                             print("errpr uuid not found")
@@ -100,8 +100,8 @@ class SignupViewController: BaseViewController {
                 if error == nil {
                     if let userUUId = user?.uid {
                         let ref = Database.database().reference().root
-                        let userDetails = ["email": email, "name": name, "phone": phone]
-                        ref.child(Constants.USERS).child(userUUId).setValue(userDetails)
+                        let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                        ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
                         self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         print("errpr uuid not found")
