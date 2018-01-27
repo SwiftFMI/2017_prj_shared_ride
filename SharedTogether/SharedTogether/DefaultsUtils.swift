@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  DefaultsUtils.swift
 //  SharedTogether
 //
 //  Created by Rosen Stoyanov on 25.01.18.
@@ -8,9 +8,6 @@
 
 import Foundation
 
-struct User: Codable {
-    var id: String
-    var email: String
-    var name: String
-    var phone: String
+final class DefaultUtils {
+    
 }

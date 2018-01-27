@@ -313,7 +313,7 @@ Create New Ride</string>
         <!--Chat View Controller-->
         <scene sceneID="wuA-wS-jHO">
             <objects>
-                <viewController id="2T4-JR-vNH" customClass="ChatViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController id="2T4-JR-vNH" customClass="ChatViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lbv-j6-ygh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,7 +352,7 @@ Create New Ride</string>
                                     <constraint firstAttribute="height" constant="40" id="1ZB-cG-bPo"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZN5-v4-Nqe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZN5-v4-Nqe">
                                 <rect key="frame" x="0.0" y="64" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="YS7-Er-XtO" userLabel="Footer">

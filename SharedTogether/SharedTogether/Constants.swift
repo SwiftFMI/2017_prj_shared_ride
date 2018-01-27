@@ -44,5 +44,7 @@ struct Constants {
         //childs
         static let CHAT_MEMBERS = "chatMembers"
         static let MESSAGESS = "messagess"
+        static let MESSAGESS_USER_ID = "fromId"
+        static let MESSAGESS_USER_MESSAGE = "message"
     }
 }

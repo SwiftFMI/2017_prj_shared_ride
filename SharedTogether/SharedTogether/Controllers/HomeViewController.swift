@@ -176,7 +176,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: RideCellItemsTap {
     func joinTab(cell: RideTableViewCell) {
-        performSegue(withIdentifier: "HomeToChat", sender: self)
+        if let row = self.ridesTableView.indexPath(for: cell)?.row, let userId = Auth.auth().currentUser?.uid {
+            let ride = rides[row]
+            let groupChatRef = Database.database().reference()
+                .child(Constants.RidesGroupChat.ROOT)
+                .child(ride.groupChatId!)
+                .child(Constants.RidesGroupChat.CHAT_MEMBERS)
+            let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
+            let newRef = groupChatRef.childByAutoId();
+            groupChatRef.setValuesForKeys([userId: name])
+//            groupChatRef.setValue([userId: name])
+        }
+//        performSegue(withIdentifier: "HomeToChat", sender: self)
     }
     
     func onLeaveTab(cell: RideTableViewCell) {

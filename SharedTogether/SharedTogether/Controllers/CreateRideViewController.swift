@@ -73,7 +73,7 @@ class CreateRideViewController: BaseViewController {
 //        let user = UserDefaults.standard.object(forKey: Constants.UserDefaults.USER) as! User
         
         let userId = Auth.auth().currentUser?.uid ?? "0"
-        let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? "test"
+        let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
         
         //userId: name
         let newGroupChat: [String:String] = [userId: name]
