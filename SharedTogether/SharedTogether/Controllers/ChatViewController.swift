@@ -15,6 +15,15 @@ import Alamofire
 
 private let reuseIdentifier = "MessagesCell"
 
+//TODO: make userMessageLabel accept multiline
+//TODO: push VC to top when keyboad is shown
+//TODO: handle scroll to bottom when new messeges arrived
+//TODO: handle push notifications
+//TODO: set chat title
+//TODO: make some image cache in order to not make image blink
+//TODO: add some cell styling
+//TODO: add loaders ask if there is a way to have base VC with loader in it
+//TODO: unsubscribe observables in deInit
 class ChatViewController: UIViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
@@ -63,8 +72,6 @@ class ChatViewController: UIViewController {
                     
                     if let dictionary = snapshot.value as? [String: String] {
                         self?.participents = dictionary
-//                        let key = Array(dictionary.keys)[0]
-//                        let message = [key: dictionary[key]]
                     }
                 })
             
@@ -86,7 +93,6 @@ class ChatViewController: UIViewController {
 //            })
             
             addMessageRefHandle = messagesRef?.observe(.childAdded, with: { [weak self] (snapshot) in
-//                let child = snapshot as! DataSnapshot
                 let dict = snapshot.value as! NSDictionary
                 let uuid = dict[Constants.RidesGroupChat.MESSAGESS_USER_ID] as? String ?? ""
                 let text = dict[Constants.RidesGroupChat.MESSAGESS_USER_MESSAGE] as? String ?? ""
@@ -236,12 +242,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.participantMessageLabel.layer.cornerRadius = 20
             }
             
-            cell.chatImageImageView.image = nil
-//            cell.backgroundColor = nil
             if !data.imageURI.isEmpty {
-                
-//                let islandRef = chatImagesRef.child(data.imageURI)
-                
                 let islandRef = Storage.storage().reference(forURL: data.imageURI)
                 
                 // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
@@ -263,6 +264,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                 
 //                cell.chatImageImageView.sd_setImage(with: URL(string: data.imageURI), completed: <#T##SDExternalCompletionBlock?##SDExternalCompletionBlock?##(UIImage?, Error?, SDImageCacheType, URL?) -> Void#>)
 //                cell.chatImageImageView.sd_setImage(with: URL(string: data.imageURI), completed: nil)
+            } else {
+                cell.chatImageImageView.image = nil
             }
             
             cell.prepare(participantName: name!, participantMessage: data.message)
