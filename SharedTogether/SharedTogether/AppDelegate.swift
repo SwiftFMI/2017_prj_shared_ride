@@ -16,6 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     //change root view controller on window
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    
+    static var user: User?
+    
+    static func getUser() -> User? {
+        if user == nil {
+            user = Defaults.getLoggedUser()
+        }
+        return user
+    }
 
     // MARK: - Remote notifications
     

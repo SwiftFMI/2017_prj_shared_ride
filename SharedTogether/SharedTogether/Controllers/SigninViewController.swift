@@ -47,7 +47,7 @@ class SigninViewController: BaseViewController {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             if error == nil, let wUser = user {
                 Utils.getUserDetails(uuid: wUser.uid, callBack: { user in
-                    UserDefaults.standard.set(user.name, forKey: Constants.UserDefaults.USER)
+                    Defaults.setLoggedUser(user: user)
                     self?.performSegue(withIdentifier: "loginToHome", sender: self)
                 })
                 

@@ -11,6 +11,10 @@ import Foundation
 struct Constants {
     static let USERS = "users"
     
+    struct Defaults {
+        static let USER = "logedUser"
+    }
+    
     struct UserDefaults {
         static let USER = "loged_user"
     }

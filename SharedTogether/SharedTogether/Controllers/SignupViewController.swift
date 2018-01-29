@@ -33,7 +33,7 @@ class SignupViewController: BaseViewController {
         phoneTextField.resignFirstResponder()
     }
     
-    
+    //TODO add completions, clear user on logout
     @IBAction func signup(_ sender: Any) {
         guard let email = emailTextField.text else {
             return
@@ -71,10 +71,17 @@ class SignupViewController: BaseViewController {
                 let credential = EmailAuthProvider.credential(withEmail: email, password: password)
                 Auth.auth().currentUser?.link(with: credential) {[weak self] (user, error) in
                     if error == nil {
-                        let ref = Database.database().reference().root
-                        let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
-                        ref.child(Constants.Users.ROOT).child((user?.uid)!).setValue(userDetails)
-                        self?.performSegue(withIdentifier: "signupToHome", sender: self)
+                        if let uuid = user?.uid {
+                            let ref = Database.database().reference().root
+                            let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                            
+                            Defaults.setLoggedUser(user: User(id: uuid, email: email, name: name, phone: phone))
+                            
+                            ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
+                            self?.performSegue(withIdentifier: "signupToHome", sender: self)
+                        } else {
+                            print("errpr uuid not found")
+                        }
                     } else {
                         self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
                     }
@@ -85,6 +92,9 @@ class SignupViewController: BaseViewController {
                         if let userUUId = user?.uid {
                             let ref = Database.database().reference().root
                             let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                            
+                             Defaults.setLoggedUser(user: User(id: userUUId, email: email, name: name, phone: phone))
+                            
                             ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
                             self?.performSegue(withIdentifier: "signupToHome", sender: self)
                         } else {
@@ -101,6 +111,8 @@ class SignupViewController: BaseViewController {
                     if let userUUId = user?.uid {
                         let ref = Database.database().reference().root
                         let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
+                        
+                        Defaults.setLoggedUser(user: User(id: userUUId, email: email, name: name, phone: phone))
                         ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
                         self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {

@@ -19,7 +19,7 @@
 		A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D12018ECA000E32209 /* ChatViewController.swift */; };
 		A08DB8D4201A33A700E32209 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D3201A33A700E32209 /* ChatUser.swift */; };
 		A08DB8D6201A380100E32209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D5201A380100E32209 /* User.swift */; };
-		A08DB8D8201A446000E32209 /* DefaultsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D7201A446000E32209 /* DefaultsUtils.swift */; };
+		A08DB8D8201A446000E32209 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D7201A446000E32209 /* Defaults.swift */; };
 		A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8E1201B30F200E32209 /* ChatMessageTableViewCell.swift */; };
 		A08DB8E4201B30F200E32209 /* ChatMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08DB8E2201B30F200E32209 /* ChatMessageTableViewCell.xib */; };
 		A092C393200FB50300472619 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A092C392200FB50300472619 /* CreateRideViewController.swift */; };
@@ -50,7 +50,7 @@
 		A08DB8D12018ECA000E32209 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		A08DB8D3201A33A700E32209 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		A08DB8D5201A380100E32209 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A08DB8D7201A446000E32209 /* DefaultsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsUtils.swift; sourceTree = "<group>"; };
+		A08DB8D7201A446000E32209 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		A08DB8E1201B30F200E32209 /* ChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A08DB8E2201B30F200E32209 /* ChatMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageTableViewCell.xib; sourceTree = "<group>"; };
 		A092C392200FB50300472619 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 				A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */,
 				A08B138E200CAD4D00D8B145 /* Extensions.swift */,
 				A0890670200CC5740073BC3F /* Utils.swift */,
-				A08DB8D7201A446000E32209 /* DefaultsUtils.swift */,
+				A08DB8D7201A446000E32209 /* Defaults.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
 				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,
-				A08DB8D8201A446000E32209 /* DefaultsUtils.swift in Sources */,
+				A08DB8D8201A446000E32209 /* Defaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

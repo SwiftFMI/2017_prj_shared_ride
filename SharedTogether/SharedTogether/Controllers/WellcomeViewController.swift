@@ -16,8 +16,10 @@ class WellcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        if Auth.auth().currentUser != nil {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Defaults.getLoggedUser() != nil {
             performSegue(withIdentifier: "wellcomeToHome", sender: self)
         }
     }
