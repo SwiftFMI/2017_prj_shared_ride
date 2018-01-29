@@ -50,5 +50,10 @@ struct Constants {
         static let MESSAGESS = "messagess"
         static let MESSAGESS_USER_ID = "fromId"
         static let MESSAGESS_USER_MESSAGE = "message"
+        static let MESSAGES_IMAGE_URL = "imageUrl"
+    }
+    
+    struct Storage {
+        static let CHAT_IMAGES = "chatImages"
     }
 }

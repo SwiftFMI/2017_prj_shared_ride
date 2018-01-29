@@ -22,7 +22,6 @@ class HomeViewController: UIViewController {
     var ridesReference: DatabaseReference?
     var rides: [Ride] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,7 +144,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RideTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RideTableViewCell,
+            let user = AppDelegate.getUser() {
+            
             let ride = rides[indexPath.row]
             
             var from = "";
@@ -176,21 +177,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: RideCellItemsTap {
     func joinTab(cell: RideTableViewCell) {
-        if let row = self.ridesTableView.indexPath(for: cell)?.row, let userId = Auth.auth().currentUser?.uid {
+        if let row = self.ridesTableView.indexPath(for: cell)?.row, let user = Defaults.getLoggedUser() {
             let ride = rides[row]
             let groupChatRef = Database.database().reference()
                 .child(Constants.RidesGroupChat.ROOT)
                 .child(ride.groupChatId!)
                 .child(Constants.RidesGroupChat.CHAT_MEMBERS)
-            let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
-            let newRef = groupChatRef.childByAutoId();
-            groupChatRef.setValuesForKeys([userId: name])
+            
+            groupChatRef.updateChildValues(["\(user.id)": user.name])
+            
+//            let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
+//            let newRef = groupChatRef.childByAutoId();
+//            groupChatRef.setValuesForKeys([userId: name])
+            
 //            groupChatRef.setValue([userId: name])
         }
 //        performSegue(withIdentifier: "HomeToChat", sender: self)
     }
     
     func onLeaveTab(cell: RideTableViewCell) {
+        //when user leave chat we will set its name to anonimous and we will display deleted on
         performSegue(withIdentifier: "HomeToChat", sender: self)
     }
     

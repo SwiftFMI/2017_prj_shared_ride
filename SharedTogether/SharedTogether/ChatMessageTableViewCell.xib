@@ -20,27 +20,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participant Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Y6-pV-R2c">
-                        <rect key="frame" x="5" y="8" width="68.5" height="10"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                        <rect key="frame" x="5" y="8" width="97.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-Xh-K9F">
-                        <rect key="frame" x="5" y="26" width="35.5" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-Xh-K9F">
+                        <rect key="frame" x="5" y="30.5" width="39.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-vb-R8V">
+                        <rect key="frame" x="0.0" y="27.5" width="340" height="38.5"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Afw-Xh-K9F" firstAttribute="top" secondItem="2Y6-pV-R2c" secondAttribute="bottom" constant="8" id="Apf-BO-PeS"/>
+                    <constraint firstItem="GLr-vb-R8V" firstAttribute="top" secondItem="2Y6-pV-R2c" secondAttribute="bottom" constant="5" id="QYM-Fg-ZpG"/>
                     <constraint firstItem="Afw-Xh-K9F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="iBg-gS-KCC"/>
+                    <constraint firstAttribute="trailing" secondItem="GLr-vb-R8V" secondAttribute="trailing" id="mgZ-Uv-hSx"/>
+                    <constraint firstItem="GLr-vb-R8V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="utb-6F-5Ez"/>
                     <constraint firstItem="2Y6-pV-R2c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wFA-qe-EvT"/>
                     <constraint firstItem="2Y6-pV-R2c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="wav-8L-hVc"/>
+                    <constraint firstAttribute="bottom" secondItem="GLr-vb-R8V" secondAttribute="bottom" id="zw8-re-bj5"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="chatImageImageView" destination="GLr-vb-R8V" id="LJq-CH-CBV"/>
                 <outlet property="participantMessageLabel" destination="Afw-Xh-K9F" id="Xt4-fQ-cl2"/>
                 <outlet property="participantNameLabel" destination="2Y6-pV-R2c" id="lrc-6b-R4b"/>
             </connections>

@@ -11,4 +11,5 @@ import Foundation
 struct Message {
     var fromId: String
     var message: String
+    var imageURI: String
 }

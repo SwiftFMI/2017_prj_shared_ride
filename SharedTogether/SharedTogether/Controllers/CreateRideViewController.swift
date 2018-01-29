@@ -54,7 +54,7 @@ class CreateRideViewController: BaseViewController {
         }
         
         let ref = Database.database().reference()
-        let rideGroupChatRef = createGroupChat(dbRef: ref)
+        let rideGroupChatRef = createGroupChat(dbRef: ref, freePlaces: freePlacesNumber)
         
         let driver = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? "test"
         
@@ -69,7 +69,7 @@ class CreateRideViewController: BaseViewController {
         newRideRef.setValue(newRide)
     }
     
-    func createGroupChat(dbRef: DatabaseReference) -> DatabaseReference {
+    func createGroupChat(dbRef: DatabaseReference, freePlaces: Int) -> DatabaseReference {
 //        let user = UserDefaults.standard.object(forKey: Constants.UserDefaults.USER) as! User
         
         let userId = Auth.auth().currentUser?.uid ?? "0"
@@ -77,7 +77,14 @@ class CreateRideViewController: BaseViewController {
         let name = Defaults.getLoggedUser()?.name ?? ""
         
         //userId: name
-        let newGroupChat: [String:String] = [userId: name]
+        var newGroupChat: [String:String] = [String:String]()
+        newGroupChat[userId] = name
+        
+//        let index = [Int](1...freePlaces)
+//        for (index, elem) in index.enumerated() {
+//            let str: String = "\(index + 1)"
+//            newGroupChat[str] = str
+//        }
         
         // userId : message
         let messagess = [String:String]()

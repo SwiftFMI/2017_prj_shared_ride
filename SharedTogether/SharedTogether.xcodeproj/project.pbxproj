@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		47C91EEDA311176996B0BCD9 /* Pods_SharedTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */; };
 		A032C47B2012428C00C6975F /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032C47A2012428C00C6975F /* Ride.swift */; };
+		A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */; };
+		A06A0E0C201F8492000BC494 /* ChatImageMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */; };
 		A0890671200CC5740073BC3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890670200CC5740073BC3F /* Utils.swift */; };
 		A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890672200CC6590073BC3F /* BaseViewController.swift */; };
 		A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890674200E50550073BC3F /* RideTableViewCell.swift */; };
@@ -40,6 +42,8 @@
 		0DC1F741349851196FE6C54A /* Pods-SharedTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SharedTogether.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SharedTogether/Pods-SharedTogether.debug.xcconfig"; sourceTree = "<group>"; };
 		91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SharedTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A032C47A2012428C00C6975F /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageMessageTableViewCell.swift; sourceTree = "<group>"; };
+		A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageMessageTableViewCell.xib; sourceTree = "<group>"; };
 		A0890670200CC5740073BC3F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A0890672200CC6590073BC3F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A0890674200E50550073BC3F /* RideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideTableViewCell.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				A0890675200E50550073BC3F /* RideTableViewCell.xib */,
 				A08DB8E1201B30F200E32209 /* ChatMessageTableViewCell.swift */,
 				A08DB8E2201B30F200E32209 /* ChatMessageTableViewCell.xib */,
+				A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */,
+				A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 				A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */,
 				A0A107CA200365CE00A09311 /* Assets.xcassets in Resources */,
 				A0A107C8200365CE00A09311 /* Main.storyboard in Resources */,
+				A06A0E0C201F8492000BC494 /* ChatImageMessageTableViewCell.xib in Resources */,
 				A0890677200E50550073BC3F /* RideTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,10 +268,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SharedTogether/Pods-SharedTogether-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
@@ -274,10 +283,12 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
@@ -335,6 +346,7 @@
 				A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */,
 				A0890671200CC5740073BC3F /* Utils.swift in Sources */,
 				A08DB8D6201A380100E32209 /* User.swift in Sources */,
+				A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */,
 				A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */,
 				A032C47B2012428C00C6975F /* Ride.swift in Sources */,
 				A08A4E28201B6AAC009B2865 /* Message.swift in Sources */,

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     
+    //TODO: delete on logout
     static var user: User?
     
     static func getUser() -> User? {
