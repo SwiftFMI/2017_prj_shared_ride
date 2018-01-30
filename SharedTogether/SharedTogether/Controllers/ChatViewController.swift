@@ -24,6 +24,7 @@ private let reuseIdentifier = "MessagesCell"
 //TODO: add some cell styling
 //TODO: add loaders ask if there is a way to have base VC with loader in it
 //TODO: unsubscribe observables in deInit
+//TODO make round bubles on chant message labels
 class ChatViewController: UIViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
@@ -39,6 +40,8 @@ class ChatViewController: UIViewController {
     var addMessageRefHandle: DatabaseHandle?
     let chatImagesRef = Storage.storage().reference().child(Constants.Storage.CHAT_IMAGES)
     
+    var images = [IndexPath:UIImage] ()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +49,9 @@ class ChatViewController: UIViewController {
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
+        
+//        chatTableView.estimatedRowHeight = 65.0
+//        chatTableView.rowHeight = UITableViewAutomaticDimension
         
         if let uid = Auth.auth().currentUser?.uid {
             userId = uid
@@ -102,6 +108,7 @@ class ChatViewController: UIViewController {
                 self?.messages.append(message)
                 
                 self?.chatTableView.reloadData()
+                self?.scrollToBottom()
             })
         }
     }
@@ -183,6 +190,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
     }
     
+    func scrollToBottom(){
+        DispatchQueue.main.async { [weak self] in
+            if let count = self?.messages.count {
+                let indexPath = IndexPath(row: count-1, section: 0)
+                self?.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
+    }
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
@@ -216,16 +231,20 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let data = messages[indexPath.row]
-        if data.imageURI.isEmpty {
-//            return UITableViewAutomaticDimension
-            return 60
-        } else {
-            return 300
-        }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let data = messages[indexPath.row]
+//        if data.imageURI.isEmpty {
+//            return UITableViewAutomaticDimension
+////            return 60
+//        } else {
+//            return 300
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? ChatMessageTableViewCell {
@@ -245,12 +264,23 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             if !data.imageURI.isEmpty {
                 let islandRef = Storage.storage().reference(forURL: data.imageURI)
                 
-                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                islandRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                    // Data for "images/island.jpg" is returned
-                    let image = UIImage(data: data!)
+                if let image = images[indexPath] {
                     cell.chatImageImageView.image = image
-//                    cell.backgroundColor = .black
+                } else {
+                    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                    islandRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+                        // Data for "images/island.jpg" is returned
+                        if (data == nil) {
+                            return
+                        }
+                        let image = UIImage(data: data!)
+                        self?.images[indexPath] = image
+                        (self?.chatTableView.cellForRow(at: indexPath) as? ChatMessageTableViewCell)?.chatImageImageView.image = image
+                        self?.chatTableView.beginUpdates();
+                        self?.chatTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
+                        self?.chatTableView.endUpdates();
+                        //                    cell.backgroundColor = .black
+                    }
                 }
                 
 //                Alamofire.download(data.imageURI).responseData { response in
@@ -274,6 +304,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.layoutIfNeeded()
+//    }
     
 }
 

@@ -26,23 +26,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afw-Xh-K9F">
-                        <rect key="frame" x="5" y="30.5" width="39.5" height="19.5"/>
+                        <rect key="frame" x="5" y="30.5" width="330" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-vb-R8V">
-                        <rect key="frame" x="0.0" y="27.5" width="340" height="38.5"/>
+                        <rect key="frame" x="5" y="27.5" width="330" height="38"/>
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Afw-Xh-K9F" secondAttribute="bottom" constant="15.5" id="2iQ-ox-c9y"/>
                     <constraint firstItem="Afw-Xh-K9F" firstAttribute="top" secondItem="2Y6-pV-R2c" secondAttribute="bottom" constant="8" id="Apf-BO-PeS"/>
-                    <constraint firstItem="GLr-vb-R8V" firstAttribute="top" secondItem="2Y6-pV-R2c" secondAttribute="bottom" constant="5" id="QYM-Fg-ZpG"/>
+                    <constraint firstItem="GLr-vb-R8V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27.5" id="FMb-1N-hKl"/>
                     <constraint firstItem="Afw-Xh-K9F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="iBg-gS-KCC"/>
-                    <constraint firstAttribute="trailing" secondItem="GLr-vb-R8V" secondAttribute="trailing" id="mgZ-Uv-hSx"/>
-                    <constraint firstItem="GLr-vb-R8V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="utb-6F-5Ez"/>
+                    <constraint firstAttribute="trailing" secondItem="GLr-vb-R8V" secondAttribute="trailing" constant="5" id="mgZ-Uv-hSx"/>
+                    <constraint firstItem="GLr-vb-R8V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="utb-6F-5Ez"/>
                     <constraint firstItem="2Y6-pV-R2c" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wFA-qe-EvT"/>
                     <constraint firstItem="2Y6-pV-R2c" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="wav-8L-hVc"/>
+                    <constraint firstAttribute="trailing" secondItem="Afw-Xh-K9F" secondAttribute="trailing" constant="5" id="wgM-Kn-Eb0"/>
                     <constraint firstAttribute="bottom" secondItem="GLr-vb-R8V" secondAttribute="bottom" id="zw8-re-bj5"/>
                 </constraints>
             </tableViewCellContentView>
