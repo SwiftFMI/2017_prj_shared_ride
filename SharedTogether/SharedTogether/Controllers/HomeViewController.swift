@@ -52,12 +52,12 @@ class HomeViewController: UIViewController {
             ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
                 let nsDik = snapshot.value as? NSDictionary
                 if let nd = nsDik {
-                    let freePlaces = nd[Constants.Rides.FREEPLACES] as! String
-                    let destination = nd[Constants.Rides.DESTINATION] as! String
-                    let from = nd[Constants.Rides.FROM] as! String
-                    let driver = nd[Constants.Rides.DRIVER] as! String
-                    let chatId = nd[Constants.Rides.GROUP_CHAT_ID] as! String
-                    let ownerId = nd[Constants.Rides.OWNER_ID] as! String
+                    let freePlaces = nd[Constants.Rides.FREEPLACES] as? String ?? ""
+                    let destination = nd[Constants.Rides.DESTINATION] as? String ?? ""
+                    let from = nd[Constants.Rides.FROM] as? String ?? ""
+                    let driver = nd[Constants.Rides.DRIVER] as? String ?? ""
+                    let chatId = nd[Constants.Rides.GROUP_CHAT_ID] as? String ?? ""
+                    let ownerId = nd[Constants.Rides.OWNER_ID] as? String ?? ""
                     
                     let ride = Ride(id: snapshot.key, from: from, destination: destination, driver: driver, freePlaces: freePlaces, groupChatId: chatId, ownerId: ownerId)
                     
