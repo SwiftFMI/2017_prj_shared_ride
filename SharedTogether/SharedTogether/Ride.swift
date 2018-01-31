@@ -9,9 +9,11 @@
 import Foundation
 
 struct Ride: Codable {
+    var id: String?
     var from: String?
     var destination: String?
     var driver: String?
     var freePlaces: String?
     var groupChatId: String?
+    var ownerId: String?
 }

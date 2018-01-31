@@ -10,6 +10,10 @@ import Foundation
 
 final class Defaults {
     
+    static func removeLoggedUser() {
+        UserDefaults.standard.removeObject(forKey: Constants.Defaults.USER)
+    }
+    
     static func setLoggedUser(user: User) {
         do {
             let jsonData = try JSONEncoder().encode(user)

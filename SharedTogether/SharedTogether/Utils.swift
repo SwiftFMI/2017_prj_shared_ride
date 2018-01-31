@@ -19,8 +19,11 @@ struct Utils {
                 let email = nsd[Constants.Users.EMAIL] as! String
                 let name = nsd[Constants.Users.NAME] as! String
                 let phone = nsd[Constants.Users.PHONE] as! String
+                let notificationToken = nsd[Constants.Users.NOTIFICATIONS_TOKEN] as? String ?? ""
+                let joinedRides = nsd[Constants.Users.JOINED_RIDES] as? [String:Bool] ?? [String:Bool]()
                 
-                let user = User(id: uuid, email: email, name: name, phone: phone)
+                let user =
+                    User(id: uuid, email: email, name: name, phone: phone, notificationsToken: notificationToken, joinedRides: joinedRides)
                 callBack(user)
             }
         })

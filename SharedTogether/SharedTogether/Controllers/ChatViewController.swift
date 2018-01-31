@@ -25,7 +25,7 @@ private let reuseIdentifier = "MessagesCell"
 //TODO: add loaders ask if there is a way to have base VC with loader in it
 //TODO: unsubscribe observables in deInit
 //TODO make round bubles on chant message labels
-class ChatViewController: UIViewController {
+class ChatViewController: BaseViewController {
     
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var userMessageLabel: UITextField!
@@ -45,7 +45,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
@@ -254,22 +254,22 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             if data.fromId == userId {
                 cell.participantMessageLabel.textColor = .white
                 cell.participantMessageLabel.backgroundColor = .blue
-                cell.participantMessageLabel.layer.cornerRadius = 20
+                cell.participantMessageLabel.layer.cornerRadius = 6
             } else {
                 cell.participantMessageLabel.textColor = .black
                 cell.participantMessageLabel.backgroundColor = .gray
-                cell.participantMessageLabel.layer.cornerRadius = 20
+                cell.participantMessageLabel.layer.cornerRadius = 6
             }
             
             if !data.imageURI.isEmpty {
-                let islandRef = Storage.storage().reference(forURL: data.imageURI)
+                let imageRef = Storage.storage().reference(forURL: data.imageURI)
+                cell.chatImageImageView.layer.cornerRadius = 6
                 
                 if let image = images[indexPath] {
                     cell.chatImageImageView.image = image
                 } else {
                     // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                    islandRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
-                        // Data for "images/island.jpg" is returned
+                    imageRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
                         if (data == nil) {
                             return
                         }
@@ -279,7 +279,6 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
                         self?.chatTableView.beginUpdates();
                         self?.chatTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.none)
                         self?.chatTableView.endUpdates();
-                        //                    cell.backgroundColor = .black
                     }
                 }
                 

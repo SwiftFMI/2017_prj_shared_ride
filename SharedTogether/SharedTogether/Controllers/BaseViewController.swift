@@ -10,6 +10,10 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    override func viewDidLoad() {
+        self.hideKeyboardWhenTappedAround()
+    }
+    
     func showAlert(_ title: String, _ message: String){
         // create the alert
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)

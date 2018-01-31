@@ -53,38 +53,44 @@ class CreateRideViewController: BaseViewController {
             return
         }
         
+        guard var user = Defaults.getLoggedUser() else {
+            return
+            //TODO: display error or handle case
+        }
         let ref = Database.database().reference()
-        let rideGroupChatRef = createGroupChat(dbRef: ref, freePlaces: freePlacesNumber)
-        
-        let driver = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? "test"
+        let rideGroupChatRef = createGroupChat(dbRef: ref, freePlaces: freePlacesNumber, user: user)
         
         let newRide =
             [Constants.Rides.FROM: from,
              Constants.Rides.DESTINATION: destination,
              Constants.Rides.FREEPLACES: freePlaces,
-             Constants.Rides.DRIVER: driver,
-             Constants.Rides.GROUP_CHAT_ID: rideGroupChatRef.key]
+             Constants.Rides.DRIVER: user.name,
+             Constants.Rides.GROUP_CHAT_ID: rideGroupChatRef.key,
+             Constants.Rides.OWNER_ID: user.id]
         
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
+        
+        user.joinedRides["\(newRideRef.key)"] = true
+        
+        Defaults.setLoggedUser(user: user)
+        
+        ref
+            .child(Constants.Users.ROOT)
+            .child(user.id)
+            .child(Constants.Users.JOINED_RIDES)
+            .updateChildValues(["\(newRideRef.key)": true])
     }
     
-    func createGroupChat(dbRef: DatabaseReference, freePlaces: Int) -> DatabaseReference {
+    func createGroupChat(dbRef: DatabaseReference, freePlaces: Int, user: User) -> DatabaseReference {
 //        let user = UserDefaults.standard.object(forKey: Constants.UserDefaults.USER) as! User
         
-        let userId = Auth.auth().currentUser?.uid ?? "0"
-//        let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
-        let name = Defaults.getLoggedUser()?.name ?? ""
+        let userId = user.id
+        let name = user.name
         
         //userId: name
         var newGroupChat: [String:String] = [String:String]()
         newGroupChat[userId] = name
-        
-//        let index = [Int](1...freePlaces)
-//        for (index, elem) in index.enumerated() {
-//            let str: String = "\(index + 1)"
-//            newGroupChat[str] = str
-//        }
         
         // userId : message
         let messagess = [String:String]()

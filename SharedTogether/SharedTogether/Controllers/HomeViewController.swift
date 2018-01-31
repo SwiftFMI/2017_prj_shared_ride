@@ -21,6 +21,11 @@ class HomeViewController: UIViewController {
     
     var ridesReference: DatabaseReference?
     var rides: [Ride] = []
+    var user = Defaults.getLoggedUser()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        user = Defaults.getLoggedUser()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +57,10 @@ class HomeViewController: UIViewController {
                     let from = nd[Constants.Rides.FROM] as! String
                     let driver = nd[Constants.Rides.DRIVER] as! String
                     let chatId = nd[Constants.Rides.GROUP_CHAT_ID] as! String
-                    let ride = Ride(from: from, destination: destination, driver: driver, freePlaces: freePlaces, groupChatId: chatId)
+                    let ownerId = nd[Constants.Rides.OWNER_ID] as! String
+                    
+                    let ride = Ride(id: snapshot.key, from: from, destination: destination, driver: driver, freePlaces: freePlaces, groupChatId: chatId, ownerId: ownerId)
+                    
                     self?.rides.append(ride)
                     self?.ridesTableView.reloadData()
                 }
@@ -113,6 +121,7 @@ class HomeViewController: UIViewController {
     @IBAction func logout(_ sender: Any) {
         do {
             try Auth.auth().signOut()
+            Defaults.removeLoggedUser()
             performSegue(withIdentifier: "goToWellcome", sender: self)
             // TODO: redirect to wellcome VC
         } catch {
@@ -135,7 +144,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[(indexPath as NSIndexPath).row]
-        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
+        //TODO: open ride details
+//        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,7 +155,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RideTableViewCell,
-            let user = AppDelegate.getUser() {
+            let user = self.user {
             
             let ride = rides[indexPath.row]
             
@@ -163,6 +173,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if let driverUnWraped = ride.driver {
                 driver = "Driver: \(driverUnWraped)"
             }
+            
+            
+            cell.joinButton.isEnabled = true
+            cell.leaveButton.isEnabled = false
+            cell.openChatButton.isEnabled = false
+            
+            if let rideId = ride.id {
+                if user.joinedRides[rideId] ?? false {
+                    cell.joinButton.isEnabled = false
+                    cell.leaveButton.isEnabled = true
+                    cell.openChatButton.isEnabled = true
+                }
+            }
+            
+            if let rideOwner = ride.ownerId {
+                if rideOwner == user.id {
+                    cell.leaveButton.isEnabled = false
+                }
+            }
                 
                 
             cell.configureCell(fromLocation: from, destination: dest, driverName: driver)
@@ -177,8 +206,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: RideCellItemsTap {
     func joinTab(cell: RideTableViewCell) {
-        if let row = self.ridesTableView.indexPath(for: cell)?.row, let user = Defaults.getLoggedUser() {
+        if let row = self.ridesTableView.indexPath(for: cell)?.row,
+            var user = Defaults.getLoggedUser() {
             let ride = rides[row]
+            
+            guard let rideId = ride.id else { return }
+            guard let rideFreePlaces = ride.freePlaces else { return }
+            
             let groupChatRef = Database.database().reference()
                 .child(Constants.RidesGroupChat.ROOT)
                 .child(ride.groupChatId!)
@@ -186,13 +220,21 @@ extension HomeViewController: RideCellItemsTap {
             
             groupChatRef.updateChildValues(["\(user.id)": user.name])
             
-//            let name = UserDefaults.standard.string(forKey: Constants.UserDefaults.USER) ?? ""
-//            let newRef = groupChatRef.childByAutoId();
-//            groupChatRef.setValuesForKeys([userId: name])
+            Database.database().reference()
+                .child(Constants.Users.ROOT)
+                .child(user.id)
+                .child(Constants.Users.JOINED_RIDES)
+                .updateChildValues(["\(rideId)": true], withCompletionBlock: {(error, snapshot) in
+                    
+                    //ask what happends with memmory here
+                    if error == nil {
+                        user.joinedRides["\(rideId)"] = true
+                        Defaults.setLoggedUser(user: user)
+                    }
+                })
             
-//            groupChatRef.setValue([userId: name])
+            //TODO handle ride free places decreasing count
         }
-//        performSegue(withIdentifier: "HomeToChat", sender: self)
     }
     
     func onLeaveTab(cell: RideTableViewCell) {
@@ -201,7 +243,9 @@ extension HomeViewController: RideCellItemsTap {
     }
     
     func onOpenChatTab(cell: RideTableViewCell) {
-        performSegue(withIdentifier: "HomeToChat", sender: self)
+        guard let indexPath = ridesTableView.indexPath(for: cell) else { return }
+        let ride = rides[indexPath.row]
+        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
     }
     
     

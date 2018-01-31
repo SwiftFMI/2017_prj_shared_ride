@@ -9,7 +9,6 @@
 import Foundation
 
 struct Constants {
-    static let USERS = "users"
     
     struct Defaults {
         static let USER = "logedUser"
@@ -29,6 +28,8 @@ struct Constants {
         static let EMAIL = "email"
         static let NAME = "name"
         static let PHONE = "phone"
+        static let JOINED_RIDES = "joinedRides"
+        static let NOTIFICATIONS_TOKEN = "notificationsToken"
     }
     
     struct Rides {
@@ -40,6 +41,7 @@ struct Constants {
         static let FREEPLACES = "freePlaces"
         static let GROUP_CHAT_ID = "groupChatId"
         static let DRIVER = "driver"
+        static let OWNER_ID = "ownerId"
     }
     
     struct RidesGroupChat {

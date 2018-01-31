@@ -16,16 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     //change root view controller on window
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
-    
-    //TODO: delete on logout
-    static var user: User?
-    
-    static func getUser() -> User? {
-        if user == nil {
-            user = Defaults.getLoggedUser()
-        }
-        return user
-    }
 
     // MARK: - Remote notifications
     
@@ -70,6 +60,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         Messaging.messaging().delegate = self
         
         let token = Messaging.messaging().fcmToken
+        
+        
+        if let fbToken = token, var user = Defaults.getLoggedUser() {
+            Database.database().reference()
+                .child(Constants.Users.ROOT)
+                .child(user.id)
+                .updateChildValues([Constants.Users.NOTIFICATIONS_TOKEN: fbToken], withCompletionBlock: {(error, dbReference) in
+                    if error == nil {
+                        user.notificationsToken = fbToken
+                        Defaults.setLoggedUser(user: user)
+                    }
+                })
+        }
         print("FCM token: \(token ?? "")")
         
         return true

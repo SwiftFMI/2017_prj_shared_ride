@@ -124,7 +124,7 @@
         <!--Create-->
         <scene sceneID="sRw-bx-VOe">
             <objects>
-                <viewController id="QQb-do-oRY" customClass="CreateRideViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController id="QQb-do-oRY" customClass="CreateRideViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cce-pL-M0A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,7 +180,7 @@ Create New Ride</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iBn-fl-1GT"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Create" id="rBn-2b-TRZ"/>
+                    <tabBarItem key="tabBarItem" title="Create" image="ic_ride_gray" id="rBn-2b-TRZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="destinationTextField" destination="dOR-2o-oHm" id="WOm-Zn-opz"/>
@@ -356,7 +356,7 @@ Create New Ride</string>
                                 <rect key="frame" x="0.0" y="64" width="375" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="YS7-Er-XtO" userLabel="Footer">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="5"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -381,7 +381,7 @@ Create New Ride</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bI-qR-qKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6130" y="-151"/>
+            <point key="canvasLocation" x="6128.8000000000002" y="-151.57421289355324"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="eyz-tq-LKX">
@@ -567,7 +567,7 @@ Create New Ride</string>
         <!--Tab Bar Controller-->
         <scene sceneID="vnJ-7j-l5o">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M6b-DA-9Tq" propertyAccessControl="all" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="M6b-DA-9Tq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LyE-jB-A80">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -586,8 +586,8 @@ Create New Ride</string>
         <!--Home-->
         <scene sceneID="Oar-WY-G0f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="mB0-QG-nCZ" propertyAccessControl="all" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="LwR-B8-Kh2"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="mB0-QG-nCZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_gray" id="LwR-B8-Kh2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="422-Gz-sJk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -605,6 +605,8 @@ Create New Ride</string>
     </scenes>
     <resources>
         <image name="ic_attach_file" width="22" height="22"/>
+        <image name="ic_home_gray" width="25" height="25"/>
+        <image name="ic_ride_gray" width="25" height="25"/>
         <image name="ic_send" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>

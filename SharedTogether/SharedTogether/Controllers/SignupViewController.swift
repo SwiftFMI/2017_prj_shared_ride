@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseMessaging
 import FirebaseAuth
 import FirebaseDatabase
 
@@ -75,7 +76,10 @@ class SignupViewController: BaseViewController {
                             let ref = Database.database().reference().root
                             let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
                             
-                            Defaults.setLoggedUser(user: User(id: uuid, email: email, name: name, phone: phone))
+                            let token = Messaging.messaging().fcmToken ?? ""
+                            let user =
+                                User(id: uuid, email: email, name: name, phone: phone, notificationsToken: token, joinedRides: [String: Bool]())
+                            Defaults.setLoggedUser(user: user)
                             
                             ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
                             self?.performSegue(withIdentifier: "signupToHome", sender: self)
@@ -89,13 +93,16 @@ class SignupViewController: BaseViewController {
             } else {
                 Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
                     if error == nil {
-                        if let userUUId = user?.uid {
+                        if let uuid = user?.uid {
                             let ref = Database.database().reference().root
                             let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
                             
-                             Defaults.setLoggedUser(user: User(id: userUUId, email: email, name: name, phone: phone))
+                            let token = Messaging.messaging().fcmToken ?? ""
+                            let user =
+                                User(id: uuid, email: email, name: name, phone: phone, notificationsToken: token, joinedRides: [String: Bool]())
+                            Defaults.setLoggedUser(user: user)
                             
-                            ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
+                            ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
                             self?.performSegue(withIdentifier: "signupToHome", sender: self)
                         } else {
                             print("errpr uuid not found")
@@ -108,12 +115,16 @@ class SignupViewController: BaseViewController {
         } else {
             Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
                 if error == nil {
-                    if let userUUId = user?.uid {
+                    if let uuid = user?.uid {
                         let ref = Database.database().reference().root
                         let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
                         
-                        Defaults.setLoggedUser(user: User(id: userUUId, email: email, name: name, phone: phone))
-                        ref.child(Constants.Users.ROOT).child(userUUId).setValue(userDetails)
+                        let token = Messaging.messaging().fcmToken ?? ""
+                        let user =
+                            User(id: uuid, email: email, name: name, phone: phone, notificationsToken: token, joinedRides: [String: Bool]())
+                        Defaults.setLoggedUser(user: user)
+                        
+                        ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
                         self?.performSegue(withIdentifier: "signupToHome", sender: self)
                     } else {
                         print("errpr uuid not found")
@@ -123,12 +134,6 @@ class SignupViewController: BaseViewController {
                 }
             })
         }
-    }
-    
-    func saveUserDetails(uuid: String, email: String, name: String, phone: String) {
-        let ref = Database.database().reference().root
-        let userDetails = ["email": email, "name": name, "phone": phone]
-        ref.child(Constants.USERS).child(uuid).setValue(userDetails)
     }
     
     /*
