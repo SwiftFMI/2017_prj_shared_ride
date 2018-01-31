@@ -79,27 +79,20 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ba5-O9-BrJ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="dfb-fw-zzz" userLabel="Footer">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGj-OJ-ATT">
-                                <rect key="frame" x="166.5" y="323" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zGj-OJ-ATT" firstAttribute="centerX" secondItem="rlS-o8-ebV" secondAttribute="centerX" id="CCd-Xq-oem"/>
                             <constraint firstItem="ba5-O9-BrJ" firstAttribute="leading" secondItem="3QY-X5-3RW" secondAttribute="leading" id="HpZ-c6-em8"/>
                             <constraint firstItem="3QY-X5-3RW" firstAttribute="bottom" secondItem="ba5-O9-BrJ" secondAttribute="bottom" id="MtZ-gG-c5H"/>
                             <constraint firstItem="3QY-X5-3RW" firstAttribute="trailing" secondItem="ba5-O9-BrJ" secondAttribute="trailing" id="Zm1-QK-Rwq"/>
                             <constraint firstItem="ba5-O9-BrJ" firstAttribute="top" secondItem="3QY-X5-3RW" secondAttribute="top" id="s6M-aH-zqV"/>
-                            <constraint firstItem="zGj-OJ-ATT" firstAttribute="centerY" secondItem="rlS-o8-ebV" secondAttribute="centerY" id="w4m-Pw-q9Y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3QY-X5-3RW"/>
                     </view>
@@ -112,7 +105,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ridesTableView" destination="ba5-O9-BrJ" id="MrN-fe-22y"/>
-                        <outlet property="wellcomeLabel" destination="zGj-OJ-ATT" id="gRX-0F-ir8"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="goToWellcome" customClass="ReplaceSegue" customModule="SharedTogether" customModuleProvider="target" id="u4U-dx-58T"/>
                         <segue destination="2T4-JR-vNH" kind="show" identifier="HomeToChat" id="Xot-C0-jcC"/>
                     </connections>
@@ -180,7 +172,7 @@ Create New Ride</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iBn-fl-1GT"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Create" image="ic_ride_gray" id="rBn-2b-TRZ"/>
+                    <tabBarItem key="tabBarItem" title="Create" image="ic_ride_blue" id="rBn-2b-TRZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="destinationTextField" destination="dOR-2o-oHm" id="WOm-Zn-opz"/>
@@ -606,10 +598,10 @@ Create New Ride</string>
     <resources>
         <image name="ic_attach_file" width="22" height="22"/>
         <image name="ic_home_gray" width="25" height="25"/>
-        <image name="ic_ride_gray" width="25" height="25"/>
+        <image name="ic_ride_blue" width="25" height="25"/>
         <image name="ic_send" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9a8-Vl-hNZ"/>
+        <segue reference="fAE-zO-QwM"/>
     </inferredMetricsTieBreakers>
 </document>

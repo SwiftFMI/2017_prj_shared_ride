@@ -9,10 +9,15 @@
 import UIKit
 
 class RideTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var cellContentView: UIView!
 
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var driverNameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var availableSeatsLabel: UILabel!
     
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var leaveButton: UIButton!
@@ -23,6 +28,8 @@ class RideTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        cellContentView.layer.cornerRadius = 3.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,11 +37,10 @@ class RideTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(fromLocation: String, destination: String, driverName: String) {
-        if fromLabel != nil && destinationLabel != nil && driverNameLabel != nil {
+    func configureCell(fromLocation: String, destination: String) {
+        if fromLabel != nil && destinationLabel != nil {
             fromLabel.text=fromLocation
             destinationLabel.text=destination
-            driverNameLabel.text=driverName
         }
     }
     

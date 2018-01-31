@@ -27,7 +27,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="image" destination="VtJ-2f-fVD" id="LjW-De-s3o"/>
                 <outlet property="imageMessage" destination="VtJ-2f-fVD" id="tU7-oS-inK"/>
             </connections>
             <point key="canvasLocation" x="67" y="203"/>

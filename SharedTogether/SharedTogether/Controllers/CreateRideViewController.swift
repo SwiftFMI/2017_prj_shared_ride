@@ -71,7 +71,7 @@ class CreateRideViewController: BaseViewController {
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
         
-        user.joinedRides["\(newRideRef.key)"] = true
+        user.joinedRides?["\(newRideRef.key)"] = true
         
         Defaults.setLoggedUser(user: user)
         

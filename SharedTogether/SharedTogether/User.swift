@@ -13,6 +13,6 @@ struct User: Codable {
     var email: String
     var name: String
     var phone: String
-    var notificationsToken: String
-    var joinedRides: [String:Bool]
+    var notificationsToken: String?
+    var joinedRides: [String:Bool]?
 }

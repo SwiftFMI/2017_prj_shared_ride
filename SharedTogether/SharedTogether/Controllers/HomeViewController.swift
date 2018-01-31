@@ -16,7 +16,6 @@ class HomeViewController: UIViewController {
 //    present pop Over VC
     
 
-    @IBOutlet weak var wellcomeLabel: UILabel!
     @IBOutlet weak var ridesTableView: UITableView!
     
     var ridesReference: DatabaseReference?
@@ -33,14 +32,6 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         let cellNib = UINib(nibName: "RideTableViewCell", bundle: nil)
         ridesTableView.register(cellNib, forCellReuseIdentifier: reuseIdentifier)
-        
-        if let user = Auth.auth().currentUser {
-            if !user.isAnonymous {
-                if let userEmail = user.email {
-                    wellcomeLabel.text = userEmail
-                }
-            }
-        }
         
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
@@ -154,53 +145,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? RideTableViewCell,
-            let user = self.user {
-            
-            let ride = rides[indexPath.row]
-            
-            var from = "";
-            if let fromUnWraped = ride.from {
-                from = "From: \(fromUnWraped)"
-            }
-            
-            var dest = "";
-            if let destinationUnWraped = ride.destination {
-                dest = "Destination: \(destinationUnWraped)"
-            }
-            
-            var driver = "";
-            if let driverUnWraped = ride.driver {
-                driver = "Driver: \(driverUnWraped)"
-            }
-            
-            
-            cell.joinButton.isEnabled = true
-            cell.leaveButton.isEnabled = false
-            cell.openChatButton.isEnabled = false
-            
-            if let rideId = ride.id {
-                if user.joinedRides[rideId] ?? false {
-                    cell.joinButton.isEnabled = false
-                    cell.leaveButton.isEnabled = true
-                    cell.openChatButton.isEnabled = true
-                }
-            }
-            
-            if let rideOwner = ride.ownerId {
-                if rideOwner == user.id {
-                    cell.leaveButton.isEnabled = false
-                }
-            }
-                
-                
-            cell.configureCell(fromLocation: from, destination: dest, driverName: driver)
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RideTableViewCell
+        
+        let ride = rides[indexPath.row]
+        
+        if let rideFrom = ride.from, let rideTo = ride.destination {
+            cell.configureCell(fromLocation: rideFrom, destination: rideTo)
             cell.delegate = self
-            return cell;
-        } else {
-            return UITableViewCell()
         }
+        
+        return cell
     }
 }
 
@@ -228,7 +182,7 @@ extension HomeViewController: RideCellItemsTap {
                     
                     //ask what happends with memmory here
                     if error == nil {
-                        user.joinedRides["\(rideId)"] = true
+                        user.joinedRides?["\(rideId)"] = true
                         Defaults.setLoggedUser(user: user)
                     }
                 })
