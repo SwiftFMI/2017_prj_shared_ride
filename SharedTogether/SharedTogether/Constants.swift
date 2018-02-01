@@ -18,7 +18,8 @@ struct Constants {
         static let USER = "loged_user"
     }
     struct Segues {
-        static let HomeToChat = "HomeToChat"
+        static let DetailsToChat = "DetailsToChat"
+        static let HomeToDetails = "HomeToDetails"
     }
     
     struct Users {

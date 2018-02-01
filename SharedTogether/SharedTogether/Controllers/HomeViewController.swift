@@ -123,10 +123,8 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if let ride = sender as? Ride {
-            let chatVc = segue.destination as! ChatViewController
-            
-            chatVc.groupId = ride.groupChatId
+        if let ride = sender as? Ride, let rideDetailsVc = segue.destination as? RideDetailsViewController {
+            rideDetailsVc.ride = ride
         }
     }
 }
@@ -136,7 +134,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[(indexPath as NSIndexPath).row]
         //TODO: open ride details
-//        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
+        performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,7 +197,7 @@ extension HomeViewController: RideCellItemsTap {
     func onOpenChatTab(cell: RideTableViewCell) {
         guard let indexPath = ridesTableView.indexPath(for: cell) else { return }
         let ride = rides[indexPath.row]
-        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
+//        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
     }
     
     

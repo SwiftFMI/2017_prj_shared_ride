@@ -15,10 +15,27 @@ class CreateRideViewController: BaseViewController {
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var freePlacesTextField: UITextField!
-
+    @IBOutlet weak var dateOfRide: UITextField!
+    
+    let picker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
+        toolbar.setItems([doneButton], animated: false)
+        
+        dateOfRide.inputAccessoryView = toolbar
+        dateOfRide.inputView = picker
+    }
+    
+    @objc func pickerDonePressed() {
+        dateOfRide.text = Utils.formatDate(date: picker.date)
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {

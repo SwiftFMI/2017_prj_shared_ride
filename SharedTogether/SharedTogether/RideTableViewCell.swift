@@ -8,7 +8,11 @@
 
 import UIKit
 
-class RideTableViewCell: UITableViewCell {
+class RideTableViewCell: UITableViewCell, IdentifiableCell {
+    
+    static var cellIdentifier: String {
+        return String(describing: RideTableViewCell.self)
+    }
     
     @IBOutlet weak var cellContentView: UIView!
 

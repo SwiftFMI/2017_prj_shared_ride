@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ChatMessageTableViewCell: UITableViewCell {
+class ChatMessageTableViewCell: UITableViewCell, IdentifiableCell {
 
+    static var cellIdentifier: String {
+        return String(describing: ChatMessageTableViewCell.self)
+    }
+    
     @IBOutlet weak var participantNameLabel: UILabel!
     @IBOutlet weak var participantMessageLabel: UILabel!
     @IBOutlet weak var chatImageImageView: UIImageView!

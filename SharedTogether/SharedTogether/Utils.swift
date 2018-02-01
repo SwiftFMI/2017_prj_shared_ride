@@ -28,4 +28,12 @@ struct Utils {
             }
         })
     }
+    
+    static func formatDate(date: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
 }

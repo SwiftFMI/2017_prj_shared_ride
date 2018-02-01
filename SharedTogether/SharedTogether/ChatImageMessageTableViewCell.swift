@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ChatImageMessageTableViewCell: UITableViewCell {
+class ChatImageMessageTableViewCell: UITableViewCell, IdentifiableCell {
+    
+    static var cellIdentifier: String {
+        return String(describing: ChatImageMessageTableViewCell.self)
+    }
     
     static let identifier = "imageCell"
 

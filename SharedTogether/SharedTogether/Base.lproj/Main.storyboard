@@ -106,12 +106,59 @@
                     <connections>
                         <outlet property="ridesTableView" destination="ba5-O9-BrJ" id="MrN-fe-22y"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="goToWellcome" customClass="ReplaceSegue" customModule="SharedTogether" customModuleProvider="target" id="u4U-dx-58T"/>
-                        <segue destination="2T4-JR-vNH" kind="show" identifier="HomeToChat" id="Xot-C0-jcC"/>
+                        <segue destination="2pW-CS-1Ug" kind="show" identifier="HomeToDetails" id="caZ-Oc-6dA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWX-sT-kZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5273" y="-150"/>
+        </scene>
+        <!--Ride Details View Controller-->
+        <scene sceneID="NH7-Mx-1Iu">
+            <objects>
+                <viewController id="2pW-CS-1Ug" customClass="RideDetailsViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A1w-du-y5d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHL-yr-IrJ">
+                                <rect key="frame" x="141" y="197" width="93" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Open Chat"/>
+                                <connections>
+                                    <action selector="openChat:" destination="2pW-CS-1Ug" eventType="touchUpInside" id="6H3-nf-nbH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijx-pC-YEc">
+                                <rect key="frame" x="143" y="256" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Join Ride"/>
+                                <connections>
+                                    <action selector="onJoinRideTab:" destination="2pW-CS-1Ug" eventType="touchUpInside" id="Qv5-LK-bvy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDE-Ug-DtY">
+                                <rect key="frame" x="142" y="307" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Leave Ride"/>
+                                <connections>
+                                    <action selector="onLeaveRideTab:" destination="2pW-CS-1Ug" eventType="touchUpInside" id="fXZ-UG-1A9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="PG4-zh-TOd"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonJoinRide" destination="ijx-pC-YEc" id="uQ4-E6-NVX"/>
+                        <outlet property="buttonLeaveRide" destination="vDE-Ug-DtY" id="5Hs-eM-WnA"/>
+                        <outlet property="buttonOpenChat" destination="uHL-yr-IrJ" id="f1f-S5-YWf"/>
+                        <segue destination="2T4-JR-vNH" kind="show" identifier="DetailsToChat" id="0E3-re-nft"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8j-vb-skS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6364" y="-149.77511244377811"/>
         </scene>
         <!--Create-->
         <scene sceneID="sRw-bx-VOe">
@@ -137,7 +184,7 @@ Create New Ride</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zNb-lJ-7Sx">
-                                <rect key="frame" x="20" y="251" width="315" height="120"/>
+                                <rect key="frame" x="20" y="251" width="315" height="165"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="from" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-HJ-mj1">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
@@ -157,6 +204,12 @@ Create New Ride</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date of ride" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9s-Hh-vvm">
+                                        <rect key="frame" x="0.0" y="135" width="315" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -175,6 +228,7 @@ Create New Ride</string>
                     <tabBarItem key="tabBarItem" title="Create" image="ic_ride_blue" id="rBn-2b-TRZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dateOfRide" destination="h9s-Hh-vvm" id="KKN-PA-kqz"/>
                         <outlet property="destinationTextField" destination="dOR-2o-oHm" id="WOm-Zn-opz"/>
                         <outlet property="freePlacesTextField" destination="pUW-x9-Q5Q" id="cVV-p5-L5D"/>
                         <outlet property="fromTextField" destination="OtB-HJ-mj1" id="UG0-fC-zCs"/>
@@ -373,7 +427,7 @@ Create New Ride</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bI-qR-qKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6128.8000000000002" y="-151.57421289355324"/>
+            <point key="canvasLocation" x="7335" y="-151"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="eyz-tq-LKX">
