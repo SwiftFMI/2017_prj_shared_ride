@@ -16,4 +16,13 @@ struct Ride: Codable {
     var freePlaces: String?
     var groupChatId: String?
     var ownerId: String?
+    
+    init(dictionary: NSDictionary) {
+        freePlaces = dictionary[Constants.Rides.FREEPLACES] as? String ?? ""
+        destination = dictionary[Constants.Rides.DESTINATION] as? String ?? ""
+        from = dictionary[Constants.Rides.FROM] as? String ?? ""
+        driver = dictionary[Constants.Rides.DRIVER] as? String ?? ""
+        groupChatId = dictionary[Constants.Rides.GROUP_CHAT_ID] as? String ?? ""
+        ownerId = dictionary[Constants.Rides.OWNER_ID] as? String ?? ""
+    }
 }

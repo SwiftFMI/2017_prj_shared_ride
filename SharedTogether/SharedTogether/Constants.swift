@@ -43,6 +43,7 @@ struct Constants {
         static let GROUP_CHAT_ID = "groupChatId"
         static let DRIVER = "driver"
         static let OWNER_ID = "ownerId"
+        static let START_RIDE_DATE = "startRideDate"
     }
     
     struct RidesGroupChat {

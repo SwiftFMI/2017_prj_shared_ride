@@ -99,12 +99,9 @@ class ChatViewController: BaseViewController {
 //            })
             
             addMessageRefHandle = messagesRef?.observe(.childAdded, with: { [weak self] (snapshot) in
-                let dict = snapshot.value as! NSDictionary
-                let uuid = dict[Constants.RidesGroupChat.MESSAGESS_USER_ID] as? String ?? ""
-                let text = dict[Constants.RidesGroupChat.MESSAGESS_USER_MESSAGE] as? String ?? ""
-                let imageURL = dict[Constants.RidesGroupChat.MESSAGES_IMAGE_URL] as? String ?? ""
-                    
-                let message = Message(fromId: uuid, message: text, imageURI: imageURL)
+                guard let dictionary = snapshot.value as? NSDictionary else { return }
+                
+                let message = Message(dictionary: dictionary)
                 self?.messages.append(message)
                 
                 self?.chatTableView.reloadData()

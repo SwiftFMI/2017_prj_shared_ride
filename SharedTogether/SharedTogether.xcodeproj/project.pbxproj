@@ -19,7 +19,6 @@
 		A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */; };
 		A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B138E200CAD4D00D8B145 /* Extensions.swift */; };
 		A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D12018ECA000E32209 /* ChatViewController.swift */; };
-		A08DB8D4201A33A700E32209 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D3201A33A700E32209 /* ChatUser.swift */; };
 		A08DB8D6201A380100E32209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D5201A380100E32209 /* User.swift */; };
 		A08DB8D8201A446000E32209 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8D7201A446000E32209 /* Defaults.swift */; };
 		A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08DB8E1201B30F200E32209 /* ChatMessageTableViewCell.swift */; };
@@ -54,7 +53,6 @@
 		A08B138C200CA1D800D8B145 /* ReplaceSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		A08B138E200CAD4D00D8B145 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A08DB8D12018ECA000E32209 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		A08DB8D3201A33A700E32209 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		A08DB8D5201A380100E32209 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A08DB8D7201A446000E32209 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		A08DB8E1201B30F200E32209 /* ChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				A032C47A2012428C00C6975F /* Ride.swift */,
-				A08DB8D3201A33A700E32209 /* ChatUser.swift */,
 				A08DB8D5201A380100E32209 /* User.swift */,
 				A08A4E27201B6AAC009B2865 /* Message.swift */,
 			);
@@ -368,7 +365,6 @@
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
 				A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */,
-				A08DB8D4201A33A700E32209 /* ChatUser.swift in Sources */,
 				A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */,
 				A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */,
 				A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */,
