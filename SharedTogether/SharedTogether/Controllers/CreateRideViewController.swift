@@ -31,6 +31,7 @@ class CreateRideViewController: BaseViewController {
         
         dateOfRide.inputAccessoryView = toolbar
         dateOfRide.inputView = picker
+        dateOfRide.text = Utils.formatDate(date: picker.date)
     }
     
     @objc func pickerDonePressed() {
@@ -62,6 +63,7 @@ class CreateRideViewController: BaseViewController {
         }
         
         guard let freePlacesNumber = Int(freePlaces) else {
+            //TODO: display error or handle case
             return
         }
         
@@ -75,6 +77,8 @@ class CreateRideViewController: BaseViewController {
             //TODO: display error or handle case
         }
         
+        let startDate = String(picker.date.timeIntervalSince1970)
+        
         let ref = Database.database().reference()
         let rideGroupChatRef = createGroupChat(dbRef: ref, freePlaces: freePlacesNumber, user: user)
         
@@ -84,7 +88,8 @@ class CreateRideViewController: BaseViewController {
              Constants.Rides.FREEPLACES: freePlaces,
              Constants.Rides.DRIVER: user.name,
              Constants.Rides.GROUP_CHAT_ID: rideGroupChatRef.key,
-             Constants.Rides.OWNER_ID: user.id]
+             Constants.Rides.OWNER_ID: user.id,
+             Constants.Rides.START_RIDE_DATE: startDate]
         
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)

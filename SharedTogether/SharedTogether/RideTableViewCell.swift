@@ -41,10 +41,13 @@ class RideTableViewCell: UITableViewCell, IdentifiableCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(fromLocation: String, destination: String) {
-        if fromLabel != nil && destinationLabel != nil {
-            fromLabel.text=fromLocation
-            destinationLabel.text=destination
+    func configureCell(fromLocation: String, destination: String, availablePlaces: String, time: String, date: String) {
+        if fromLabel != nil && destinationLabel != nil && timeLabel != nil && dateLabel != nil && availableSeatsLabel != nil {
+            fromLabel.text = fromLocation
+            destinationLabel.text = destination
+            availableSeatsLabel.text = availablePlaces
+            timeLabel.text = time
+            dateLabel.text = date
         }
     }
     

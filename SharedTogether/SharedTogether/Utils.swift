@@ -29,10 +29,49 @@ struct Utils {
         })
     }
     
-    static func formatDate(date: Date) -> String{
+    static func formatDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    static func formatDate(unixTimestamp: Int64) -> String {
+        let dateFormatter = DateFormatter()
+        let date = Date(timeIntervalSince1970: Double(unixTimestamp))
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    static func formatDate(stringUnixTimeStamp: String) -> String {
+        guard let unisTimeStampLong = Int64(stringUnixTimeStamp) else { return "" }
+        
+        return formatDate(unixTimestamp: unisTimeStampLong)
+    }
+    
+    static func dateFromTimestampString(stringUnixTimeStamp: String) -> Date? {
+        guard let unisTimeStampLong = Double(stringUnixTimeStamp) else { return nil }
+        
+        return Date(timeIntervalSince1970: unisTimeStampLong)
+    }
+    
+    static func timeFromDate(date: Date?) -> String {
+        guard let date = date else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    static func dateFromDate(date: Date?) -> String {
+        guard let date = date else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
         
         return dateFormatter.string(from: date)
     }

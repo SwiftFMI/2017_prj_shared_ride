@@ -135,15 +135,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //why force unwrap as!
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! RideTableViewCell
         
         let ride = rides[indexPath.row]
         
-        if let rideFrom = ride.from, let rideTo = ride.destination {
-            cell.configureCell(fromLocation: rideFrom, destination: rideTo)
-            cell.delegate = self
-        }
+        let rideFrom = ride.from ?? ""
+        let rideTo = ride.destination ?? ""
+        let freePlaces = ride.freePlaces ?? ""
+        let date = Utils.dateFromDate(date: ride.dateOfRide)
+        let time = Utils.timeFromDate(date: ride.dateOfRide)
         
+        cell.configureCell(fromLocation: rideFrom, destination: rideTo, availablePlaces: freePlaces, time: time, date: date)
+        cell.delegate = self
+//        if let rideFrom = ride.from, let rideTo = ride.destination {
+//            cell.configureCell(fromLocation: rideFrom, destination: rideTo)
+//            cell.delegate = self
+//        }
         return cell
     }
 }
