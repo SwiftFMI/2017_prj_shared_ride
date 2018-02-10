@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		47C91EEDA311176996B0BCD9 /* Pods_SharedTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */; };
 		A032C47B2012428C00C6975F /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032C47A2012428C00C6975F /* Ride.swift */; };
+		A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */; };
 		A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */; };
 		A06A0E0C201F8492000BC494 /* ChatImageMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */; };
 		A0890671200CC5740073BC3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890670200CC5740073BC3F /* Utils.swift */; };
@@ -43,6 +44,8 @@
 		0DC1F741349851196FE6C54A /* Pods-SharedTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SharedTogether.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SharedTogether/Pods-SharedTogether.debug.xcconfig"; sourceTree = "<group>"; };
 		91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SharedTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A032C47A2012428C00C6975F /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		A056F675202EE99E00F165DC /* SharedTogether.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SharedTogether.entitlements; sourceTree = "<group>"; };
+		A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRideEmitter.swift; sourceTree = "<group>"; };
 		A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageMessageTableViewCell.xib; sourceTree = "<group>"; };
 		A0890670200CC5740073BC3F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -94,6 +97,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A056F676202F0E3300F165DC /* singletons */ = {
+			isa = PBXGroup;
+			children = (
+				A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */,
+			);
+			name = singletons;
+			sourceTree = "<group>";
+		};
 		A06A0E0D202340E6000BC494 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +135,8 @@
 		A0A107C1200365CE00A09311 /* SharedTogether */ = {
 			isa = PBXGroup;
 			children = (
+				A056F676202F0E3300F165DC /* singletons */,
+				A056F675202EE99E00F165DC /* SharedTogether.entitlements */,
 				A06A0E0D202340E6000BC494 /* protocols */,
 				A0A107DC2003BC3000A09311 /* Models */,
 				A0A107DB2003BC2700A09311 /* Views */,
@@ -233,6 +246,11 @@
 					A0A107BE200365CE00A09311 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -370,6 +388,7 @@
 				A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */,
 				A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */,
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
+				A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */,
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
 				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,
 				A08DB8D8201A446000E32209 /* Defaults.swift in Sources */,
@@ -510,6 +529,8 @@
 			baseConfigurationReference = 0DC1F741349851196FE6C54A /* Pods-SharedTogether.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SharedTogether/SharedTogether.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L24TQ8W95;
 				INFOPLIST_FILE = SharedTogether/Info.plist;
@@ -517,6 +538,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sharedtogether.app.SharedTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -527,6 +549,8 @@
 			baseConfigurationReference = 01D99852BCB2937A3FD6635E /* Pods-SharedTogether.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SharedTogether/SharedTogether.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L24TQ8W95;
 				INFOPLIST_FILE = SharedTogether/Info.plist;
@@ -534,6 +558,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sharedtogether.app.SharedTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
