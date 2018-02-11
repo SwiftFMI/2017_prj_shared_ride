@@ -10,6 +10,7 @@
 		47C91EEDA311176996B0BCD9 /* Pods_SharedTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */; };
 		A032C47B2012428C00C6975F /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032C47A2012428C00C6975F /* Ride.swift */; };
 		A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */; };
+		A056F67A202F132C00F165DC /* LeaveRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056F679202F132C00F165DC /* LeaveRide.swift */; };
 		A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */; };
 		A06A0E0C201F8492000BC494 /* ChatImageMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */; };
 		A0890671200CC5740073BC3F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0890670200CC5740073BC3F /* Utils.swift */; };
@@ -46,6 +47,7 @@
 		A032C47A2012428C00C6975F /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		A056F675202EE99E00F165DC /* SharedTogether.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SharedTogether.entitlements; sourceTree = "<group>"; };
 		A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRideEmitter.swift; sourceTree = "<group>"; };
+		A056F679202F132C00F165DC /* LeaveRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRide.swift; sourceTree = "<group>"; };
 		A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageMessageTableViewCell.xib; sourceTree = "<group>"; };
 		A0890670200CC5740073BC3F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -97,20 +99,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A056F676202F0E3300F165DC /* singletons */ = {
+		A01D7548202FC0DC00007FCD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A0A107C4200365CE00A09311 /* WellcomeViewController.swift */,
+				A0A107E12003C05000A09311 /* SigninViewController.swift */,
+				A0A107E32003C0A500A09311 /* SignupViewController.swift */,
+				A0A107E52003C0B800A09311 /* HomeViewController.swift */,
+				A0890672200CC6590073BC3F /* BaseViewController.swift */,
+				A092C392200FB50300472619 /* CreateRideViewController.swift */,
+				A08DB8D12018ECA000E32209 /* ChatViewController.swift */,
+				A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A056F676202F0E3300F165DC /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
 				A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */,
 			);
-			name = singletons;
+			name = Singletons;
 			sourceTree = "<group>";
 		};
-		A06A0E0D202340E6000BC494 /* protocols */ = {
+		A06A0E0D202340E6000BC494 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */,
 			);
-			name = protocols;
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		A0A107B6200365CD00A09311 = {
@@ -135,18 +152,18 @@
 		A0A107C1200365CE00A09311 /* SharedTogether */ = {
 			isa = PBXGroup;
 			children = (
-				A056F676202F0E3300F165DC /* singletons */,
-				A056F675202EE99E00F165DC /* SharedTogether.entitlements */,
-				A06A0E0D202340E6000BC494 /* protocols */,
+				A056F676202F0E3300F165DC /* Singletons */,
+				A06A0E0D202340E6000BC494 /* Protocols */,
 				A0A107DC2003BC3000A09311 /* Models */,
 				A0A107DB2003BC2700A09311 /* Views */,
-				A0A107DE2003BC3E00A09311 /* Controllers */,
+				A01D7548202FC0DC00007FCD /* Controllers */,
 				A0A107E02003BD0400A09311 /* Utils */,
 				A0A107C2200365CE00A09311 /* AppDelegate.swift */,
 				A0A107C6200365CE00A09311 /* Main.storyboard */,
 				A0A107C9200365CE00A09311 /* Assets.xcassets */,
 				A0A107CB200365CE00A09311 /* LaunchScreen.storyboard */,
 				A0A107CE200365CE00A09311 /* Info.plist */,
+				A056F675202EE99E00F165DC /* SharedTogether.entitlements */,
 			);
 			path = SharedTogether;
 			sourceTree = "<group>";
@@ -170,23 +187,9 @@
 				A032C47A2012428C00C6975F /* Ride.swift */,
 				A08DB8D5201A380100E32209 /* User.swift */,
 				A08A4E27201B6AAC009B2865 /* Message.swift */,
+				A056F679202F132C00F165DC /* LeaveRide.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		A0A107DE2003BC3E00A09311 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A0A107C4200365CE00A09311 /* WellcomeViewController.swift */,
-				A0A107E12003C05000A09311 /* SigninViewController.swift */,
-				A0A107E32003C0A500A09311 /* SignupViewController.swift */,
-				A0A107E52003C0B800A09311 /* HomeViewController.swift */,
-				A0890672200CC6590073BC3F /* BaseViewController.swift */,
-				A092C392200FB50300472619 /* CreateRideViewController.swift */,
-				A08DB8D12018ECA000E32209 /* ChatViewController.swift */,
-				A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		A0A107E02003BD0400A09311 /* Utils */ = {
@@ -386,6 +389,7 @@
 				A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */,
 				A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */,
 				A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */,
+				A056F67A202F132C00F165DC /* LeaveRide.swift in Sources */,
 				A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */,
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
 				A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */,

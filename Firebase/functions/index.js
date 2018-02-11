@@ -17,55 +17,152 @@ app.post('/joinRide', (req, res) => {
   const rideId = req.body.rideId
   const rideOwnerId = req.body.rideOwnerId
   const joinUserId = req.body.joinUserId
+  const rideChatId = req.body.rideChatId
 
-  //TODO: handle empry fields
+  if(!rideId){
+    return res.status(400).json({ message: 'RideId must not be empty' })
+  }
 
-  const ownerUser = admin.database().ref(`/users/${rideOwnerId}`).once('value');
-  const joiningUser = admin.database().ref(`/users/${joinUserId}`).once('value');
-  const ride = admin.database().ref(`/rides/${rideId}`)
+  if(!rideOwnerId){
+    return res.status(400).json({ message: 'RideOwnerId must not be empty' })
+  }
 
-  Promise.all([ownerUser, joiningUser, ride]).then(results => {
+  if(!joinUserId){
+    return res.status(400).json({ message: 'JoinUserId must not be empty' })
+  }
+
+  if(!rideChatId){
+    return res.status(400).json({ message: 'RideChatId must not be empty' })
+  }
+
+  const ownerUserRef = admin.database().ref(`/users/${rideOwnerId}`);
+  const joiningUserRef = admin.database().ref(`/users/${joinUserId}`);
+  const rideRef = admin.database().ref(`/rides/${rideId}`);
+  const chatRef = admin.database().ref(`/ridesGroups/${rideChatId}`);
+
+  const ownerPromise = ownerUserRef.once('value');
+  const joiningPromise = joiningUserRef.once('value');
+  const ridePromise = rideRef.once('value');
+  const chatPromise = chatRef.once('value');
+
+  Promise.all([ownerPromise, joiningPromise, ridePromise, chatPromise]).then(results => {
     const ownerUser = results[0].val();
     const joinUser = results[1].val();
     const ride = results[2].val();
+    const chat = results[3].val();
 
-    //TODO: update ride
+    //TODO: check if user is not joined in the ride
+    const freePlaces = parseInt(ride.freePlaces);
+    if (freePlaces < 1) {
+      return res
+        .status(400)
+        .json({ message: `Ride to ${ride.destination} dose not have availabel places` });
+    }
+
+    const newFreePlaces = freePlaces - 1
+    rideRef.update({
+      freePlaces: newFreePlaces.toString()
+    })
+
+    var joiningUserDict = {};
+    joiningUserDict[rideId] = true;
+    joiningUserRef.child('joinedRides').update(joiningUserDict)
+
+
+    var chatDict = {};
+    chatDict[joinUserId] = joinUser.name;
+    chatRef.child('chatMembers').update(chatDict)
 
     const payload = {
         notification: {
-            title: 'Join event',
-            body: joinUser.name + ' has join your ride',
-            icon: null
+            title: 'Join ride',
+            body:  `${joinUser.name} has join your ride`
+            // icon: null
         }
     };
 
-    // var ref = event.data.ref;
-    // ref.update({
-    //     "isVerified": true
-    // });
     admin.messaging().sendToDevice(ownerUser.notificationsToken, payload)
-        .then(function (response) {
-            console.log("Successfully sent message:", response);
-        })
-        .catch(function (error) {
-            console.log("Error sending message:", error);
+        .then(response => { return res.status(200).json({result: 'Notification send'}) })
+        .catch(error => {
+          console.log(`error while sending notification to ${joinUserId} for event ${rideId} with error: ${error}`)
+          return res.status(400).json({message: 'Something went wrong'})
         });
+  })
+  .catch(error => {
+    console.log("error: " + error)
+    return res.status(400).json({message: 'Something went wrong'})
   });
-
-  res.send("Widgets.create()")
 });
 
 app.post('/leaveRide', (req, res) => {
   const rideId = req.body.rideId
   const rideOwnerId = req.body.rideOwnerId
-  const leaveUserId = req.body.joinUserId
+  const leaveUserId = req.body.leaveUserId
+  // const rideChatId = req.body.rideChatId
 
-  //TODO: handle empry fields
+  if(!rideId){
+    return res.status(400).json({ message: 'RideId must not be empty' })
+  }
 
-  const ownerUser = admin.database().ref(`/users/${rideOwnerId}`).once('value');
-  const leaveUser = admin.database().ref(`/users/${leaveUserId}`).once('value');
-  const ride = admin.database().ref(`/rides/${rideId}`)
+  if(!rideOwnerId){
+    return res.status(400).json({ message: 'RideOwnerId must not be empty' })
+  }
 
+  if(!leaveUserId){
+    return res.status(400).json({ message: 'LeaveUserId must not be empty' })
+  }
+
+  // if(!rideChatId){
+  //   return res.status(400).json({ message: 'RideChatId must not be empty' })
+  // }
+
+  const ownerUserRef = admin.database().ref(`/users/${rideOwnerId}`);
+  const leavingUserRef = admin.database().ref(`/users/${leaveUserId}`);
+  const rideRef = admin.database().ref(`/rides/${rideId}`);
+  // const chatRef = admin.database().ref(`/ridesGroups/${rideChatId}`);
+
+  const ownerPromise = ownerUserRef.once('value');
+  const leavingPromise = leavingUserRef.once('value');
+  const ridePromise = rideRef.once('value');
+  // const chatPromise = chatRef.once('value');
+
+  Promise.all([ownerPromise, leavingPromise, ridePromise]).then(results => {
+    const ownerUser = results[0].val();
+    const leavingUser = results[1].val();
+    const ride = results[2].val();
+    // const chat = results[3].val();
+
+    //TODO: check if user is joined in the ride
+    const freePlaces = parseInt(ride.freePlaces);
+
+    const newFreePlaces = freePlaces + 1
+    rideRef.update({
+      freePlaces: newFreePlaces.toString()
+    })
+
+    var leavingUserDict = {};
+    leavingUserDict[rideId] = false;
+    leavingUserRef.child('joinedRides').update(leavingUserDict);
+
+    const payload = {
+        notification: {
+            title: 'Leave ride',
+            body: `${leavingUser.name} has left your ride`
+            // icon: null
+        }
+    };
+
+    admin.messaging().sendToDevice(ownerUser.notificationsToken, payload)
+        .then(response => { return res.status(200).json({result: 'Notification send'}) })
+        .catch(error => {
+          console.log(`error while sending notification to ${joinUserId} for event ${rideId} with error: ${error}`)
+          return res.status(400).json({message: 'Something went wrong'})
+        });
+  })
+  .catch(error => {
+    console.log("error: " + error)
+    return res.status(400).json({message: 'Something went wrong'})
+  });
 });
 
 // Expose Express API as a single Cloud Function:

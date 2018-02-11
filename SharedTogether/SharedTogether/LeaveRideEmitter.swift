@@ -12,7 +12,21 @@ class LeaveRideEmitter {
     
     static let shared = LeaveRideEmitter()
     
+    var leaveRideEvents: [LeaveRide]
+    
     private init() {
+        leaveRideEvents = [LeaveRide]()
+    }
+    
+    func addLeaveRideEvent(leaveRide: LeaveRide) {
+        leaveRideEvents.append(leaveRide)
+    }
+    
+    func startLoop() {
+        
+    }
+    
+    func stopLoop() {
         
     }
 }
