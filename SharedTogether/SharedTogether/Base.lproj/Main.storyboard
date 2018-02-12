@@ -81,7 +81,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="dfb-fw-zzz" userLabel="Footer">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWX-sT-kZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5273" y="-150"/>
+            <point key="canvasLocation" x="5272.8000000000002" y="-150.67466266866569"/>
         </scene>
         <!--Ride Details View Controller-->
         <scene sceneID="NH7-Mx-1Iu">
@@ -236,7 +236,94 @@ Create New Ride</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v48-Me-vYV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3482" y="669"/>
+            <point key="canvasLocation" x="1521" y="811"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="cuK-q5-ApV">
+            <objects>
+                <viewController id="3U2-sk-fq4" customClass="ProfileViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Ww-M3-ADr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XLE-iP-Km5">
+                                <rect key="frame" x="142" y="40" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="6dg-iS-cPA"/>
+                                    <constraint firstAttribute="width" constant="90" id="Rwj-Aa-6Ir"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonymous User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTt-q8-zjk">
+                                <rect key="frame" x="121.5" y="150" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xRf-2l-J5F">
+                                <rect key="frame" x="48.5" y="206" width="278" height="29"/>
+                                <segments>
+                                    <segment title="My Profile"/>
+                                    <segment title="My Rides"/>
+                                    <segment title="Joined Rides"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControllClick:" destination="3U2-sk-fq4" eventType="valueChanged" id="LsA-ux-XUH"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZy-q2-zR6" userLabel="MyProfileView">
+                                <rect key="frame" x="0.0" y="239" width="375" height="379"/>
+                                <connections>
+                                    <segue destination="3Co-Go-WyB" kind="embed" id="0dt-fK-OTb"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="un9-au-7DH" userLabel="MyRidesView">
+                                <rect key="frame" x="0.0" y="239" width="375" height="379"/>
+                                <connections>
+                                    <segue destination="XbN-vy-QoS" kind="embed" id="T2i-tD-nMJ"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK0-kW-4ZC" userLabel="JoinedRidesView">
+                                <rect key="frame" x="0.0" y="239" width="375" height="379"/>
+                                <connections>
+                                    <segue destination="Hyg-Pi-oth" kind="embed" id="CqQ-kF-Pxr"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NTt-q8-zjk" firstAttribute="centerX" secondItem="7Ww-M3-ADr" secondAttribute="centerX" id="2Hf-1m-bl6"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="trailing" secondItem="TK0-kW-4ZC" secondAttribute="trailing" id="89y-Qo-SVH"/>
+                            <constraint firstItem="jZy-q2-zR6" firstAttribute="top" secondItem="xRf-2l-J5F" secondAttribute="bottom" constant="5" id="8Bn-QN-A5H"/>
+                            <constraint firstItem="XLE-iP-Km5" firstAttribute="centerX" secondItem="7Ww-M3-ADr" secondAttribute="centerX" id="8eM-3k-CAs"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="bottom" secondItem="TK0-kW-4ZC" secondAttribute="bottom" id="B4c-WM-86Y"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="trailing" secondItem="jZy-q2-zR6" secondAttribute="trailing" id="M7G-3A-IHg"/>
+                            <constraint firstItem="un9-au-7DH" firstAttribute="top" secondItem="xRf-2l-J5F" secondAttribute="bottom" constant="5" id="NNu-M9-ygB"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="bottom" secondItem="jZy-q2-zR6" secondAttribute="bottom" id="Sij-lp-KcA"/>
+                            <constraint firstItem="xRf-2l-J5F" firstAttribute="top" secondItem="NTt-q8-zjk" secondAttribute="bottom" constant="35" id="Trd-sA-oQQ"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="bottom" secondItem="un9-au-7DH" secondAttribute="bottom" id="UGR-cD-V79"/>
+                            <constraint firstItem="un9-au-7DH" firstAttribute="leading" secondItem="z0G-nO-X8I" secondAttribute="leading" id="Zq4-u7-0hm"/>
+                            <constraint firstItem="z0G-nO-X8I" firstAttribute="trailing" secondItem="un9-au-7DH" secondAttribute="trailing" id="b0v-6j-vJL"/>
+                            <constraint firstItem="XLE-iP-Km5" firstAttribute="top" secondItem="z0G-nO-X8I" secondAttribute="top" constant="20" id="bGE-iD-1TT"/>
+                            <constraint firstItem="jZy-q2-zR6" firstAttribute="leading" secondItem="z0G-nO-X8I" secondAttribute="leading" id="cAy-Jt-xUx"/>
+                            <constraint firstItem="NTt-q8-zjk" firstAttribute="top" secondItem="XLE-iP-Km5" secondAttribute="bottom" constant="20" id="jeo-Kq-TpZ"/>
+                            <constraint firstItem="xRf-2l-J5F" firstAttribute="centerX" secondItem="7Ww-M3-ADr" secondAttribute="centerX" id="o99-Jn-Pdd"/>
+                            <constraint firstItem="TK0-kW-4ZC" firstAttribute="leading" secondItem="z0G-nO-X8I" secondAttribute="leading" id="vC5-aB-ViJ"/>
+                            <constraint firstItem="TK0-kW-4ZC" firstAttribute="top" secondItem="xRf-2l-J5F" secondAttribute="bottom" constant="5" id="yen-PW-eQA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="z0G-nO-X8I"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="ic_person" id="jwg-FZ-I47"/>
+                    <connections>
+                        <outlet property="joinedRidesView" destination="TK0-kW-4ZC" id="87a-aA-ACK"/>
+                        <outlet property="myProfileView" destination="jZy-q2-zR6" id="MoL-wi-M0U"/>
+                        <outlet property="myRidesView" destination="un9-au-7DH" id="XFU-Ot-CKZ"/>
+                        <outlet property="userAvatarImageView" destination="XLE-iP-Km5" id="0Af-cN-ol4"/>
+                        <outlet property="userNameLabel" destination="NTt-q8-zjk" id="c6j-wy-gZ2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Skw-W3-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340" y="811"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="atE-27-mrk">
@@ -623,6 +710,7 @@ Create New Ride</string>
                     <connections>
                         <segue destination="mB0-QG-nCZ" kind="relationship" relationship="viewControllers" id="wOM-a9-awn"/>
                         <segue destination="QQb-do-oRY" kind="relationship" relationship="viewControllers" id="Qve-zI-XPa"/>
+                        <segue destination="3U2-sk-fq4" kind="relationship" relationship="viewControllers" id="AFm-Uk-yOc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4t-OF-jVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -633,7 +721,7 @@ Create New Ride</string>
         <scene sceneID="Oar-WY-G0f">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="mB0-QG-nCZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_gray" id="LwR-B8-Kh2"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home_blue" id="LwR-B8-Kh2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="422-Gz-sJk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -648,10 +736,83 @@ Create New Ride</string>
             </objects>
             <point key="canvasLocation" x="3992" y="-148.42578710644679"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="9Tj-jP-UMb">
+            <objects>
+                <viewController id="3Co-Go-WyB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Osn-0d-crS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyProfile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rc-NB-cMb">
+                                <rect key="frame" x="151" y="179" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gxd-42-Km0"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9O-vd-DzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245.5999999999999" y="476.31184407796104"/>
+        </scene>
+        <!--My Rides View Controller-->
+        <scene sceneID="i9P-Pu-uZx">
+            <objects>
+                <viewController id="XbN-vy-QoS" customClass="MyRidesViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MPw-sZ-lVR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyRides" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDp-UU-aI4">
+                                <rect key="frame" x="149" y="179" width="71" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="euy-6S-kJf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lZe-hm-a8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3388" y="964.76761619190415"/>
+        </scene>
+        <!--Joined Rides View Controller-->
+        <scene sceneID="Dx4-eR-8go">
+            <objects>
+                <viewController id="Hyg-Pi-oth" customClass="JoinedRidesViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s0F-Nj-qZy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JoinedRides" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOZ-ha-bHR">
+                                <rect key="frame" x="137" y="179" width="100" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="67s-ky-N25"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1en-Mw-ARU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2952.8000000000002" y="1436.1319340329835"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_attach_file" width="22" height="22"/>
-        <image name="ic_home_gray" width="25" height="25"/>
+        <image name="ic_home_blue" width="25" height="25"/>
+        <image name="ic_person" width="25" height="25"/>
         <image name="ic_ride_blue" width="25" height="25"/>
         <image name="ic_send" width="22" height="22"/>
     </resources>

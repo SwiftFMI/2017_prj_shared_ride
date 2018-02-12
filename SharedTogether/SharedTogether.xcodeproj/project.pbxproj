@@ -36,6 +36,9 @@
 		A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107E52003C0B800A09311 /* HomeViewController.swift */; };
 		A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0A107E92003C7D600A09311 /* GoogleService-Info.plist */; };
 		A0A107EC2004DC9400A09311 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A107EB2004DC9400A09311 /* Constants.swift */; };
+		A0D83F1B2031DFFB006FA25E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */; };
+		A0D83F1F2031EA8D006FA25E /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */; };
+		A0D83F212031EA9E006FA25E /* JoinedRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */; };
 		A0DE8C482023414A006AAA77 /* IdentifiableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */; };
 		A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +78,9 @@
 		A0A107E52003C0B800A09311 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A0A107E92003C7D600A09311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0A107EB2004DC9400A09311 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
+		A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesViewController.swift; sourceTree = "<group>"; };
 		A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCell.swift; sourceTree = "<group>"; };
 		A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,6 +116,9 @@
 				A092C392200FB50300472619 /* CreateRideViewController.swift */,
 				A08DB8D12018ECA000E32209 /* ChatViewController.swift */,
 				A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */,
+				A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */,
+				A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */,
+				A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -379,6 +388,7 @@
 				A0890671200CC5740073BC3F /* Utils.swift in Sources */,
 				A0DE8C482023414A006AAA77 /* IdentifiableCell.swift in Sources */,
 				A08DB8D6201A380100E32209 /* User.swift in Sources */,
+				A0D83F1B2031DFFB006FA25E /* ProfileViewController.swift in Sources */,
 				A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */,
 				A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */,
 				A032C47B2012428C00C6975F /* Ride.swift in Sources */,
@@ -386,11 +396,13 @@
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
 				A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */,
+				A0D83F212031EA9E006FA25E /* JoinedRidesViewController.swift in Sources */,
 				A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */,
 				A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */,
 				A08DB8D22018ECA000E32209 /* ChatViewController.swift in Sources */,
 				A056F67A202F132C00F165DC /* LeaveRide.swift in Sources */,
 				A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */,
+				A0D83F1F2031EA8D006FA25E /* MyRidesViewController.swift in Sources */,
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
 				A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */,
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
