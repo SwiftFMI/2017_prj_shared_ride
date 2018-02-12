@@ -77,6 +77,11 @@ class CreateRideViewController: BaseViewController {
             //TODO: display error or handle case
         }
         
+        if picker.date <= Date() {
+            showAlert("Error", "You start trip date should be in the future")
+            return
+        }
+        
         let startDate = String(picker.date.timeIntervalSince1970)
         
         let ref = Database.database().reference()
@@ -103,6 +108,13 @@ class CreateRideViewController: BaseViewController {
             .child(user.id)
             .child(Constants.Users.JOINED_RIDES)
             .updateChildValues(["\(newRideRef.key)": true])
+        
+        fromTextField.text = ""
+        destinationTextField.text = ""
+        freePlacesTextField.text = ""
+        dateOfRide.text = ""
+        
+        tabBarController?.selectedIndex = 0
     }
     
     func createGroupChat(dbRef: DatabaseReference, freePlaces: Int, user: User) -> DatabaseReference {

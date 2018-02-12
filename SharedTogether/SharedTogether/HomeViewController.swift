@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
             // Listen for new comments in the Firebase database
             ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
                 if let dictionary = snapshot.value as? NSDictionary {
-                    let ride = Ride(dictionary: dictionary)
+                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
                     
                     self?.rides.append(ride)
                     self?.ridesTableView.reloadData()
@@ -147,58 +147,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let time = Utils.timeFromDate(date: ride.dateOfRide)
         
         cell.configureCell(fromLocation: rideFrom, destination: rideTo, availablePlaces: freePlaces, time: time, date: date)
-        cell.delegate = self
 //        if let rideFrom = ride.from, let rideTo = ride.destination {
 //            cell.configureCell(fromLocation: rideFrom, destination: rideTo)
 //            cell.delegate = self
 //        }
         return cell
     }
-}
-
-extension HomeViewController: RideCellItemsTap {
-    func joinTab(cell: RideTableViewCell) {
-        if let row = self.ridesTableView.indexPath(for: cell)?.row,
-            var user = Defaults.getLoggedUser() {
-            let ride = rides[row]
-            
-            guard let rideId = ride.id else { return }
-            guard let rideFreePlaces = ride.freePlaces else { return }
-            
-            let groupChatRef = Database.database().reference()
-                .child(Constants.RidesGroupChat.ROOT)
-                .child(ride.groupChatId!)
-                .child(Constants.RidesGroupChat.CHAT_MEMBERS)
-            
-            groupChatRef.updateChildValues(["\(user.id)": user.name])
-            
-            Database.database().reference()
-                .child(Constants.Users.ROOT)
-                .child(user.id)
-                .child(Constants.Users.JOINED_RIDES)
-                .updateChildValues(["\(rideId)": true], withCompletionBlock: {(error, snapshot) in
-                    
-                    //ask what happends with memmory here
-                    if error == nil {
-                        user.joinedRides?["\(rideId)"] = true
-                        Defaults.setLoggedUser(user: user)
-                    }
-                })
-            
-            //TODO handle ride free places decreasing count
-        }
-    }
-    
-    func onLeaveTab(cell: RideTableViewCell) {
-        //when user leave chat we will set its name to anonimous and we will display deleted on
-        performSegue(withIdentifier: "HomeToChat", sender: self)
-    }
-    
-    func onOpenChatTab(cell: RideTableViewCell) {
-        guard let indexPath = ridesTableView.indexPath(for: cell) else { return }
-        let ride = rides[indexPath.row]
-//        performSegue(withIdentifier: Constants.Segues.HomeToChat, sender: ride)
-    }
-    
-    
 }

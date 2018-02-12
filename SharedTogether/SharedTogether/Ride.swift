@@ -9,7 +9,7 @@
 import Foundation
 
 struct Ride: Codable {
-    var id: String?
+    var rideId: String?
     var from: String?
     var destination: String?
     var driver: String?
@@ -18,7 +18,8 @@ struct Ride: Codable {
     var ownerId: String?
     var dateOfRide: Date?
     
-    init(dictionary: NSDictionary) {
+    init(dictionary: NSDictionary, id: String?) {
+        rideId = id ?? ""
         freePlaces = dictionary[Constants.Rides.FREEPLACES] as? String ?? ""
         destination = dictionary[Constants.Rides.DESTINATION] as? String ?? ""
         from = dictionary[Constants.Rides.FROM] as? String ?? ""
