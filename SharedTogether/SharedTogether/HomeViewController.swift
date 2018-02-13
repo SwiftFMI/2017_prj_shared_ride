@@ -21,14 +21,65 @@ class HomeViewController: UIViewController {
     var ridesReference: DatabaseReference?
     var rides: [Ride] = []
     var user = Defaults.getLoggedUser()
+    var observeAdded: DatabaseHandle?
+    var observeChanged: DatabaseHandle?
+    var observeRemoved: DatabaseHandle?
     
     override func viewWillAppear(_ animated: Bool) {
         user = Defaults.getLoggedUser()
+        
+        if let ref = ridesReference {
+            //TODO: add pagination  and synchronize .value and .childAdded
+            observeAdded = ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
+                if let dictionary = snapshot.value as? NSDictionary {
+                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
+
+                    self?.rides.append(ride)
+                    self?.ridesTableView.reloadData()
+                }
+            })
+            
+            observeChanged = ref.observe(.childChanged, with: { [weak self] (snapshot) -> Void in
+                if let dictionary = snapshot.value as? NSDictionary {
+                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
+
+                    if let updateIndex = self?.rides.index(where: {$0 == ride}) {
+                        self?.rides[updateIndex] = ride
+                        self?.ridesTableView.reloadRows(at: [IndexPath(row: updateIndex, section: 0)], with: .none)
+                    }
+                }
+            })
+
+            observeRemoved = ref.observe(.childRemoved, with: { [weak self] (snapshot) -> Void in
+                if let dictionary = snapshot.value as? NSDictionary {
+                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
+
+                    if let removedIndex = self?.rides.index(where: {$0 == ride}) {
+                        self?.rides.remove(at: removedIndex)
+                        self?.ridesTableView.deleteRows(at: [IndexPath(row: removedIndex, section: 0)], with: .automatic)
+                    }
+                }
+            })
+            
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let addedHandle = observeAdded {
+            ridesReference?.removeObserver(withHandle: addedHandle)
+        }
+        
+        if let changedHandle = observeChanged {
+            ridesReference?.removeObserver(withHandle: changedHandle)
+        }
+        
+        if let removedHandle = observeRemoved {
+            ridesReference?.removeObserver(withHandle: removedHandle)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         let cellNib = UINib(nibName: "RideTableViewCell", bundle: nil)
         ridesTableView.register(cellNib, forCellReuseIdentifier: reuseIdentifier)
@@ -37,59 +88,6 @@ class HomeViewController: UIViewController {
         ridesTableView.dataSource = self
         
         ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
-        
-        if let ref = ridesReference {
-            // Listen for new comments in the Firebase database
-            ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-                if let dictionary = snapshot.value as? NSDictionary {
-                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
-                    
-                    self?.rides.append(ride)
-                    self?.ridesTableView.reloadData()
-                }
-                
-                
-//                if let data = snapshot.value as? [[String: String]] {
-//                    do {
-//                        let json = try JSONEncoder().encode(data)
-//                        do {
-//                            let ride = try JSONDecoder().decode(Ride.self, from: json)
-//                            self?.rides.append(ride)
-//                            self?.ridesTableView.reloadData()
-//                        } catch {
-//                            print("error \(error)")
-//                        }
-//
-//                    } catch {
-//                        print("JSONEncoder: \(error)")
-//                    }
-//                } else {
-//                    print("problem")
-//                }
-////                do {
-////                    let ride = try JSONDecoder().decode(Ride.self, from: snapshot)
-////                } catch {
-////                    print(error)
-////                }
-//
-//                print(snapshot) // I got the expected number of items
-//                for rest in snapshot.children.allObjects {
-//                    print(rest)
-//                }
-//                self?.rides.append(snapshot.getV)
-//                let ride = Ride(from: "From: \(snapshot )", destination: "Destination: \()", driver: "Trip driver:\()")
-//                let count = self?.rides.count ?? 1
-//                self?.ridesTableView.insertRows(at: [IndexPath(row: (count -1), section: self?.kSectionComments)], with: UITableViewRowAnimation.automatic)
-            })
-            
-            // Listen for deleted comments in the Firebase database
-//            ref.observe(.childRemoved, with: { [weak self]( snapshot) -> Void in
-//                let index = self?.indexOfRide(snapshot)
-//                self?.comments.remove(at: index)
-//                self?.tableView.deleteRows(at: [IndexPath(row: index, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
-//            })
-        }
-        // Do any additional setup after loading the view.
     }
     
     func indexOfRide(ride: Ride) -> Int {
@@ -125,7 +123,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ride = rides[(indexPath as NSIndexPath).row]
-        //TODO: open ride details
         performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
     }
     
@@ -147,10 +144,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let time = Utils.timeFromDate(date: ride.dateOfRide)
         
         cell.configureCell(fromLocation: rideFrom, destination: rideTo, availablePlaces: freePlaces, time: time, date: date)
-//        if let rideFrom = ride.from, let rideTo = ride.destination {
-//            cell.configureCell(fromLocation: rideFrom, destination: rideTo)
-//            cell.delegate = self
-//        }
+        
         return cell
     }
 }

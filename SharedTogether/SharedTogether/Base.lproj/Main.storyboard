@@ -145,11 +145,20 @@
                                     <action selector="onLeaveRideTab:" destination="2pW-CS-1Ug" eventType="touchUpInside" id="fXZ-UG-1A9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZS-vU-geN">
+                                <rect key="frame" x="113" y="357" width="148" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel (Delete) Ride"/>
+                                <connections>
+                                    <action selector="cancelDeleteRide:" destination="2pW-CS-1Ug" eventType="touchUpInside" id="1f0-Pe-CbS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PG4-zh-TOd"/>
                     </view>
                     <connections>
+                        <outlet property="buttonCancelDeleteRide" destination="6ZS-vU-geN" id="jpa-g5-k1c"/>
                         <outlet property="buttonJoinRide" destination="ijx-pC-YEc" id="uQ4-E6-NVX"/>
                         <outlet property="buttonLeaveRide" destination="vDE-Ug-DtY" id="5Hs-eM-WnA"/>
                         <outlet property="buttonOpenChat" destination="uHL-yr-IrJ" id="f1f-S5-YWf"/>

@@ -15,6 +15,7 @@ class RideDetailsViewController: BaseViewController {
     @IBOutlet weak var buttonOpenChat: UIButton!
     @IBOutlet weak var buttonJoinRide: UIButton!
     @IBOutlet weak var buttonLeaveRide: UIButton!
+    @IBOutlet weak var buttonCancelDeleteRide: UIButton!
     
     var ride: Ride?
     
@@ -41,6 +42,7 @@ class RideDetailsViewController: BaseViewController {
         if let rideOwner = ride.ownerId {
             if rideOwner == user.id {
                 buttonLeaveRide.isEnabled = false
+                buttonCancelDeleteRide.isEnabled = true
             }
         }
         
@@ -156,4 +158,6 @@ class RideDetailsViewController: BaseViewController {
         }
     }
     
+    @IBAction func cancelDeleteRide(_ sender: UIButton) {
+    }
 }

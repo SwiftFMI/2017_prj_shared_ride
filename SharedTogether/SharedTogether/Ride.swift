@@ -29,4 +29,8 @@ struct Ride: Codable {
         let dateUnixTimestamp = dictionary[Constants.Rides.START_RIDE_DATE] as? String ?? ""
         dateOfRide = Utils.dateFromTimestampString(stringUnixTimeStamp: dateUnixTimestamp)
     }
+    
+    static func == (lhs: Ride, rhs: Ride) -> Bool {
+        return lhs.rideId == rhs.rideId
+    }
 }
