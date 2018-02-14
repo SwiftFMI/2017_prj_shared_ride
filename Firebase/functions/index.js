@@ -168,8 +168,13 @@ app.post('/leaveRide', (req, res) => {
 // Expose Express API as a single Cloud Function:
 exports.api = functions.https.onRequest(app);
 
-exports.chatNotifications = functions.database.ref('/rideGroups/{groupId}/messages')
-    .onWrite(event => {
+exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messagess/{value}')
+    .onCreate(event => {
+      console.log(`event: ${event.params}`)
+      console.log(`event val: ${event.data.val()}`)
+      console.log(`event params groupId: ${event.params.groupId}`)
+      console.log(`event params valueKey: ${event.params.value}`)
+      console.log(`event params valueKey value: ${event.params.value.val()}`)
 //       // Only edit data when it is first created.
 //       if (event.data.previous.exists()) {
 //         return null;

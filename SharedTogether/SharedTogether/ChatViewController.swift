@@ -113,6 +113,12 @@ class ChatViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        if let addMessageRefHandle = addMessageRefHandle, let messagesRef = messagesRef {
+            messagesRef.removeObserver(withHandle: addMessageRefHandle)
+        }
+    }
+    
     @objc
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
