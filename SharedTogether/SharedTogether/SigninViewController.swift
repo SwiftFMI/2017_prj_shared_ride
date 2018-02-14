@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseMessaging
 
 class SigninViewController: BaseViewController {
 
@@ -45,12 +47,33 @@ class SigninViewController: BaseViewController {
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
-            if error == nil, let wUser = user {
+            if let error = error {
+                self?.showAlert("Error", error.localizedDescription)
+                return
+            }
+            
+            if let wUser = user {
                 Utils.getUserDetails(uuid: wUser.uid, callBack: { user in
+                    
                     Defaults.setLoggedUser(user: user)
-                    self?.performSegue(withIdentifier: "loginToHome", sender: self)
+                    
+                    if let token = Messaging.messaging().fcmToken {
+                        Database.database().reference()
+                            .child(Constants.Users.ROOT)
+                            .child(wUser.uid)
+                            .updateChildValues([Constants.Users.NOTIFICATIONS_TOKEN: token], withCompletionBlock: {(error, dbReference) in
+                                if error == nil {
+                                    if var user = Defaults.getLoggedUser() {
+                                        user.notificationsToken = token
+                                        Defaults.setLoggedUser(user: user)
+                                        self?.performSegue(withIdentifier: "loginToHome", sender: self)
+                                    }
+                                }
+                            })
+                    } else {
+                        self?.performSegue(withIdentifier: "loginToHome", sender: self)
+                    }
                 })
-                
             } else {
                 self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
             }

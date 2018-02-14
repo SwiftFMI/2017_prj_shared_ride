@@ -101,7 +101,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print(fcmToken)
+        print("Firebase registration token: \(fcmToken)")
+        
+        //if there is a logged user register its token
+        if var user = Defaults.getLoggedUser() {
+            Database.database().reference()
+                .child(Constants.Users.ROOT)
+                .child(user.id)
+                .updateChildValues([Constants.Users.NOTIFICATIONS_TOKEN: fcmToken], withCompletionBlock: {(error, dbReference) in
+                    if error == nil {
+                        user.notificationsToken = fcmToken
+                        Defaults.setLoggedUser(user: user)
+                    }
+                })
+        }
+        
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
 }
 

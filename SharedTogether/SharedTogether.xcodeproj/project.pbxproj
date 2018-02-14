@@ -39,6 +39,7 @@
 		A0D83F1B2031DFFB006FA25E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */; };
 		A0D83F1F2031EA8D006FA25E /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */; };
 		A0D83F212031EA9E006FA25E /* JoinedRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */; };
+		A0D83F2720332970006FA25E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F2620332970006FA25E /* EditProfileViewController.swift */; };
 		A0DE8C482023414A006AAA77 /* IdentifiableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */; };
 		A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesViewController.swift; sourceTree = "<group>"; };
+		A0D83F2620332970006FA25E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCell.swift; sourceTree = "<group>"; };
 		A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 				A0D83F1A2031DFFB006FA25E /* ProfileViewController.swift */,
 				A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */,
 				A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */,
+				A0D83F2620332970006FA25E /* EditProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
 				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,
 				A08DB8D8201A446000E32209 /* Defaults.swift in Sources */,
+				A0D83F2720332970006FA25E /* EditProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
