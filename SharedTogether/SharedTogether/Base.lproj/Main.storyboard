@@ -803,9 +803,8 @@ Create New Ride</string>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwH-ZX-0Ff">
-                                <rect key="frame" x="16" y="209" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwH-ZX-0Ff">
+                                <rect key="frame" x="20" y="219" width="335" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -814,6 +813,8 @@ Create New Ride</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ubf-dY-H5Z" firstAttribute="leading" secondItem="8BQ-c0-IyQ" secondAttribute="trailing" constant="20" id="0VR-cx-aUy"/>
+                            <constraint firstItem="zwH-ZX-0Ff" firstAttribute="top" secondItem="EW5-Y5-dv5" secondAttribute="bottom" constant="123" id="13d-2h-yJZ"/>
+                            <constraint firstItem="gxd-42-Km0" firstAttribute="trailing" secondItem="zwH-ZX-0Ff" secondAttribute="trailing" constant="20" id="1Nc-ho-vDS"/>
                             <constraint firstItem="EW5-Y5-dv5" firstAttribute="leading" secondItem="8BQ-c0-IyQ" secondAttribute="leading" id="OT0-xU-Gc5"/>
                             <constraint firstItem="8BQ-c0-IyQ" firstAttribute="top" secondItem="gxd-42-Km0" secondAttribute="top" constant="20" id="PXv-3d-1Z5"/>
                             <constraint firstItem="8BQ-c0-IyQ" firstAttribute="leading" secondItem="gxd-42-Km0" secondAttribute="leading" constant="20" id="RXq-RM-bBR"/>
@@ -822,6 +823,7 @@ Create New Ride</string>
                             <constraint firstItem="RKn-zM-awc" firstAttribute="baseline" secondItem="EW5-Y5-dv5" secondAttribute="baseline" id="ab9-gJ-ESg"/>
                             <constraint firstItem="ubf-dY-H5Z" firstAttribute="baseline" secondItem="8BQ-c0-IyQ" secondAttribute="baseline" id="cbx-1Z-lOX"/>
                             <constraint firstItem="gxd-42-Km0" firstAttribute="trailing" secondItem="ubf-dY-H5Z" secondAttribute="trailing" constant="20" id="dQe-AL-q8v"/>
+                            <constraint firstItem="zwH-ZX-0Ff" firstAttribute="leading" secondItem="gxd-42-Km0" secondAttribute="leading" constant="20" id="e2e-8S-Lty"/>
                             <constraint firstItem="1eF-rd-CLv" firstAttribute="centerX" secondItem="Osn-0d-crS" secondAttribute="centerX" id="fkG-Wr-1ds"/>
                             <constraint firstItem="RKn-zM-awc" firstAttribute="leading" secondItem="ubf-dY-H5Z" secondAttribute="leading" id="yFY-vS-Fof"/>
                             <constraint firstItem="gxd-42-Km0" firstAttribute="bottom" secondItem="1eF-rd-CLv" secondAttribute="bottom" constant="10" id="ypJ-hq-MSo"/>
@@ -829,6 +831,7 @@ Create New Ride</string>
                         <viewLayoutGuide key="safeArea" id="gxd-42-Km0"/>
                     </view>
                     <connections>
+                        <outlet property="firebaseTokenLabel" destination="zwH-ZX-0Ff" id="VnY-2y-rhz"/>
                         <outlet property="nameTextField" destination="ubf-dY-H5Z" id="Khp-wA-bEL"/>
                         <outlet property="phoneTextField" destination="RKn-zM-awc" id="KEV-PS-4pu"/>
                     </connections>

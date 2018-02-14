@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import FirebaseMessaging
 
 class EditProfileViewController: BaseViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var firebaseTokenLabel: UILabel!
     
     var user: User?
     
@@ -24,6 +26,8 @@ class EditProfileViewController: BaseViewController {
             nameTextField.text = user.name
             phoneTextField.text = user.phone
         }
+        
+        firebaseTokenLabel.text = Messaging.messaging().fcmToken ?? "Token not initialized"
 
         // Do any additional setup after loading the view.
     }
@@ -33,6 +37,8 @@ class EditProfileViewController: BaseViewController {
             nameTextField.text = user.name
             phoneTextField.text = user.phone
         }
+        
+        firebaseTokenLabel.text = Messaging.messaging().fcmToken ?? "Token not initialized"
     }
     
     @IBAction func onSaveTap(_ sender: UIButton) {
