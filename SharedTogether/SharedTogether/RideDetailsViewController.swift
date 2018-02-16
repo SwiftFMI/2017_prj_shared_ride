@@ -107,7 +107,8 @@ class RideDetailsViewController: BaseViewController {
             "joinUserId": user.id,
             "rideChatId": rideChatId
         ]
-        let url = URL(string: "https://us-central1-shared-together.cloudfunctions.net/api/joinRide")!
+        
+        guard let url = URL(string: "https://us-central1-shared-together.cloudfunctions.net/api/joinRide") else { return }
         
         Alamofire
             .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)
@@ -131,14 +132,16 @@ class RideDetailsViewController: BaseViewController {
         guard let rideId = ride?.rideId else { return }
         guard let rideOwnerId = ride?.ownerId else { return }
         guard var user = Defaults.getLoggedUser() else { return }
-        
+        guard let rideChatId = ride?.groupChatId else { return }
 
         let parameters: Parameters = [
             "rideId": rideId,
             "rideOwnerId": rideOwnerId,
-            "leaveUserId": user.id
+            "leaveUserId": user.id,
+            "rideChatId": rideChatId
         ]
-        let url = URL(string: "https://us-central1-shared-together.cloudfunctions.net/api/leaveRide")!
+        
+        guard let url = URL(string: "https://us-central1-shared-together.cloudfunctions.net/api/leaveRide") else { return }
         
         Alamofire
             .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)

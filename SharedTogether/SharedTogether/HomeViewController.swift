@@ -24,20 +24,20 @@ class HomeViewController: UIViewController {
     var observeAdded: DatabaseHandle?
     var observeChanged: DatabaseHandle?
     var observeRemoved: DatabaseHandle?
+    var startRideRef: String?
     
     override func viewWillAppear(_ animated: Bool) {
         user = Defaults.getLoggedUser()
         
         if let ref = ridesReference {
-            //TODO: add pagination  and synchronize .value and .childAdded
-            observeAdded = ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-                if let dictionary = snapshot.value as? NSDictionary {
-                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
-
-                    self?.rides.append(ride)
-                    self?.ridesTableView.reloadData()
-                }
-            })
+//            observeAdded = ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
+//                if let dictionary = snapshot.value as? NSDictionary {
+//                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
+//
+//                    self?.rides.append(ride)
+//                    self?.ridesTableView.reloadData()
+//                }
+//            })
             
             observeChanged = ref.observe(.childChanged, with: { [weak self] (snapshot) -> Void in
                 if let dictionary = snapshot.value as? NSDictionary {
@@ -61,6 +61,55 @@ class HomeViewController: UIViewController {
                 }
             })
             
+        }
+    }
+    
+    func loadRides() {
+        //TODO: check if remove observing of single event is needed probably not
+        //TODO: detect pull to refresh and load more at bottom
+        //TODO: order by date
+        guard let ridesReference = ridesReference?.queryOrderedByKey() else { return }
+        
+        if let startRideRef = startRideRef {
+            ridesReference
+                .queryStarting(atValue: startRideRef)
+                .queryLimited(toFirst: 20)
+                .observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+                    print(snapshot)
+                    if snapshot.childrenCount > 0 {
+                        guard let lastChilden = snapshot.children.allObjects.last as? DataSnapshot else { return }
+                        guard let allSnaps = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                        
+                        for child in allSnaps {
+                            if let dictionary = child.value as? NSDictionary {
+                                let ride = Ride(dictionary: dictionary, id: snapshot.key)
+                                
+                                self?.rides.append(ride)
+                            }
+                        }
+                        
+                        self?.ridesTableView.reloadData()
+                        self?.startRideRef = lastChilden.key
+                    }
+                })
+        } else {
+            ridesReference.queryLimited(toFirst: 20).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+                if snapshot.childrenCount > 0 {
+                    guard let lastChilden = snapshot.children.allObjects.last as? DataSnapshot else { return }
+                    guard let allSnaps = snapshot.children.allObjects as? [DataSnapshot] else { return }
+                    
+                    for child in allSnaps {
+                        if let dictionary = child.value as? NSDictionary {
+                            let ride = Ride(dictionary: dictionary, id: snapshot.key)
+                            
+                            self?.rides.append(ride)
+                        }
+                    }
+                    
+                    self?.ridesTableView.reloadData()
+                    self?.startRideRef = lastChilden.key
+                }
+            })
         }
     }
     
@@ -88,6 +137,7 @@ class HomeViewController: UIViewController {
         ridesTableView.dataSource = self
         
         ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
+        loadRides()
     }
     
     func indexOfRide(ride: Ride) -> Int {

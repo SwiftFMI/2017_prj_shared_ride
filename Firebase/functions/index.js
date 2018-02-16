@@ -59,6 +59,10 @@ app.post('/joinRide', (req, res) => {
         .json({ message: `Ride to ${ride.destination} dose not have availabel places` });
     }
 
+    var chatMembersDict = {};
+    chatMembersDict[joinUserId] = true;
+    admin.database().ref(`/chatNotifications/${rideChatId}`).update(chatMembersDict)
+
     const newFreePlaces = freePlaces - 1
     rideRef.update({
       freePlaces: newFreePlaces.toString()
@@ -98,7 +102,7 @@ app.post('/leaveRide', (req, res) => {
   const rideId = req.body.rideId
   const rideOwnerId = req.body.rideOwnerId
   const leaveUserId = req.body.leaveUserId
-  // const rideChatId = req.body.rideChatId
+  const rideChatId = req.body.rideChatId
 
   if(!rideId){
     return res.status(400).json({ message: 'RideId must not be empty' })
@@ -112,9 +116,9 @@ app.post('/leaveRide', (req, res) => {
     return res.status(400).json({ message: 'LeaveUserId must not be empty' })
   }
 
-  // if(!rideChatId){
-  //   return res.status(400).json({ message: 'RideChatId must not be empty' })
-  // }
+  if(!rideChatId){
+    return res.status(400).json({ message: 'RideChatId must not be empty' })
+  }
 
   const ownerUserRef = admin.database().ref(`/users/${rideOwnerId}`);
   const leavingUserRef = admin.database().ref(`/users/${leaveUserId}`);
@@ -133,6 +137,9 @@ app.post('/leaveRide', (req, res) => {
     // const chat = results[3].val();
 
     //TODO: check if user is joined in the ride
+
+    admin.database().ref(`/chatNotifications/${rideChatId}/${leaveUserId}`).remove()
+
     const freePlaces = parseInt(ride.freePlaces);
 
     const newFreePlaces = freePlaces + 1
@@ -196,15 +203,23 @@ exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messa
           }
       };
 
-      return admin.messaging().sendToDevice(ownerUser.notificationsToken, payload)
-          .then(response => { return res.status(200).json({result: 'Notification send'}) })
-          .catch(error => {
-            console.log(`error while sending notification to ${joinUserId} for event ${rideId} with error: ${error}`)
-          });
-      })
-      .catch(error => {
-        console.log("error: " + error)
-      });
+      // Set the message as high priority and have it expire after 24 hours.
+// var options = {
+//   priority: 'high',
+//   timeToLive: 60 * 60 * 24
+// };
+//
+// admin.messaging().sendToTopic
+      //
+      // return admin.messaging().sendToDevice(ownerUser.notificationsToken, payload)
+      //     .then(response => { return res.status(200).json({result: 'Notification send'}) })
+      //     .catch(error => {
+      //       console.log(`error while sending notification to ${joinUserId} for event ${rideId} with error: ${error}`)
+      //     });
+      // })
+      // .catch(error => {
+      //   console.log("error: " + error)
+      // });
 
 
 //       // Only edit data when it is first created.

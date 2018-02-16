@@ -34,6 +34,11 @@ class CreateRideViewController: BaseViewController {
         dateOfRide.text = Utils.formatDate(date: picker.date)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        picker.date = Date()
+        dateOfRide.text = Utils.formatDate(date: picker.date)
+    }
+    
     @objc func pickerDonePressed() {
         dateOfRide.text = Utils.formatDate(date: picker.date)
         self.view.endEditing(true)
@@ -82,7 +87,8 @@ class CreateRideViewController: BaseViewController {
             return
         }
         
-        let startDate = String(picker.date.timeIntervalSince1970)
+        let startDate = String(Int64(picker.date.timeIntervalSince1970))
+        let creationDate = String(Int64(Date().timeIntervalSince1970))
         
         let ref = Database.database().reference()
         let rideGroupChatRef = createGroupChat(dbRef: ref, freePlaces: freePlacesNumber, user: user)
@@ -94,7 +100,8 @@ class CreateRideViewController: BaseViewController {
              Constants.Rides.DRIVER: user.name,
              Constants.Rides.GROUP_CHAT_ID: rideGroupChatRef.key,
              Constants.Rides.OWNER_ID: user.id,
-             Constants.Rides.START_RIDE_DATE: startDate]
+             Constants.Rides.START_RIDE_DATE: startDate,
+             Constants.Rides.CREATION_DATE: creationDate]
         
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
@@ -104,10 +111,15 @@ class CreateRideViewController: BaseViewController {
         Defaults.setLoggedUser(user: user)
         
         ref
+            .child(Constants.ChatNotifications.ROOT)
+            .child(rideGroupChatRef.key)
+            .updateChildValues([user.id: true])
+        
+        ref
             .child(Constants.Users.ROOT)
             .child(user.id)
             .child(Constants.Users.JOINED_RIDES)
-            .updateChildValues(["\(newRideRef.key)": true])
+            .updateChildValues([newRideRef.key: true])
         
         fromTextField.text = ""
         destinationTextField.text = ""

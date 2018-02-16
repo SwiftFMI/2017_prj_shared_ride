@@ -44,6 +44,7 @@ struct Constants {
         static let DRIVER = "driver"
         static let OWNER_ID = "ownerId"
         static let START_RIDE_DATE = "startRideDate"
+        static let CREATION_DATE = "creationDate"
     }
     
     struct RidesGroupChat {
@@ -56,6 +57,24 @@ struct Constants {
         static let MESSAGESS_USER_MESSAGE = "message"
         static let MESSAGES_IMAGE_URL = "imageUrl"
         static let MESSAGES_DATE = "messagesDate"
+    }
+    
+    struct ChatNotifications {
+        static let ROOT = "chatNotifications"
+        // dictionary userUuid - bool
+    }
+    
+    struct UserCreatedRides {
+        static let ROOT = "userCreatedRides"
+        // dictionary ride Uuid - bool
+    }
+    
+    struct RidesLocation {
+        static let ROOT = "ridesLocation"
+        
+        static let TO = "to"
+        static let LONGITUDE = "longitude"
+        static let LATITUDE = "latitude"
     }
     
     struct Storage {
