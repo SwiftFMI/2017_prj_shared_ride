@@ -18,6 +18,7 @@ class ChatDetailViewController: UIViewController {
     var userId: String?
     var data = [ChatMember]()
     var keySize: Int?
+    var receiveNotification: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,8 @@ class ChatDetailViewController: UIViewController {
         ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
             guard let dictionary = snapshot.value as? [String: Bool] else { return }
             guard let userId = self?.userId else { return }
-            self?.getNotificationSwitch.isOn = dictionary[userId] ?? false
+            self?.receiveNotification = dictionary[userId] ?? false
+            self?.getNotificationSwitch.isOn = self?.receiveNotification ?? false
             
             self?.loadUsersParticipant(participantKeys: dictionary.keys)
         })
@@ -69,7 +71,18 @@ class ChatDetailViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //TODO: update notification status from switch if needed
+        guard let receiveNotification = receiveNotification else { return }
+        guard let chatId = chatId else { return }
+        guard let userId = userId else { return }
+        
+        if getNotificationSwitch.isOn != receiveNotification {
+            Database
+                .database()
+                .reference()
+                .child(Constants.ChatNotifications.ROOT)
+                .child(chatId)
+                .updateChildValues([userId: getNotificationSwitch.isOn])
+        }
     }
 }
 
