@@ -463,8 +463,15 @@ Create New Ride</string>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c2m-zA-oCU">
                                 <rect key="frame" x="0.0" y="578" width="375" height="40"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80l-4y-cu5">
+                                        <rect key="frame" x="0.0" y="8" width="24" height="24"/>
+                                        <state key="normal" image="ic_info_outline"/>
+                                        <connections>
+                                            <segue destination="1k4-fh-6kC" kind="show" identifier="chatToChatDetails" id="nys-Cu-1rK"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N16-vQ-6Vf">
-                                        <rect key="frame" x="0.0" y="9" width="30" height="22"/>
+                                        <rect key="frame" x="24" y="9" width="30" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="8UW-r0-L1O"/>
                                         </constraints>
@@ -474,7 +481,7 @@ Create New Ride</string>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xLa-EK-2la">
-                                        <rect key="frame" x="30" y="5" width="315" height="30"/>
+                                        <rect key="frame" x="54" y="5" width="291" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="send"/>
@@ -524,6 +531,51 @@ Create New Ride</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5bI-qR-qKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7335" y="-151"/>
+        </scene>
+        <!--Chat Detail View Controller-->
+        <scene sceneID="GDr-tc-be0">
+            <objects>
+                <viewController id="1k4-fh-6kC" customClass="ChatDetailViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mC9-Vt-7T1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvT-yj-5UF">
+                                <rect key="frame" x="15" y="89" width="301" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gc-l1-ojH">
+                                <rect key="frame" x="316" y="84" width="51" height="31"/>
+                            </switch>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aA4-hD-qyW">
+                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5gc-l1-ojH" firstAttribute="centerY" secondItem="GvT-yj-5UF" secondAttribute="centerY" id="2Oj-MW-dDe"/>
+                            <constraint firstItem="aA4-hD-qyW" firstAttribute="leading" secondItem="PEi-fh-weL" secondAttribute="leading" id="2iL-di-MfR"/>
+                            <constraint firstItem="GvT-yj-5UF" firstAttribute="top" secondItem="PEi-fh-weL" secondAttribute="top" constant="25" id="7hh-VV-B2h"/>
+                            <constraint firstItem="5gc-l1-ojH" firstAttribute="leading" secondItem="GvT-yj-5UF" secondAttribute="trailing" id="EfZ-vu-0tV"/>
+                            <constraint firstItem="aA4-hD-qyW" firstAttribute="top" secondItem="GvT-yj-5UF" secondAttribute="bottom" constant="20" id="JoF-2f-KHJ"/>
+                            <constraint firstItem="GvT-yj-5UF" firstAttribute="leading" secondItem="PEi-fh-weL" secondAttribute="leading" constant="15" id="NUH-Hw-eJW"/>
+                            <constraint firstItem="PEi-fh-weL" firstAttribute="trailing" secondItem="5gc-l1-ojH" secondAttribute="trailing" constant="10" id="rCw-Na-bai"/>
+                            <constraint firstItem="PEi-fh-weL" firstAttribute="bottom" secondItem="aA4-hD-qyW" secondAttribute="bottom" id="ub6-Dc-pLD"/>
+                            <constraint firstItem="PEi-fh-weL" firstAttribute="trailing" secondItem="aA4-hD-qyW" secondAttribute="trailing" id="vLc-1W-fwL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PEi-fh-weL"/>
+                    </view>
+                    <connections>
+                        <outlet property="chatPartiipantsTableView" destination="aA4-hD-qyW" id="d4L-wX-uSM"/>
+                        <outlet property="getNotificationSwitch" destination="5gc-l1-ojH" id="Szr-hq-jld"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kmc-hy-ts0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8279" y="-152"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="eyz-tq-LKX">
@@ -892,6 +944,7 @@ Create New Ride</string>
     <resources>
         <image name="ic_attach_file" width="22" height="22"/>
         <image name="ic_home_blue" width="25" height="25"/>
+        <image name="ic_info_outline" width="24" height="24"/>
         <image name="ic_person" width="25" height="25"/>
         <image name="ic_ride_blue" width="25" height="25"/>
         <image name="ic_send" width="22" height="22"/>

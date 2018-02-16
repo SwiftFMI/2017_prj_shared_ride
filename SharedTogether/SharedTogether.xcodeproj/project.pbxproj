@@ -40,6 +40,10 @@
 		A0D83F1F2031EA8D006FA25E /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */; };
 		A0D83F212031EA9E006FA25E /* JoinedRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */; };
 		A0D83F2720332970006FA25E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F2620332970006FA25E /* EditProfileViewController.swift */; };
+		A0D83F2A2035D7C5006FA25E /* ChatDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F282035D7C5006FA25E /* ChatDetailTableViewCell.swift */; };
+		A0D83F2B2035D7C6006FA25E /* ChatDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0D83F292035D7C5006FA25E /* ChatDetailTableViewCell.xib */; };
+		A0D83F2D2035DBBB006FA25E /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F2C2035DBBB006FA25E /* ChatDetailViewController.swift */; };
+		A0D83F2F20363F02006FA25E /* ChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D83F2E20363F02006FA25E /* ChatMember.swift */; };
 		A0DE8C482023414A006AAA77 /* IdentifiableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */; };
 		A0DE8C4A20235C72006AAA77 /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +87,10 @@
 		A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesViewController.swift; sourceTree = "<group>"; };
 		A0D83F2620332970006FA25E /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A0D83F282035D7C5006FA25E /* ChatDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailTableViewCell.swift; sourceTree = "<group>"; };
+		A0D83F292035D7C5006FA25E /* ChatDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDetailTableViewCell.xib; sourceTree = "<group>"; };
+		A0D83F2C2035DBBB006FA25E /* ChatDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
+		A0D83F2E20363F02006FA25E /* ChatMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMember.swift; sourceTree = "<group>"; };
 		A0DE8C472023414A006AAA77 /* IdentifiableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCell.swift; sourceTree = "<group>"; };
 		A0DE8C4920235C72006AAA77 /* RideDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +130,7 @@
 				A0D83F1E2031EA8D006FA25E /* MyRidesViewController.swift */,
 				A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */,
 				A0D83F2620332970006FA25E /* EditProfileViewController.swift */,
+				A0D83F2C2035DBBB006FA25E /* ChatDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -189,6 +198,8 @@
 				A08DB8E2201B30F200E32209 /* ChatMessageTableViewCell.xib */,
 				A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */,
 				A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */,
+				A0D83F282035D7C5006FA25E /* ChatDetailTableViewCell.swift */,
+				A0D83F292035D7C5006FA25E /* ChatDetailTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -200,6 +211,7 @@
 				A08DB8D5201A380100E32209 /* User.swift */,
 				A08A4E27201B6AAC009B2865 /* Message.swift */,
 				A056F679202F132C00F165DC /* LeaveRide.swift */,
+				A0D83F2E20363F02006FA25E /* ChatMember.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -294,6 +306,7 @@
 			files = (
 				A0A107CD200365CE00A09311 /* LaunchScreen.storyboard in Resources */,
 				A08DB8E4201B30F200E32209 /* ChatMessageTableViewCell.xib in Resources */,
+				A0D83F2B2035D7C6006FA25E /* ChatDetailTableViewCell.xib in Resources */,
 				A0A107EA2003C7D700A09311 /* GoogleService-Info.plist in Resources */,
 				A0A107CA200365CE00A09311 /* Assets.xcassets in Resources */,
 				A0A107C8200365CE00A09311 /* Main.storyboard in Resources */,
@@ -389,12 +402,14 @@
 				A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */,
 				A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */,
 				A0890671200CC5740073BC3F /* Utils.swift in Sources */,
+				A0D83F2F20363F02006FA25E /* ChatMember.swift in Sources */,
 				A0DE8C482023414A006AAA77 /* IdentifiableCell.swift in Sources */,
 				A08DB8D6201A380100E32209 /* User.swift in Sources */,
 				A0D83F1B2031DFFB006FA25E /* ProfileViewController.swift in Sources */,
 				A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */,
 				A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */,
 				A032C47B2012428C00C6975F /* Ride.swift in Sources */,
+				A0D83F2A2035D7C5006FA25E /* ChatDetailTableViewCell.swift in Sources */,
 				A08A4E28201B6AAC009B2865 /* Message.swift in Sources */,
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
@@ -408,6 +423,7 @@
 				A0D83F1F2031EA8D006FA25E /* MyRidesViewController.swift in Sources */,
 				A0A107E42003C0A500A09311 /* SignupViewController.swift in Sources */,
 				A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */,
+				A0D83F2D2035DBBB006FA25E /* ChatDetailViewController.swift in Sources */,
 				A0A107E22003C05000A09311 /* SigninViewController.swift in Sources */,
 				A0A107EC2004DC9400A09311 /* Constants.swift in Sources */,
 				A08DB8D8201A446000E32209 /* Defaults.swift in Sources */,

@@ -55,6 +55,7 @@ struct Constants {
         static let MESSAGESS_USER_ID = "fromId"
         static let MESSAGESS_USER_MESSAGE = "message"
         static let MESSAGES_IMAGE_URL = "imageUrl"
+        static let MESSAGES_DATE = "messagesDate"
     }
     
     struct Storage {

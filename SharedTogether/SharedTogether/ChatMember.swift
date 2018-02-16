@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct ChatMember {
+    let name: String?
+    let phoneNumber: String?
+}
