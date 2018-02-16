@@ -184,6 +184,7 @@ class ChatViewController: BaseViewController {
             guard let chatDetailsVc = segue.destination as? ChatDetailViewController else { return }
             guard let groupChatId = groupId else { return }
             chatDetailsVc.chatId = groupChatId
+            chatDetailsVc.userId = userId
         }
     }
 }

@@ -15,7 +15,9 @@ class ChatDetailViewController: UIViewController {
     @IBOutlet weak var getNotificationSwitch: UISwitch!
     
     var chatId: String?
+    var userId: String?
     var data = [ChatMember]()
+    var keySize: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ class ChatDetailViewController: UIViewController {
         let cellNib = UINib(nibName: "ChatDetailTableViewCell", bundle: nil)
         chatPartiipantsTableView.register(cellNib, forCellReuseIdentifier: ChatDetailTableViewCell.cellIdentifier)
         // Do any additional setup after loading the view.
+        loadChatDetails()
     }
     
     func loadChatDetails() {
@@ -32,8 +35,41 @@ class ChatDetailViewController: UIViewController {
         
         let ref = Database.database().reference().child(Constants.ChatNotifications.ROOT).child(chatId)
         ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-            print(snapshot)
+            guard let dictionary = snapshot.value as? [String: Bool] else { return }
+            guard let userId = self?.userId else { return }
+            self?.getNotificationSwitch.isOn = dictionary[userId] ?? false
+            
+            self?.loadUsersParticipant(participantKeys: dictionary.keys)
         })
+    }
+    
+    func loadUsersParticipant(participantKeys: Dictionary<String, Bool>.Keys) {
+        keySize = participantKeys.count
+        
+        for key in participantKeys {
+            Database
+                .database()
+                .reference()
+                .child(Constants.Users.ROOT)
+                .child(key)
+                .observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+                    if let dictionary = snapshot.value as? NSDictionary {
+                        let name = dictionary[Constants.Users.NAME] as? String ?? ""
+                        let phoneNumber = dictionary[Constants.Users.PHONE] as? String ?? ""
+                        
+                        let chatMember = ChatMember(name: name, phoneNumber: phoneNumber)
+                        self?.data.append(chatMember)
+                    }
+                    
+                    if self?.data.count == self?.keySize {
+                        self?.chatPartiipantsTableView.reloadData()
+                    }
+                })
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //TODO: update notification status from switch if needed
     }
 }
 
