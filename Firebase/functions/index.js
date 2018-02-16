@@ -168,13 +168,45 @@ app.post('/leaveRide', (req, res) => {
 // Expose Express API as a single Cloud Function:
 exports.api = functions.https.onRequest(app);
 
-exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messagess/{value}')
+exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messagess/{newMessageKey}')
     .onCreate(event => {
-      console.log(`event: ${event.params}`)
-      console.log(`event val: ${event.data.val()}`)
+      console.log(`event val stringify: ${JSON.stringify(event.data.val())}`)
       console.log(`event params groupId: ${event.params.groupId}`)
       console.log(`event params valueKey: ${event.params.value}`)
-      console.log(`event params valueKey value: ${event.params.value.val()}`)
+
+      console.log(`event fromId: ${event.data.val().fromId}`);
+      console.log(`event imageUrl: ${event.data.val().imageUrl}`);
+      console.log(`event message: ${event.data.val().message}`);
+      console.log(`event parent: ${JSON.stringify(event.data.ref.parent.child('chatMembers').val())}`);
+
+      const messageGroupId = event.params.groupId
+      const newMessageId = event.params.newMessageKey
+      const imageUrl = event.data.val().imageUrl
+      const fromId = event.data.val().fromId
+      const message = event.data.val().message
+
+      const payload = {
+          notification: {
+              title: `New Message in groupId ${groupId}`,
+              body: `You have some new unread messages`
+          },
+          data: {
+            chatGroupKey: messageGroupId,
+            newMessageKey: messageGroupId
+          }
+      };
+
+      return admin.messaging().sendToDevice(ownerUser.notificationsToken, payload)
+          .then(response => { return res.status(200).json({result: 'Notification send'}) })
+          .catch(error => {
+            console.log(`error while sending notification to ${joinUserId} for event ${rideId} with error: ${error}`)
+          });
+      })
+      .catch(error => {
+        console.log("error: " + error)
+      });
+
+
 //       // Only edit data when it is first created.
 //       if (event.data.previous.exists()) {
 //         return null;
