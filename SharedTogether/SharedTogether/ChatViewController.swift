@@ -177,13 +177,10 @@ class ChatViewController: BaseViewController {
         present(picker, animated: true, completion:nil)
     }
     
-    //MARK: - Navigation
-     
-    //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.prepare(for: segue, sender: sender)
+        super.prepare(for: segue, sender: sender)
         
-        if segue.identifier == "chatToChatDetails" {
+        if segue.identifier == "chatToChatNotifications" {
             guard let chatDetailsVc = segue.destination as? ChatDetailViewController else { return }
             guard let groupChatId = groupId else { return }
             chatDetailsVc.chatId = groupChatId

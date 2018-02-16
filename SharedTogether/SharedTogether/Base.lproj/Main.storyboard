@@ -467,7 +467,7 @@ Create New Ride</string>
                                         <rect key="frame" x="0.0" y="8" width="24" height="24"/>
                                         <state key="normal" image="ic_info_outline"/>
                                         <connections>
-                                            <segue destination="1k4-fh-6kC" kind="show" identifier="chatToChatDetails" id="nys-Cu-1rK"/>
+                                            <segue destination="1k4-fh-6kC" kind="show" identifier="chatToChatNotifications" id="qgp-9V-maJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N16-vQ-6Vf">
