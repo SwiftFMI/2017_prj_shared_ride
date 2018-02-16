@@ -27,8 +27,8 @@ class RideDetailsViewController: BaseViewController {
         
         
         
-        if let rideId = ride.rideId, let userJoinedRudes = user.joinedRides {
-            if userJoinedRudes[rideId] ?? false {
+        if let rideId = ride.rideId, let userJoinedRides = user.joinedRides {
+            if userJoinedRides[rideId] ?? false {
                 buttonJoinRide.isEnabled = false
                 buttonLeaveRide.isEnabled = true
                 buttonOpenChat.isEnabled = true

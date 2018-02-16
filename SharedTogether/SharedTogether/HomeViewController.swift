@@ -82,7 +82,7 @@ class HomeViewController: UIViewController {
                         
                         for child in allSnaps {
                             if let dictionary = child.value as? NSDictionary {
-                                let ride = Ride(dictionary: dictionary, id: snapshot.key)
+                                let ride = Ride(dictionary: dictionary, id: child.key)
                                 
                                 self?.rides.append(ride)
                             }
@@ -100,7 +100,7 @@ class HomeViewController: UIViewController {
                     
                     for child in allSnaps {
                         if let dictionary = child.value as? NSDictionary {
-                            let ride = Ride(dictionary: dictionary, id: snapshot.key)
+                            let ride = Ride(dictionary: dictionary, id: child.key)
                             
                             self?.rides.append(ride)
                         }

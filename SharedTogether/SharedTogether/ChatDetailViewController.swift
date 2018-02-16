@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ChatDetailViewController: UIViewController {
 
     @IBOutlet weak var chatPartiipantsTableView: UITableView!
     @IBOutlet weak var getNotificationSwitch: UISwitch!
     
+    var chatId: String?
     var data = [ChatMember]()
     
     override func viewDidLoad() {
@@ -23,6 +25,15 @@ class ChatDetailViewController: UIViewController {
         let cellNib = UINib(nibName: "ChatDetailTableViewCell", bundle: nil)
         chatPartiipantsTableView.register(cellNib, forCellReuseIdentifier: ChatDetailTableViewCell.cellIdentifier)
         // Do any additional setup after loading the view.
+    }
+    
+    func loadChatDetails() {
+        guard let chatId = chatId else { return }
+        
+        let ref = Database.database().reference().child(Constants.ChatNotifications.ROOT).child(chatId)
+        ref.observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            print(snapshot)
+        })
     }
 }
 

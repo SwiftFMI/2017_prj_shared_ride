@@ -177,15 +177,18 @@ class ChatViewController: BaseViewController {
         present(picker, animated: true, completion:nil)
     }
     
-    /*
-     // MARK: - Navigation
+    //MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    //In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "chatToChatDetails" {
+            guard let chatDetailsVc = segue.destination as? ChatDetailViewController else { return }
+            guard let groupChatId = groupId else { return }
+            chatDetailsVc.chatId = groupChatId
+        }
+    }
 }
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
