@@ -172,6 +172,101 @@ app.post('/leaveRide', (req, res) => {
   });
 });
 
+
+app.post('/deleteRide', (req, res) => {
+  const rideId = req.body.rideId
+  const userId = req.body.userId
+  const rideChatId = req.body.rideChatId
+
+  if(!rideId){
+    return res.status(400).json({ message: 'RideId must not be empty' })
+  }
+
+  if(!userId){
+    return res.status(400).json({ message: 'UserId must not be empty' })
+  }
+
+  if(!rideChatId){
+    return res.status(400).json({ message: 'RideChatId must not be empty' })
+  }
+
+  const rideRef = admin.database().ref(`/rides/${rideId}`);
+  const chatNotificationsRef = admin.database().ref(`/chatNotifications/${rideChatId}`);
+
+  const ridePromise = rideRef.once('value');
+  const chatNotificationsPromise = chatNotificationsRef.once('value');
+  // const chatPromise = chatRef.once('value');
+
+  var rideFrom = ""
+  var rideTo = ""
+
+  Promise.all([ridePromise, chatNotificationsPromise]).then(results => {
+    const ride = results[0].val();
+    const chatNotifications = results[1].val();
+
+    admin.database().ref(`/ridesGroups/${ride.groupChatId}`).remove()
+    rideRef.remove()
+    chatNotificationsRef.remove()
+
+    rideFrom = ride.from
+    rideTo = ride.destination
+
+    if (ride.ownerId != userId) {
+      res.status(400).json({ message: 'Only ride owner can make this changes' })
+      return
+    }
+
+    console.log(`RideFrom ${rideFrom}`);
+    console.log(`RideTo ${rideTo}`);
+
+    var keys = []
+    var promises = []
+    for(var key in chatNotifications) {
+        if(chatNotifications.hasOwnProperty(key)) {
+            //key                 = keys,  left of the ":"
+            //driversCounter[key] = value, right of the ":"
+            keys.push(key)
+            if (key !== userId) {
+              const userPromise = admin.database().ref(`/users/${key}`).once('value')
+              promises.push(userPromise)
+            }
+        }
+    }
+    console.log(`keyss ${keys}`)
+    console.log(`loading user profiles ${promises.length}`);
+    return Promise.all(promises)
+  }).then(results => {
+    console.log(`RideFrom ${rideFrom}`);
+    console.log(`RideTo ${rideTo}`);
+
+    const payload = {
+        notification: {
+            title: 'Ride canceled',
+            body: `Ride from ${rideFrom} to ${rideTo} had been canceled.`
+            // icon: null
+        }
+    };
+
+    var messegingPromices = []
+
+    results.forEach(user => {
+      const notificationToken = user.val().notificationsToken
+      console.log(`tokens ${notificationToken}`);
+      const notificationPromise = admin.messaging().sendToDevice(notificationToken, payload)
+      messegingPromices.push(notificationPromise)
+    })
+    console.log(`loading promices ${messegingPromices.length}`);
+
+    return Promise.all(messegingPromices)
+  }).then(results => {
+    console.log("Success: " + results);
+    return res.status(200).json({result: 'Notification send'})
+  }).catch(error => {
+    console.log("error: " + error)
+    return res.status(400).json({message: 'Something went wrong'})
+  });
+});
+
 // Expose Express API as a single Cloud Function:
 exports.api = functions.https.onRequest(app);
 
@@ -184,7 +279,7 @@ exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messa
       console.log(`event fromId: ${event.data.val().fromId}`);
       console.log(`event imageUrl: ${event.data.val().imageUrl}`);
       console.log(`event message: ${event.data.val().message}`);
-      console.log(`event parent: ${JSON.stringify(event.data.ref.parent.child('chatMembers').val())}`);
+      // console.log(`event parent: ${JSON.stringify(event.data.ref.parent.child('chatMembers').val())}`);
 
       const messageGroupId = event.params.groupId
       const newMessageId = event.params.newMessageKey
@@ -192,17 +287,69 @@ exports.chatNotifications = functions.database.ref('/ridesGroups/{groupId}/messa
       const fromId = event.data.val().fromId
       const message = event.data.val().message
 
-      const payload = {
-          notification: {
-              title: `New Message in groupId ${groupId}`,
-              body: `You have some new unread messages`
-          },
-          data: {
-            chatGroupKey: messageGroupId,
-            newMessageKey: messageGroupId
-          }
-      };
+      const chatNotificationsRef = admin.database().ref(`/chatNotifications/${messageGroupId}`);
+      const userSendRef = admin.database().ref(`/users/${fromId}`);
 
+      const userSendPromise = userSendRef.once('value')
+      const chatNotificationsPromise = chatNotificationsRef.once('value');
+
+      var userName = ""
+
+      console.log("StartPromice requests");
+      return Promise.all([chatNotificationsPromise, userSendPromise]).then(results => {
+        const chatNotifications = results[0].val();
+        const sendUser = results[1].val();
+
+        userName = sendUser.name
+
+        var keys = []
+        var promises = []
+        for(var key in chatNotifications) {
+            if(chatNotifications.hasOwnProperty(key)) {
+                //key                 = keys,  left of the ":"
+                //driversCounter[key] = value, right of the ":"
+                keys.push(key)
+                if (key !== fromId && chatNotifications[key]) {
+                  const userPromise = admin.database().ref(`/users/${key}`).once('value')
+                  promises.push(userPromise)
+                }
+            }
+        }
+        console.log(`keyss ${keys}`)
+        console.log(`loading user profiles ${promises.length}`);
+        return Promise.all(promises)
+      }).then(results => {
+        console.log(`Username send ${userName}`);
+        console.log(`messagingGroup ${messageGroupId}`);
+
+        const payload = {
+            notification: {
+                title: `New message`,
+                body: `You have new unread message from ${userName}`
+                // icon: null
+            },
+            data: {
+              messageGroupId: `${messageGroupId}`
+            }
+        };
+
+        var messegingPromices = []
+
+        results.forEach(user => {
+          const notificationToken = user.val().notificationsToken
+          console.log(`tokens ${notificationToken}`);
+          const notificationPromise = admin.messaging().sendToDevice(notificationToken, payload)
+          messegingPromices.push(notificationPromise)
+        })
+        console.log(`loading promices ${messegingPromices.length}`);
+        return Promise.all(messegingPromices)
+      }).then(results => {
+        console.log("success: " + results);
+        // return res.status(200).json({result: 'Notification send'})
+      }).catch(error => {
+        console.log("error: " + error)
+        // return res.status(400).json({message: 'Something went wrong'})
+      });
       // Set the message as high priority and have it expire after 24 hours.
 // var options = {
 //   priority: 'high',
