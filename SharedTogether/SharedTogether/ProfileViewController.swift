@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: BaseViewController {
 
@@ -15,6 +16,7 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var joinedRidesView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userAvatarImageView: UIImageView!
+    @IBOutlet weak var selectTabSegmentedControl: UISegmentedControl!
     
     var user: User?
     
@@ -30,6 +32,13 @@ class ProfileViewController: BaseViewController {
             userNameLabel.text = user.email
             userAvatarImageView.layer.cornerRadius = 45
             userAvatarImageView.backgroundColor = .gray
+        }
+        
+        guard let isAnonymous = Auth.auth().currentUser?.isAnonymous else { return }
+        
+        if isAnonymous {
+            selectTabSegmentedControl.isEnabled = false
+            showAlert("Error", "You have to log in first")
         }
     }
     

@@ -50,6 +50,14 @@ class CreateRideViewController: BaseViewController {
     }
     
     @IBAction func createRide(_ sender: UIButton) {
+        
+        guard let isAnonymous = Auth.auth().currentUser?.isAnonymous else { return }
+        
+        if isAnonymous {
+            showAlert("Error", "You have to log in first")
+            return
+        }
+        
         guard let from = fromTextField.text else {
             return
         }

@@ -10,6 +10,8 @@ import Foundation
 
 final class Defaults {
     
+    private init() {}
+    
     static func removeLoggedUser() {
         UserDefaults.standard.removeObject(forKey: Constants.Defaults.USER)
     }

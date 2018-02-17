@@ -162,5 +162,37 @@ class RideDetailsViewController: BaseViewController {
     }
     
     @IBAction func cancelDeleteRide(_ sender: UIButton) {
+        guard let rideId = ride?.rideId else { return }
+        guard var user = Defaults.getLoggedUser() else { return }
+        guard let rideChatId = ride?.groupChatId else { return }
+        
+        let parameters: Parameters = [
+            "rideId": rideId,
+            "userId": user.id,
+            "rideChatId": rideChatId
+        ]
+        
+        guard let url = URL(string: "https://us-central1-shared-together.cloudfunctions.net/api/deleteRide") else { return }
+        
+        Alamofire
+            .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .response { response in
+                if  response.response?.statusCode == 200  {
+                    //TODO hide loader and update current user profile
+                    
+                    //TODO naviage home
+                    self.parent?.navigationController?.popToRootViewController(animated: true)
+                    print(response.data)
+//
+//                    user.joinedRides?["\(rideId)"] = true
+//                    Defaults.setLoggedUser(user: user)
+//
+//                    self.buttonOpenChat.isEnabled = false
+//                    self.buttonLeaveRide.isEnabled = false
+//                    self.buttonJoinRide.isEnabled = true
+                }
+                
+                print("Response: \(String(describing: String(data: response.data ?? Data(), encoding: .utf8)))")
+        }
     }
 }

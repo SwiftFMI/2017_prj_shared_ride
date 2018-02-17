@@ -12,7 +12,7 @@ import FirebaseDatabase
 
 private let reuseIdentifier = "RidesCell"
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
 //    present pop Over VC
     
 
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         if let startRideRef = startRideRef {
             ridesReference
                 .queryStarting(atValue: startRideRef)
-                .queryLimited(toFirst: 20)
+                .queryLimited(toLast: 20)
                 .observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
                     print(snapshot)
                     if snapshot.childrenCount > 0 {
@@ -93,7 +93,7 @@ class HomeViewController: UIViewController {
                     }
                 })
         } else {
-            ridesReference.queryLimited(toFirst: 20).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            ridesReference.queryLimited(toLast: 20).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
                 if snapshot.childrenCount > 0 {
                     guard let lastChilden = snapshot.children.allObjects.last as? DataSnapshot else { return }
                     guard let allSnaps = snapshot.children.allObjects as? [DataSnapshot] else { return }
@@ -137,6 +137,11 @@ class HomeViewController: UIViewController {
         ridesTableView.dataSource = self
         
         ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
+        
+        //get all not need to un subscribe
+        ridesReference?.observeSingleEvent(of: .value, with: {(snapshot) in
+            
+        })
         loadRides()
     }
     
@@ -172,8 +177,14 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let ride = rides[(indexPath as NSIndexPath).row]
-        performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
+        guard let isAnonymous = Auth.auth().currentUser?.isAnonymous else { return }
+        
+        if !isAnonymous {
+            let ride = rides[(indexPath as NSIndexPath).row]
+            performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
+        } else {
+            showAlert("Error", "You have to log in first")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

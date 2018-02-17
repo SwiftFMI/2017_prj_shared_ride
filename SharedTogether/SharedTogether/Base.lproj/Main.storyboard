@@ -257,10 +257,14 @@ Create New Ride</string>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XLE-iP-Km5">
                                 <rect key="frame" x="142" y="40" width="90" height="90"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="6dg-iS-cPA"/>
                                     <constraint firstAttribute="width" constant="90" id="Rwj-Aa-6Ir"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="x7E-Sl-cqq" appends="YES" id="qZe-2l-dgx"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonymous User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTt-q8-zjk">
                                 <rect key="frame" x="121.5" y="150" width="131" height="21"/>
@@ -326,11 +330,13 @@ Create New Ride</string>
                         <outlet property="joinedRidesView" destination="TK0-kW-4ZC" id="87a-aA-ACK"/>
                         <outlet property="myProfileView" destination="jZy-q2-zR6" id="MoL-wi-M0U"/>
                         <outlet property="myRidesView" destination="un9-au-7DH" id="XFU-Ot-CKZ"/>
+                        <outlet property="selectTabSegmentedControl" destination="xRf-2l-J5F" id="bdZ-TO-e3G"/>
                         <outlet property="userAvatarImageView" destination="XLE-iP-Km5" id="0Af-cN-ol4"/>
                         <outlet property="userNameLabel" destination="NTt-q8-zjk" id="c6j-wy-gZ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Skw-W3-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="x7E-Sl-cqq"/>
             </objects>
             <point key="canvasLocation" x="2340" y="811"/>
         </scene>

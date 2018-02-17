@@ -17,7 +17,6 @@ private let reuseIdentifier = "MessagesCell"
 
 //TODO: make userMessageLabel accept multiline
 //TODO: push VC to top when keyboad is shown
-//TODO: handle scroll to bottom when new messeges arrived
 //TODO: handle push notifications
 //TODO: set chat title
 //TODO: make some image cache in order to not make image blink
@@ -113,7 +112,17 @@ class ChatViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.chatIsActive = true
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.chatIsActive = false
+        
         if let addMessageRefHandle = addMessageRefHandle, let messagesRef = messagesRef {
             messagesRef.removeObserver(withHandle: addMessageRefHandle)
         }
