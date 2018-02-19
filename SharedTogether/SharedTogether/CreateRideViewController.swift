@@ -114,6 +114,8 @@ class CreateRideViewController: BaseViewController {
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
         
+        // TODO: Save Location values with GeoFire (at ROOT)
+        
         user.joinedRides?[newRideRef.key] = true
         
         Defaults.setLoggedUser(user: user)

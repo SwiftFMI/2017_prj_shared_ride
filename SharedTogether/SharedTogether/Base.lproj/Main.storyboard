@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M6b-DA-9Tq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Wellcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WellcomeViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WellcomeViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -168,6 +168,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8j-vb-skS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6364" y="-149.77511244377811"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="nGa-qd-K8O">
+            <objects>
+                <viewController id="FmU-4V-E2H" customClass="MapViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8X3-du-qnk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zzg-kE-TYe">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y8g-Xy-OSa">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                    </mapView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zzg-kE-TYe" firstAttribute="leading" secondItem="v10-g7-TIt" secondAttribute="leading" id="1GW-DI-q5Y"/>
+                            <constraint firstItem="zzg-kE-TYe" firstAttribute="bottom" secondItem="v10-g7-TIt" secondAttribute="bottom" id="6At-4t-h3R"/>
+                            <constraint firstItem="zzg-kE-TYe" firstAttribute="trailing" secondItem="v10-g7-TIt" secondAttribute="trailing" id="7Oq-ZK-yEc"/>
+                            <constraint firstItem="zzg-kE-TYe" firstAttribute="top" secondItem="v10-g7-TIt" secondAttribute="top" id="Ydn-yX-c3B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v10-g7-TIt"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="marker" id="Vta-2Q-33t"/>
+                    <connections>
+                        <outlet property="mapView" destination="y8g-Xy-OSa" id="AfF-1l-daj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bh7-Er-eTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853.60000000000002" y="1387.5562218890557"/>
         </scene>
         <!--Create-->
         <scene sceneID="sRw-bx-VOe">
@@ -343,7 +378,7 @@ Create New Ride</string>
         <!--Signup View Controller-->
         <scene sceneID="atE-27-mrk">
             <objects>
-                <viewController id="NLH-NZ-sIf" customClass="SignupViewController" customModule="SharedTogether" customModuleProvider="target" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController id="NLH-NZ-sIf" customClass="SignupViewController" customModule="SharedTogether" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x9w-xd-9Th">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -375,35 +410,35 @@ Create New Ride</string>
                                                     <segue destination="cRm-8O-wqC" kind="unwind" unwindAction="unwindToWellcomeWithUnwindSegue:" id="gVl-Vm-2vs"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-Dd-mtH">
-                                                <rect key="frame" x="20" y="149" width="315" height="270"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-Dd-mtH">
+                                                <rect key="frame" x="16" y="151" width="343" height="270"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8q7-GD-BEc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WDG-Ka-a6F">
-                                                        <rect key="frame" x="0.0" y="60" width="315" height="30"/>
+                                                        <rect key="frame" x="0.0" y="60" width="343" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hhk-HY-kap">
-                                                        <rect key="frame" x="0.0" y="120" width="315" height="30"/>
+                                                        <rect key="frame" x="0.0" y="120" width="343" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xAw-DB-p44">
-                                                        <rect key="frame" x="0.0" y="180" width="315" height="30"/>
+                                                        <rect key="frame" x="0.0" y="180" width="343" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d4d-Z2-860">
-                                                        <rect key="frame" x="0.0" y="240" width="315" height="30"/>
+                                                        <rect key="frame" x="0.0" y="240" width="343" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
@@ -413,7 +448,7 @@ Create New Ride</string>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="X1d-Dd-mtH" firstAttribute="leading" secondItem="JM1-rk-A2S" secondAttribute="leading" constant="20" id="0SU-TA-lav"/>
+                                            <constraint firstItem="X1d-Dd-mtH" firstAttribute="leading" secondItem="JM1-rk-A2S" secondAttribute="leading" constant="16" id="0SU-TA-lav"/>
                                             <constraint firstItem="C9u-3i-dKC" firstAttribute="top" secondItem="X1d-Dd-mtH" secondAttribute="bottom" constant="60" id="1NV-Ga-URp"/>
                                             <constraint firstItem="0N8-je-KgU" firstAttribute="top" secondItem="JM1-rk-A2S" secondAttribute="top" constant="30" id="6Cb-Vu-zFS"/>
                                             <constraint firstItem="Cvb-m9-Aeg" firstAttribute="top" secondItem="JM1-rk-A2S" secondAttribute="top" constant="2" id="8lJ-mj-apT"/>
@@ -421,7 +456,7 @@ Create New Ride</string>
                                             <constraint firstItem="0N8-je-KgU" firstAttribute="centerX" secondItem="JM1-rk-A2S" secondAttribute="centerX" constant="10" id="VRp-k7-yD9"/>
                                             <constraint firstItem="X1d-Dd-mtH" firstAttribute="top" secondItem="0N8-je-KgU" secondAttribute="bottom" constant="80" id="fhN-qr-w4h"/>
                                             <constraint firstItem="Cvb-m9-Aeg" firstAttribute="leading" secondItem="JM1-rk-A2S" secondAttribute="leading" constant="5" id="hia-wZ-RF2"/>
-                                            <constraint firstAttribute="trailing" secondItem="X1d-Dd-mtH" secondAttribute="trailing" constant="40" id="m35-Xy-aka"/>
+                                            <constraint firstAttribute="trailing" secondItem="X1d-Dd-mtH" secondAttribute="trailing" constant="16" id="m35-Xy-aka"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -781,8 +816,8 @@ Create New Ride</string>
                     </tabBar>
                     <connections>
                         <segue destination="mB0-QG-nCZ" kind="relationship" relationship="viewControllers" id="wOM-a9-awn"/>
-                        <segue destination="QQb-do-oRY" kind="relationship" relationship="viewControllers" id="Qve-zI-XPa"/>
-                        <segue destination="3U2-sk-fq4" kind="relationship" relationship="viewControllers" id="AFm-Uk-yOc"/>
+                        <segue destination="FmU-4V-E2H" kind="relationship" relationship="viewControllers" id="Etp-9k-Awe"/>
+                        <segue destination="3U2-sk-fq4" kind="relationship" relationship="viewControllers" id="Eo1-WJ-qgn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4t-OF-jVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -959,8 +994,9 @@ Create New Ride</string>
         <image name="ic_person" width="25" height="25"/>
         <image name="ic_ride_blue" width="25" height="25"/>
         <image name="ic_send" width="22" height="22"/>
+        <image name="marker" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xrs-mM-ETz"/>
+        <segue reference="fAE-zO-QwM"/>
     </inferredMetricsTieBreakers>
 </document>

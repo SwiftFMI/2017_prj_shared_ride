@@ -60,6 +60,8 @@ PODS:
   - FirebaseUI/Storage (4.5.1):
     - Firebase/Storage (~> 4.0)
     - SDWebImage (~> 4.0)
+  - GeoFire (2.0.1):
+    - Firebase/Database (~> 4.0)
   - GoogleToolboxForMac/DebugUtils (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
@@ -112,6 +114,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - FirebaseUI/Storage
+  - GeoFire
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -126,6 +129,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: dfdcd307c2382290a1e297a81d0f18370f5b1bcd
   FirebaseStorage: 181bb543d39ee3c53e0558de7ba86b1286a0427f
   FirebaseUI: 1dc9c8a87a776b488a28a28541f029e60c824cfd
+  GeoFire: 3e70a24019dc16816190f533c9cac0d1321c4a71
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   gRPC: 572520c17b794362388d5c95396329592a3c199b
   gRPC-Core: af0d4f0a53735e335fccc815c50c0a03da695287
@@ -137,6 +141,6 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
 
-PODFILE CHECKSUM: 62f35f20b9dfe193a791ebe484ff8adf081b2336
+PODFILE CHECKSUM: 73137347ccb81f4de5218c4b66aadc29c834042d
 
 COCOAPODS: 1.3.1

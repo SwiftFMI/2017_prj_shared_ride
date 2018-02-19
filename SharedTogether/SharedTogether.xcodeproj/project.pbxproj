@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35B8F12A203B5A7F004A76A4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8F129203B5A7F004A76A4 /* MapViewController.swift */; };
+		35B8F130203B7A4E004A76A4 /* RideLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8F12F203B7A4E004A76A4 /* RideLocation.swift */; };
+		35B8F132203B88B6004A76A4 /* RideMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B8F131203B88B6004A76A4 /* RideMKAnnotation.swift */; };
 		47C91EEDA311176996B0BCD9 /* Pods_SharedTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */; };
 		A032C47B2012428C00C6975F /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032C47A2012428C00C6975F /* Ride.swift */; };
 		A056F678202F11D000F165DC /* LeaveRideEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056F677202F11CF00F165DC /* LeaveRideEmitter.swift */; };
@@ -51,6 +54,11 @@
 /* Begin PBXFileReference section */
 		01D99852BCB2937A3FD6635E /* Pods-SharedTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SharedTogether.release.xcconfig"; path = "Pods/Target Support Files/Pods-SharedTogether/Pods-SharedTogether.release.xcconfig"; sourceTree = "<group>"; };
 		0DC1F741349851196FE6C54A /* Pods-SharedTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SharedTogether.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SharedTogether/Pods-SharedTogether.debug.xcconfig"; sourceTree = "<group>"; };
+		35B8F129203B5A7F004A76A4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		35B8F12C203B7381004A76A4 /* GeoFire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GeoFire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35B8F12D203B7488004A76A4 /* SharedTogether-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SharedTogether-Bridging-Header.h"; sourceTree = "<group>"; };
+		35B8F12F203B7A4E004A76A4 /* RideLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideLocation.swift; sourceTree = "<group>"; };
+		35B8F131203B88B6004A76A4 /* RideMKAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideMKAnnotation.swift; sourceTree = "<group>"; };
 		91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SharedTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A032C47A2012428C00C6975F /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		A056F675202EE99E00F165DC /* SharedTogether.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SharedTogether.entitlements; sourceTree = "<group>"; };
@@ -110,6 +118,7 @@
 		57E2123DAA57E830B24FAE31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35B8F12C203B7381004A76A4 /* GeoFire.framework */,
 				91BDDD177A3D5AE2B83A3F7D /* Pods_SharedTogether.framework */,
 			);
 			name = Frameworks;
@@ -131,6 +140,7 @@
 				A0D83F202031EA9E006FA25E /* JoinedRidesViewController.swift */,
 				A0D83F2620332970006FA25E /* EditProfileViewController.swift */,
 				A0D83F2C2035DBBB006FA25E /* ChatDetailViewController.swift */,
+				35B8F129203B5A7F004A76A4 /* MapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 				A0A107CB200365CE00A09311 /* LaunchScreen.storyboard */,
 				A0A107CE200365CE00A09311 /* Info.plist */,
 				A056F675202EE99E00F165DC /* SharedTogether.entitlements */,
+				35B8F12D203B7488004A76A4 /* SharedTogether-Bridging-Header.h */,
 			);
 			path = SharedTogether;
 			sourceTree = "<group>";
@@ -199,6 +210,7 @@
 				A06A0E09201F8492000BC494 /* ChatImageMessageTableViewCell.swift */,
 				A06A0E0A201F8492000BC494 /* ChatImageMessageTableViewCell.xib */,
 				A0D83F282035D7C5006FA25E /* ChatDetailTableViewCell.swift */,
+				35B8F131203B88B6004A76A4 /* RideMKAnnotation.swift */,
 				A0D83F292035D7C5006FA25E /* ChatDetailTableViewCell.xib */,
 			);
 			name = Views;
@@ -212,6 +224,7 @@
 				A08A4E27201B6AAC009B2865 /* Message.swift */,
 				A056F679202F132C00F165DC /* LeaveRide.swift */,
 				A0D83F2E20363F02006FA25E /* ChatMember.swift */,
+				35B8F12F203B7A4E004A76A4 /* RideLocation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -328,6 +341,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GeoFire/GeoFire.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -343,6 +357,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GeoFire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -398,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B8F12A203B5A7F004A76A4 /* MapViewController.swift in Sources */,
 				A092C393200FB50300472619 /* CreateRideViewController.swift in Sources */,
 				A0A107E62003C0B800A09311 /* HomeViewController.swift in Sources */,
 				A0A107C5200365CE00A09311 /* WellcomeViewController.swift in Sources */,
@@ -407,6 +423,7 @@
 				A08DB8D6201A380100E32209 /* User.swift in Sources */,
 				A0D83F1B2031DFFB006FA25E /* ProfileViewController.swift in Sources */,
 				A06A0E0B201F8492000BC494 /* ChatImageMessageTableViewCell.swift in Sources */,
+				35B8F130203B7A4E004A76A4 /* RideLocation.swift in Sources */,
 				A0890676200E50550073BC3F /* RideTableViewCell.swift in Sources */,
 				A032C47B2012428C00C6975F /* Ride.swift in Sources */,
 				A0D83F2A2035D7C5006FA25E /* ChatDetailTableViewCell.swift in Sources */,
@@ -414,6 +431,7 @@
 				A0A107C3200365CE00A09311 /* AppDelegate.swift in Sources */,
 				A08B138F200CAD4D00D8B145 /* Extensions.swift in Sources */,
 				A0890673200CC6590073BC3F /* BaseViewController.swift in Sources */,
+				35B8F132203B88B6004A76A4 /* RideMKAnnotation.swift in Sources */,
 				A0D83F212031EA9E006FA25E /* JoinedRidesViewController.swift in Sources */,
 				A08DB8E3201B30F200E32209 /* ChatMessageTableViewCell.swift in Sources */,
 				A08B138D200CA1D800D8B145 /* ReplaceSegue.swift in Sources */,
@@ -575,6 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sharedtogether.app.SharedTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kristianaatasi/FMI/2017_prj_shared_ride/SharedTogether/SharedTogether/SharedTogether-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -595,6 +614,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sharedtogether.app.SharedTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kristianaatasi/FMI/2017_prj_shared_ride/SharedTogether/SharedTogether/SharedTogether-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

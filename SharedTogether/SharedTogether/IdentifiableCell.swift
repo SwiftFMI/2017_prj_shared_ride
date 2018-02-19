@@ -12,3 +12,11 @@ protocol IdentifiableCell {
     static var cellIdentifier: String { get }
 }
 
+extension IdentifiableCell {
+    public static var cellIdentifier: String {
+        get {
+            return String(describing: self)
+        }
+    }
+}
+
