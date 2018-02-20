@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import GeoFire
 
 class CreateRideViewController: BaseViewController {
     
@@ -16,6 +17,8 @@ class CreateRideViewController: BaseViewController {
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var freePlacesTextField: UITextField!
     @IBOutlet weak var dateOfRide: UITextField!
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     let picker = UIDatePicker()
     
@@ -31,12 +34,26 @@ class CreateRideViewController: BaseViewController {
         
         dateOfRide.inputAccessoryView = toolbar
         dateOfRide.inputView = picker
-        dateOfRide.text = Utils.formatDate(date: picker.date)
+//        dateOfRide.text = Utils.formatDate(date: picker.date)
+        
+        //TODO : picker delegate, fix keyboard
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        picker.date = Date()
-        dateOfRide.text = Utils.formatDate(date: picker.date)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.view.frame.width > self.view.frame.height {
+            self.topConstraint.constant = 16.0
+        } else {
+            self.topConstraint.constant = 100.0
+        }
     }
     
     @objc func pickerDonePressed() {
@@ -47,6 +64,10 @@ class CreateRideViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func cancel(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func createRide(_ sender: UIButton) {
@@ -114,7 +135,9 @@ class CreateRideViewController: BaseViewController {
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
         
-        // TODO: Save Location values with GeoFire (at ROOT)
+        let geoFire = GeoFire(firebaseRef: ref)
+        let location = CLLocation(latitude: 42.69751, longitude: 23.32415)
+        geoFire.setLocation(location, forKey: newRideRef.key)
         
         user.joinedRides?[newRideRef.key] = true
         
@@ -136,7 +159,7 @@ class CreateRideViewController: BaseViewController {
         freePlacesTextField.text = ""
         dateOfRide.text = ""
         
-        tabBarController?.selectedIndex = 0
+        self.dismiss(animated: true, completion: nil)
     }
     
     func createGroupChat(dbRef: DatabaseReference, freePlaces: Int, user: User) -> DatabaseReference {
@@ -160,5 +183,23 @@ class CreateRideViewController: BaseViewController {
         newRideGroupRef.setValue(newRideGroup)
         
         return newRideGroupRef
+    }
+        
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            self.topConstraint.constant = 16
+        })
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            self.topConstraint.constant = 100
+        })
     }
 }

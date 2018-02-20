@@ -16,13 +16,13 @@ class RideMKAnnotation: NSObject, MKAnnotation {
     
     var rideId: String?
     
-    override var coordinate: CLLocationCoordinate2D
-    override var title: String?
-    override var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
     
     init(latitute: CLLocationDegrees, longitude: CLLocationDegrees, title: String? = nil, subtitle: String? = nil) {
-        coordinate = CLLocationCoordinate2DMake(latitute, longitude)
-        title = title
-        subtitle = subtitle
+        self.coordinate = CLLocationCoordinate2DMake(latitute, longitude)
+        self.title = title
+        self.subtitle = subtitle
     }
 }

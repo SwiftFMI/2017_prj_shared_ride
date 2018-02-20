@@ -30,14 +30,16 @@ class HomeViewController: BaseViewController {
         user = Defaults.getLoggedUser()
         
         if let ref = ridesReference {
-//            observeAdded = ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
-//                if let dictionary = snapshot.value as? NSDictionary {
-//                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
-//
-//                    self?.rides.append(ride)
-//                    self?.ridesTableView.reloadData()
-//                }
-//            })
+            observeAdded = ref.observe(.childAdded, with: { [weak self] (snapshot) -> Void in
+                if let dictionary = snapshot.value as? NSDictionary {
+                    let ride = Ride(dictionary: dictionary, id: snapshot.key)
+
+                    if !(self?.rides.contains(where: { $0 == ride}))! {
+                        self?.rides.insert(ride, at: 0)
+                        self?.ridesTableView.reloadData()
+                    }
+                }
+            })
             
             observeChanged = ref.observe(.childChanged, with: { [weak self] (snapshot) -> Void in
                 if let dictionary = snapshot.value as? NSDictionary {
@@ -84,7 +86,7 @@ class HomeViewController: BaseViewController {
                             if let dictionary = child.value as? NSDictionary {
                                 let ride = Ride(dictionary: dictionary, id: child.key)
                                 
-                                self?.rides.append(ride)
+                                self?.rides.insert(ride, at: 0)
                             }
                         }
                         
@@ -102,7 +104,7 @@ class HomeViewController: BaseViewController {
                         if let dictionary = child.value as? NSDictionary {
                             let ride = Ride(dictionary: dictionary, id: child.key)
                             
-                            self?.rides.append(ride)
+                            self?.rides.insert(ride, at: 0)
                         }
                     }
                     
@@ -155,14 +157,30 @@ class HomeViewController: BaseViewController {
     }
     
     @IBAction func logout(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            Defaults.removeLoggedUser()
-            performSegue(withIdentifier: "goToWellcome", sender: self)
-            // TODO: redirect to wellcome VC
-        } catch {
-            
+//        do {
+//            try Auth.auth().signOut()
+//            Defaults.removeLoggedUser()
+//            performSegue(withIdentifier: "goToWellcome", sender: self)
+//            // TODO: redirect to wellcome VC
+//        } catch {
+//
+//        }
+        performSegue(withIdentifier: "CreateRide", sender: self)
+
+    }
+    
+    @IBAction func createRide(_ sender: Any) {
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+        if user != nil {
+            let createRideViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "CreateRideNavigationController") as UIViewController
+            self.present(createRideViewController, animated: true, completion: nil)
+        } else {
+            let signUpViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "SignInNavigationController") as UIViewController
+            self.present(signUpViewController, animated: true, completion: nil)
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
