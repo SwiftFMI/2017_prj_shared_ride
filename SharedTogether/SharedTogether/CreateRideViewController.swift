@@ -30,16 +30,16 @@ class CreateRideViewController: BaseViewController {
         toolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
+        doneButton.tintColor = UIColor(red: 86/255, green: 190/255, blue: 197/255, alpha: 1.0)
         toolbar.setItems([doneButton], animated: false)
         
         dateOfRide.inputAccessoryView = toolbar
         dateOfRide.inputView = picker
-//        dateOfRide.text = Utils.formatDate(date: picker.date)
         
-        //TODO : picker delegate, fix keyboard
+        picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
     deinit {
@@ -52,7 +52,7 @@ class CreateRideViewController: BaseViewController {
         if self.view.frame.width > self.view.frame.height {
             self.topConstraint.constant = 16.0
         } else {
-            self.topConstraint.constant = 100.0
+            self.topConstraint.constant = 32.0
         }
     }
     
@@ -67,6 +67,7 @@ class CreateRideViewController: BaseViewController {
     }
     
     @IBAction func cancel(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -184,22 +185,25 @@ class CreateRideViewController: BaseViewController {
         
         return newRideGroupRef
     }
+    
+    @objc func dateChanged(sender: UIDatePicker) {
+        
+        self.dateOfRide.text = Utils.formatDate(date: sender.date)
+    }
         
     @objc func keyboardWillShow(_ notification: NSNotification) {
-        let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.topConstraint.constant = 16
+
+        UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
+            self?.topConstraint.constant = 16
+            self?.view.layoutIfNeeded()
         })
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification) {
-        let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.topConstraint.constant = 100
+
+        UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
+            self?.topConstraint.constant = 32
+            self?.view.layoutIfNeeded()
         })
     }
 }

@@ -16,7 +16,13 @@ import GeoFire
 
 class MapViewController: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
+    fileprivate static let radius: CLLocationDistance = 25000
+    
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.delegate = self
+        }
+    }
     
     var locationManager: CLLocationManager?
     
@@ -25,23 +31,39 @@ class MapViewController: UIViewController {
     var observeChanged: DatabaseHandle?
     var observeRemoved: DatabaseHandle?
     
+    var locationsReference: DatabaseReference?
+    
     var rides: [String: Ride] = [:]
     var locationsDict: [String: CLLocation] = [:]
     
     var mapPins: [RideMKAnnotation] = []
-
+    
     var currentLocation: CLLocation? {
         didSet {
             displayUserLocation()
+            getRidesAroundCurrentLocation()
         }
     }
+    
+    var dateFormatter: DateFormatter {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM, HH:mm"
+            return dateFormatter
+        }
+    }
+    
+    // MARK: - ViewController Life Cycle
     
     override func viewDidLoad() {
         
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         
+        locationsReference = Database.database().reference()
         ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
+        
+        observeDataBaseChanges()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,8 +77,9 @@ class MapViewController: UIViewController {
         
         locationManager?.stopMonitoringSignificantLocationChanges()
     }
-    
 
+    // MARK: - Private
+    
     fileprivate func setupLocationManager() {
         if !CLLocationManager.locationServicesEnabled() {
             return
@@ -77,7 +100,7 @@ class MapViewController: UIViewController {
     fileprivate func displayUserLocation() {
         guard let location = currentLocation else { return }
         
-        let regionRadius: CLLocationDistance = 25000
+        let regionRadius: CLLocationDistance = MapViewController.radius
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
@@ -86,19 +109,21 @@ class MapViewController: UIViewController {
     fileprivate func getRidesAroundCurrentLocation() {
         guard let currLocation = currentLocation else { return }
 
-        if let ref = ridesReference {
+        if let ref = locationsReference {
             let geoFire = GeoFire(firebaseRef: ref)
 
-            let regionRadius: CLLocationDistance = 25000
-            let query = geoFire.query(at: currLocation, withRadius: regionRadius)
+            let region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, MapViewController.radius, MapViewController.radius)
+            let query = geoFire.query(with: region)
             
             query.observe(.keyEntered, with: { [weak self] (key, enteredLocation) in
                 self?.locationsDict[key] = enteredLocation
                 
                 if let ride = self?.rides[key] {
                     
-                    let pin = RideMKAnnotation(latitute: enteredLocation.coordinate.latitude, longitude: enteredLocation.coordinate.longitude, title: ride.destination, subtitle: ride.from)
-                    self?.mapPins.append(pin)
+                    if let destination = ride.destination, let date = ride.dateOfRide {
+                        let pin = RideMKAnnotation(latitute: enteredLocation.coordinate.latitude, longitude: enteredLocation.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date))
+                        self?.mapPins.append(pin)
+                    }
                 }
             })
             query.observeReady { [weak self] in
@@ -131,11 +156,11 @@ class MapViewController: UIViewController {
 
                 self?.rides.removeValue(forKey: snapshot.key)
             })
-            
         }
     }
-
 }
+
+// MARK: - Extenstions
 
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
@@ -156,6 +181,39 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
             locationManager?.startMonitoringSignificantLocationChanges()
+        }
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+
+        let annotationIdentifier = RideMKAnnotation.reuseIdentifier
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView!.canShowCallout = true
+            let infoButton = UIButton(type: .detailDisclosure)
+            annotationView!.rightCalloutAccessoryView = infoButton
+        }
+        else {
+            annotationView!.annotation = annotation
+        }
+        
+        let pinImage = UIImage(named: "snowflake")
+        annotationView!.image = pinImage
+        
+        // TODO: add annotationView?.detailCalloutAccessoryView
+        
+        return annotationView   
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let annotation = view.annotation {
+            if self.mapPins.contains(where: {$0 == annotation as! RideMKAnnotation}) {
+                // TODO: handle selection
+            }
         }
     }
 }

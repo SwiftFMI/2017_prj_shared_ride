@@ -13,9 +13,7 @@ import MapKit
 class RideMKAnnotation: NSObject, MKAnnotation {
     
     static let reuseIdentifier = String(describing: self)
-    
-    var rideId: String?
-    
+        
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
@@ -24,5 +22,13 @@ class RideMKAnnotation: NSObject, MKAnnotation {
         self.coordinate = CLLocationCoordinate2DMake(latitute, longitude)
         self.title = title
         self.subtitle = subtitle
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let annotation = object as? RideMKAnnotation else {
+            return false
+        }
+        
+        return self.coordinate.longitude == annotation.coordinate.longitude && self.coordinate.latitude == annotation.coordinate.latitude
     }
 }

@@ -216,13 +216,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create new ride" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5El-Gn-eoG">
-                                <rect key="frame" x="107" y="164" width="162" height="29"/>
+                                <rect key="frame" x="107" y="88" width="162" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.33546427540000001" green="0.74444544189999995" blue="0.77143480330000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zNb-lJ-7Sx">
-                                <rect key="frame" x="20" y="225" width="335" height="165"/>
+                                <rect key="frame" x="20" y="133" width="335" height="165"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="from" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OtB-HJ-mj1">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -235,7 +235,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="destination" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOR-2o-oHm">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="to" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOR-2o-oHm">
                                         <rect key="frame" x="0.0" y="45" width="335" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -257,7 +257,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date of ride" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9s-Hh-vvm">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="when" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9s-Hh-vvm">
                                         <rect key="frame" x="0.0" y="135" width="335" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -275,8 +275,8 @@
                         <constraints>
                             <constraint firstItem="iBn-fl-1GT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zNb-lJ-7Sx" secondAttribute="bottom" constant="20" id="1Td-Ne-bLA"/>
                             <constraint firstItem="5El-Gn-eoG" firstAttribute="centerX" secondItem="cce-pL-M0A" secondAttribute="centerX" id="1aF-44-v5y"/>
-                            <constraint firstItem="zNb-lJ-7Sx" firstAttribute="top" secondItem="5El-Gn-eoG" secondAttribute="bottom" constant="32" id="5N7-Fz-HoS"/>
-                            <constraint firstItem="5El-Gn-eoG" firstAttribute="top" secondItem="iBn-fl-1GT" secondAttribute="top" constant="100" id="A86-70-yFp"/>
+                            <constraint firstItem="zNb-lJ-7Sx" firstAttribute="top" secondItem="5El-Gn-eoG" secondAttribute="bottom" constant="16" id="5N7-Fz-HoS"/>
+                            <constraint firstItem="5El-Gn-eoG" firstAttribute="top" secondItem="iBn-fl-1GT" secondAttribute="top" constant="24" id="A86-70-yFp"/>
                             <constraint firstItem="zNb-lJ-7Sx" firstAttribute="leading" secondItem="iBn-fl-1GT" secondAttribute="leading" constant="20" id="g98-lO-183"/>
                             <constraint firstItem="iBn-fl-1GT" firstAttribute="trailing" secondItem="zNb-lJ-7Sx" secondAttribute="trailing" constant="20" id="pXh-CR-lfc"/>
                         </constraints>
@@ -689,7 +689,7 @@
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbN-Qv-72j">
                                                 <rect key="frame" x="112" y="265" width="150" height="40"/>
-                                                <color key="backgroundColor" red="0.5359770184" green="0.82914810839999997" blue="0.84513485430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.53725490196078429" green="0.82745098039215681" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="Xzz-rR-yOl"/>
                                                     <constraint firstAttribute="height" constant="40" id="yxU-jI-16G"/>
@@ -884,7 +884,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" red="0.33546427537412332" green="0.74444544185578121" blue="0.77143480329949243" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.33725490196078434" green="0.74509803921568629" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="mB0-QG-nCZ" kind="relationship" relationship="viewControllers" id="wOM-a9-awn"/>
