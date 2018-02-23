@@ -92,7 +92,9 @@ class RideDetailsViewController: BaseViewController {
             if rideOwner == user.id {
                 currentCellIdentifiers.append("RideDetailsDelete")
                 currentCellIdentifiers.remove(at: 0)
-                currentCellIdentifiers.remove(at: 1)
+                if currentCellIdentifiers.count > 1 {
+                    currentCellIdentifiers.remove(at: 1)
+                }
             }
         }
     }
