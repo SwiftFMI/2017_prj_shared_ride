@@ -40,6 +40,8 @@ class MapViewController: UIViewController {
     fileprivate var mapPins: [RideMKAnnotation] = []
     fileprivate var removedMapPins: [RideMKAnnotation] = []
     
+    fileprivate var rideIdToOpen: String?
+    
     var currentLocation: CLLocation? {
         didSet {
             displayUserLocation()
@@ -216,6 +218,13 @@ class MapViewController: UIViewController {
         
         self.present(navController, animated: true, completion: nil)
     }
+    
+    fileprivate func presentLoginScreen() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let signInViewController: UINavigationController = storyboard.instantiateViewController(withIdentifier: "SignInNavigationController") as! UINavigationController
+        (signInViewController.viewControllers.first as! SigninViewController).delegate = self
+        self.present(signInViewController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Extenstions
@@ -270,12 +279,28 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         if let annotation = view.annotation {
             if self.mapPins.contains(where: {$0 == annotation as! RideMKAnnotation}) {
                 if let rideId = (annotation as! RideMKAnnotation).rideId {
-                    presentRideDetailScreen(rideId: rideId)
+                    
+                    if Defaults.getLoggedUser() == nil {
+                        rideIdToOpen = rideId
+                        presentLoginScreen()
+                    } else {
+                        presentRideDetailScreen(rideId: rideId)
+                    }
                 }
             }
+        }
+    }
+}
+
+extension MapViewController: SigninViewControllerDelegate {
+    func didSignInSuccessfully() {
+        if let rideId = rideIdToOpen {
+            presentRideDetailScreen(rideId: rideId)
+            rideIdToOpen = nil
         }
     }
 }
