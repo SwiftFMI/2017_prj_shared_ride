@@ -25,6 +25,7 @@ class MapViewController: UIViewController {
     }
     
     var locationManager: CLLocationManager?
+    var geofireManager: GeoFire?
     
     fileprivate var ridesReference: DatabaseReference?
     fileprivate var observeAdded: DatabaseHandle?
@@ -73,6 +74,7 @@ class MapViewController: UIViewController {
         
         observeDataBaseChanges()
         setupLocationManager()
+        getRidesAroundCurrentLocation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,25 +116,25 @@ class MapViewController: UIViewController {
         guard let currLocation = currentLocation else { return }
 
         if let ref = locationsReference {
-            let geoFire = GeoFire(firebaseRef: ref)
+            geofireManager = GeoFire(firebaseRef: ref)
 
             let region = MKCoordinateRegionMakeWithDistance(currLocation.coordinate, MapViewController.radius, MapViewController.radius)
-            let query = geoFire.query(with: region)
+            let query = geofireManager?.query(with: region)
 
-            query.observe(.keyEntered, with: { [weak self] (key, enteredLocation) in
+            query?.observe(.keyEntered, with: { [weak self] (key, enteredLocation) in
                 self?.locationsDict[key] = enteredLocation
                 
                 if let ride = self?.rides[key] {
                     
                     if let destination = ride.destination, let date = ride.dateOfRide {
                         let pin = RideMKAnnotation(latitute: enteredLocation.coordinate.latitude, longitude: enteredLocation.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date), rideId: ride.rideId)
-                        if !(self?.mapPins.contains(pin))! {
+                        
                             self?.mapPins.append(pin)
-                        }
                     }
                 }
             })
-            query.observe(.keyExited, with: { [weak self] (key, location) in
+            
+            query?.observe(.keyExited, with: { [weak self] (key, location) in
                 self?.locationsDict.removeValue(forKey: key)
                 
                 if let ride = self?.rides[key] {
@@ -149,10 +151,12 @@ class MapViewController: UIViewController {
                 }
             })
             
-            query.observeReady { [weak self] in
+            query?.observeReady { [weak self] in
                 if let pins = self?.mapPins {
                     if let removed = self?.removedMapPins {
-                        self?.mapView.removeAnnotations(removed)
+                        if removed.count > 0 {
+                            self?.mapView.removeAnnotations(removed)
+                        }
                     }
                     self?.mapView.addAnnotations(pins)
                 }
