@@ -26,6 +26,8 @@ class HomeViewController: BaseViewController {
     var observeRemoved: DatabaseHandle?
     var startRideRef: String?
     
+    fileprivate var rideToOpen: Ride?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -191,14 +193,16 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let isAnonymous = Auth.auth().currentUser?.isAnonymous else { return }
         
-        if !isAnonymous {
-            let ride = rides[(indexPath as NSIndexPath).row]
-            performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
-        } else {
+        let ride = rides[(indexPath as NSIndexPath).row]
+
+        if Defaults.getLoggedUser() == nil {
+            rideToOpen = ride
             presentLoginScreen()
+            return
         }
+        
+        performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -226,6 +230,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: SigninViewControllerDelegate {
     func didSignInSuccessfully() {
-        presentCreateRideScreen()
+        if let ride = rideToOpen {
+            performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
+            rideToOpen = nil
+        } else {
+            presentCreateRideScreen()
+        }
     }
 }
