@@ -11,6 +11,10 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseMessaging
 
+protocol SigninViewControllerDelegate: class {
+    func didSignInSuccessfully()
+}
+
 class SigninViewController: BaseViewController {
 
     fileprivate static let defaultTopConstraintValue: CGFloat = 90.0
@@ -24,6 +28,10 @@ class SigninViewController: BaseViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    weak var delegate: SigninViewControllerDelegate?
     
     // MARK: - View Controller Lifecycle
     
@@ -66,61 +74,66 @@ class SigninViewController: BaseViewController {
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
-            if error == nil {
-                if let uuid = user?.uid {
-                    let name = "Kristiana"
-                    let phone = "888888888"
-                    let ref = Database.database().reference().root
-                    let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
-                    
-                    let token = Messaging.messaging().fcmToken ?? ""
-                    let user =
-                        User(id: uuid, email: email, name: name, phone: phone, notificationsToken: token, joinedRides: [String: Bool]())
-                    Defaults.setLoggedUser(user: user)
-                    
-                    ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
-                    
-                } else {
-                    print("errpr uuid not found")
-                }
-            } else {
-                self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
-            }
-        })
-        
-//        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
-//            if let error = error {
-//                self?.showAlert("Error", error.localizedDescription)
-//                return
-//            }
+//        Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self](user, error) in
+//            if error == nil {
+//                if let uuid = user?.uid {
+//                    let name = "Kristiana"
+//                    let phone = "888888888"
+//                    let ref = Database.database().reference().root
+//                    let userDetails = [Constants.Users.EMAIL: email, Constants.Users.NAME: name, Constants.Users.PHONE: phone]
 //
-//            if let wUser = user {
-//
-//                Utils.getUserDetails(uuid: wUser.uid, callBack: { user in
-//
+//                    let token = Messaging.messaging().fcmToken ?? ""
+//                    let user =
+//                        User(id: uuid, email: email, name: name, phone: phone, notificationsToken: token, joinedRides: [String: Bool]())
 //                    Defaults.setLoggedUser(user: user)
 //
-//                    if let token = Messaging.messaging().fcmToken {
-//                        Database.database().reference()
-//                            .child(Constants.Users.ROOT)
-//                            .child(wUser.uid)
-//                            .updateChildValues([Constants.Users.NOTIFICATIONS_TOKEN: token], withCompletionBlock: {(error, dbReference) in
-//                                if error == nil {
-//                                    if var user = Defaults.getLoggedUser() {
-//                                        user.notificationsToken = token
-//                                        Defaults.setLoggedUser(user: user)
-//                                        self?.dismiss(animated: true, completion: nil)
-//                                        self?.presentCreateRideController()
-//                                    }
-//                                }
-//                            })
-//                    } else {
-//                        self?.dismiss(animated: true, completion: nil)
-//                    }
-//                })
-//    }
-//        }
+//                    ref.child(Constants.Users.ROOT).child(uuid).setValue(userDetails)
+//
+//                } else {
+//                    print("errpr uuid not found")
+//                }
+//            } else {
+//                self?.showAlert("Error", error?.localizedDescription ?? "Something went wrong")
+//            }
+//        })
+        
+        self.activityIndicator.startAnimating()
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
+            
+            self?.activityIndicator.stopAnimating()
+            
+            if let error = error {
+                self?.showAlert("Error", error.localizedDescription)
+                return
+            }
+
+            if let wUser = user {
+
+                Utils.getUserDetails(uuid: wUser.uid, callBack: { user in
+
+                    Defaults.setLoggedUser(user: user)
+
+                    if let token = Messaging.messaging().fcmToken {
+                        Database.database().reference()
+                            .child(Constants.Users.ROOT)
+                            .child(wUser.uid)
+                            .updateChildValues([Constants.Users.NOTIFICATIONS_TOKEN: token], withCompletionBlock: {(error, dbReference) in
+                                if error == nil {
+                                    if var user = Defaults.getLoggedUser() {
+                                        user.notificationsToken = token
+                                        Defaults.setLoggedUser(user: user)
+                                        self?.dismiss(animated: true, completion: nil)
+                                        self?.delegate?.didSignInSuccessfully()
+                                    }
+                                }
+                            })
+                    } else {
+                        self?.dismiss(animated: true, completion: nil)
+                    }
+                })
+    }
+        }
     
     }
 

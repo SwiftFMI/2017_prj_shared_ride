@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import GeoFire
+import CoreLocation
 
 class CreateRideViewController: BaseViewController {
     
@@ -17,6 +18,11 @@ class CreateRideViewController: BaseViewController {
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var freePlacesTextField: UITextField!
     @IBOutlet weak var dateOfRide: UITextField!
+    
+    @IBOutlet weak var locationSwitch: UISwitch!
+    
+    var currentUserLocation: CLLocation?
+    var locationManager: CLLocationManager?
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
@@ -38,6 +44,12 @@ class CreateRideViewController: BaseViewController {
         
         picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
+        locationSwitch.addTarget(self, action: #selector(locationSwitchChanged), for: .valueChanged)
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.pausesLocationUpdatesAutomatically = true
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -54,11 +66,6 @@ class CreateRideViewController: BaseViewController {
         } else {
             self.topConstraint.constant = 32.0
         }
-    }
-    
-    @objc func pickerDonePressed() {
-        dateOfRide.text = Utils.formatDate(date: picker.date)
-        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,7 +116,6 @@ class CreateRideViewController: BaseViewController {
         
         guard var user = Defaults.getLoggedUser() else {
             return
-            //TODO: display error or handle case
         }
         
         if picker.date <= Date() {
@@ -136,9 +142,12 @@ class CreateRideViewController: BaseViewController {
         let newRideRef = ref.child(Constants.Rides.ROOT).childByAutoId()
         newRideRef.setValue(newRide)
         
-        let geoFire = GeoFire(firebaseRef: ref)
-        let location = CLLocation(latitude: 42.69751, longitude: 23.32415)
-        geoFire.setLocation(location, forKey: newRideRef.key)
+        if locationSwitch.isOn {
+            let geoFire = GeoFire(firebaseRef: ref)
+            if let location = currentUserLocation {
+                geoFire.setLocation(location, forKey: newRideRef.key)
+            }
+        }
         
         user.joinedRides?[newRideRef.key] = true
         
@@ -190,6 +199,25 @@ class CreateRideViewController: BaseViewController {
         
         self.dateOfRide.text = Utils.formatDate(date: sender.date)
     }
+    
+    @objc func pickerDonePressed() {
+        dateOfRide.text = Utils.formatDate(date: picker.date)
+        self.view.endEditing(true)
+    }
+    
+    @objc func locationSwitchChanged(sender: UISwitch) {
+        
+        if sender.isOn {
+            if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                
+                locationManager?.startUpdatingLocation()
+            } else {
+                locationManager?.requestWhenInUseAuthorization()
+            }
+        } else {
+            locationManager?.stopUpdatingLocation()
+        }
+    }
         
     @objc func keyboardWillShow(_ notification: NSNotification) {
 
@@ -205,5 +233,32 @@ class CreateRideViewController: BaseViewController {
             self?.topConstraint.constant = 32
             self?.view.layoutIfNeeded()
         })
+    }
+}
+
+extension CreateRideViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if currentUserLocation == nil {
+            let lastLocation = locations.last!
+            
+            if lastLocation.timestamp.timeIntervalSinceNow < 5.0 {
+                currentUserLocation = lastLocation
+            }
+        }
+        locationManager?.stopUpdatingLocation()
+    }
+
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if let error = error as? CLError, error.code == .denied {
+            locationManager?.stopUpdatingLocation()
+            return
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            locationManager?.startUpdatingLocation()
+        }
     }
 }

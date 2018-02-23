@@ -33,4 +33,8 @@ struct Ride: Codable {
     static func == (lhs: Ride, rhs: Ride) -> Bool {
         return lhs.rideId == rhs.rideId
     }
+    
+    static func > (lhs: Ride, rhs: Ride) -> Bool {
+        return Double(lhs.dateOfRide!.timeIntervalSinceNow) > Double(rhs.dateOfRide!.timeIntervalSinceNow)
+    }
 }

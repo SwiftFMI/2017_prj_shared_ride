@@ -27,6 +27,8 @@ class HomeViewController: BaseViewController {
     var startRideRef: String?
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         user = Defaults.getLoggedUser()
         
         if let ref = ridesReference {
@@ -116,17 +118,7 @@ class HomeViewController: BaseViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let addedHandle = observeAdded {
-            ridesReference?.removeObserver(withHandle: addedHandle)
-        }
-        
-        if let changedHandle = observeChanged {
-            ridesReference?.removeObserver(withHandle: changedHandle)
-        }
-        
-        if let removedHandle = observeRemoved {
-            ridesReference?.removeObserver(withHandle: removedHandle)
-        }
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidLoad() {
@@ -145,10 +137,17 @@ class HomeViewController: BaseViewController {
             
         })
         loadRides()
+        
+        if let user = self.user {
+            Utils.getUserDetails(uuid: user.id, callBack: { [weak self] user in
+                Defaults.setLoggedUser(user: user)
+                self?.user = user
+            })
+        }
     }
     
     func indexOfRide(ride: Ride) -> Int {
-        return 1;
+        return 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -156,31 +155,13 @@ class HomeViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logout(_ sender: Any) {
-//        do {
-//            try Auth.auth().signOut()
-//            Defaults.removeLoggedUser()
-//            performSegue(withIdentifier: "goToWellcome", sender: self)
-//            // TODO: redirect to wellcome VC
-//        } catch {
-//
-//        }
-        performSegue(withIdentifier: "CreateRide", sender: self)
-
-    }
-    
     @IBAction func createRide(_ sender: Any) {
         
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-
         if user != nil {
-            let createRideViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "CreateRideNavigationController") as UIViewController
-            self.present(createRideViewController, animated: true, completion: nil)
+            presentCreateRideScreen()
         } else {
-            let signUpViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "SignInNavigationController") as UIViewController
-            self.present(signUpViewController, animated: true, completion: nil)
+            presentLoginScreen()
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -189,6 +170,21 @@ class HomeViewController: BaseViewController {
         if let ride = sender as? Ride, let rideDetailsVc = segue.destination as? RideDetailsViewController {
             rideDetailsVc.ride = ride
         }
+    }
+    
+    // MARK: Private
+    
+    fileprivate func presentCreateRideScreen() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let createRideViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "CreateRideNavigationController") as UIViewController
+        self.present(createRideViewController, animated: true, completion: nil)
+    }
+    
+    fileprivate func presentLoginScreen() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let signInViewController: UINavigationController = storyboard.instantiateViewController(withIdentifier: "SignInNavigationController") as! UINavigationController
+        (signInViewController.viewControllers.first as! SigninViewController).delegate = self
+        self.present(signInViewController, animated: true, completion: nil)
     }
 }
 
@@ -201,7 +197,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let ride = rides[(indexPath as NSIndexPath).row]
             performSegue(withIdentifier: Constants.Segues.HomeToDetails, sender: ride)
         } else {
-            showAlert("Error", "You have to log in first")
+            presentLoginScreen()
         }
     }
     
@@ -225,5 +221,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(fromLocation: rideFrom, destination: rideTo, availablePlaces: freePlaces, time: time, date: date)
         
         return cell
+    }
+}
+
+extension HomeViewController: SigninViewControllerDelegate {
+    func didSignInSuccessfully() {
+        presentCreateRideScreen()
     }
 }
