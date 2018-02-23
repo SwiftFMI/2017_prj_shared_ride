@@ -277,7 +277,15 @@ extension RideDetailsViewController: UITableViewDelegate {
             call()
             break
         case "RideDetailsDelete":
-            deleteRide()
+            let alert = UIAlertController(title: "Confirm Deletion", message: "Are you sure you want to delete this ride?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { [weak self] action in
+                self?.deleteRide()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
             break
         default:
             break
