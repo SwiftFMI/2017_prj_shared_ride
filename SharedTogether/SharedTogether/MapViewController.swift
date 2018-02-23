@@ -80,7 +80,7 @@ class MapViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        locationManager?.stopMonitoringSignificantLocationChanges()
+        locationManager?.stopUpdatingLocation()
     }
 
     // MARK: - Private
@@ -90,16 +90,11 @@ class MapViewController: UIViewController {
             return
         }
         
-        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
-            return
-        }
-        
-        let authorizationStatus = CLLocationManager.authorizationStatus()
-        if authorizationStatus != .authorizedAlways {
-            // TODO: make it to work with when in-use auth
-            locationManager?.requestAlwaysAuthorization()
+        if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            
+            locationManager?.startUpdatingLocation()
         } else {
-            locationManager?.startMonitoringSignificantLocationChanges()
+            locationManager?.requestWhenInUseAuthorization()
         }
     }
     
@@ -227,23 +222,27 @@ class MapViewController: UIViewController {
 
 extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
-        let lastLocation = locations.last!
         
-        if lastLocation.timestamp.timeIntervalSinceNow < 5.0 {
-            currentLocation = lastLocation
+        if currentLocation == nil {
+            let lastLocation = locations.last!
+            
+            if lastLocation.timestamp.timeIntervalSinceNow < 5.0 {
+                currentLocation = lastLocation
+            }
         }
+        locationManager?.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
-            locationManager?.stopMonitoringSignificantLocationChanges()
+            locationManager?.stopUpdatingLocation()
             return
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            locationManager?.startMonitoringSignificantLocationChanges()
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            locationManager?.startUpdatingLocation()
         }
     }
 }
