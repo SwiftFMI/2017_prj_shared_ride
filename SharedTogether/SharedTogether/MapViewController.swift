@@ -125,7 +125,7 @@ class MapViewController: UIViewController {
                 if let ride = self?.rides[key] {
                     
                     if let destination = ride.destination, let date = ride.dateOfRide {
-                        let pin = RideMKAnnotation(latitute: enteredLocation.coordinate.latitude, longitude: enteredLocation.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date))
+                        let pin = RideMKAnnotation(latitute: enteredLocation.coordinate.latitude, longitude: enteredLocation.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date), rideId: ride.rideId)
                         if !(self?.mapPins.contains(pin))! {
                             self?.mapPins.append(pin)
                         }
@@ -138,7 +138,7 @@ class MapViewController: UIViewController {
                 if let ride = self?.rides[key] {
                     
                     if let destination = ride.destination, let date = ride.dateOfRide {
-                        let pin = RideMKAnnotation(latitute: location.coordinate.latitude, longitude: location.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date))
+                        let pin = RideMKAnnotation(latitute: location.coordinate.latitude, longitude: location.coordinate.longitude, title: "to: \(destination)", subtitle: self?.dateFormatter.string(from: date), rideId: ride.rideId)
                         if (self?.mapPins.contains(pin))! {
                             if let index = self?.mapPins.index(of: pin) {
                                 self?.mapPins.remove(at: index)
@@ -203,6 +203,20 @@ class MapViewController: UIViewController {
             })
         }
     }
+    
+    fileprivate func presentRideDetailScreen(rideId: String) {
+        let ride = self.rides[rideId]
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let rideViewController: RideDetailsViewController = storyboard.instantiateViewController(withIdentifier: "RideDetailsViewController") as! RideDetailsViewController
+        rideViewController.ride = ride
+        
+        let navController = UINavigationController(rootViewController: rideViewController)
+        let backItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        navController.navigationItem.backBarButtonItem = backItem
+        
+        self.present(navController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - Extenstions
@@ -255,7 +269,9 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation {
             if self.mapPins.contains(where: {$0 == annotation as! RideMKAnnotation}) {
-                // TODO: handle selection
+                if let rideId = (annotation as! RideMKAnnotation).rideId {
+                    presentRideDetailScreen(rideId: rideId)
+                }
             }
         }
     }

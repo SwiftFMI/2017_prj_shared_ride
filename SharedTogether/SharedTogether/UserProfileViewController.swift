@@ -61,6 +61,8 @@ class UserProfileViewController: BaseViewController {
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         
+        userImageView.clipsToBounds = true
+        
         ridesReference = Database.database().reference().child(Constants.Rides.ROOT)
         
         getJoinedRides()

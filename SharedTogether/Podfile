@@ -16,5 +16,7 @@ target 'SharedTogether' do
   pod 'Alamofire'
   
   pod 'GeoFire'
+  
+  pod 'KVNProgress'
 
 end

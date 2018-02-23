@@ -10,5 +10,6 @@
 #define SharedTogether_Bridging_Header_h
 
 #import "GeoFire/GeoFire.h"
+#import <KVNProgress/KVNProgress.h>
 
 #endif /* SharedTogether_Bridging_Header_h */

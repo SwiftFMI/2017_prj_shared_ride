@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import Alamofire
+import KVNProgress
 
 class RideDetailsViewController: BaseViewController {
 
@@ -60,6 +61,10 @@ class RideDetailsViewController: BaseViewController {
     // MARK: - Actions
     
     @objc func backTapped(_ sender: UIBarButtonItem) {
+        if KVNProgress.isVisible() {
+            KVNProgress.dismiss()
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -120,6 +125,8 @@ class RideDetailsViewController: BaseViewController {
         guard let rideId = ride.rideId else { return }
         guard let rideFreePlaces = ride.freePlaces else { return }
         
+        KVNProgress.show(withStatus: "Joining ride...")
+        
         var freePlaces = Int(rideFreePlaces)!
         if freePlaces > 0 {
             freePlaces -= 1
@@ -142,8 +149,10 @@ class RideDetailsViewController: BaseViewController {
         Alamofire
             .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .response { [weak self] response in
+                
+                KVNProgress.dismiss()
+                
                 if  response.response?.statusCode == 200  {
-                    //TODO hide loader and update current user profile
                     
                     user.joinedRides?["\(rideId)"] = true
                     Defaults.setLoggedUser(user: user)
@@ -164,6 +173,8 @@ class RideDetailsViewController: BaseViewController {
         guard let rideChatId = ride?.groupChatId else { return }
         guard let rideFreePlaces = ride?.freePlaces else { return }
         
+        KVNProgress.show(withStatus: "Leaving ride...")
+
         Database.database().reference()
             .child(Constants.Users.ROOT)
             .child(user.id)
@@ -187,8 +198,10 @@ class RideDetailsViewController: BaseViewController {
         Alamofire
             .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .response { [weak self] response in
+                
+                KVNProgress.dismiss()
+                
                 if  response.response?.statusCode == 200  {
-                    //TODO hide loader and update current user profile
                     
                     user.joinedRides?["\(rideId)"] = false
                     Defaults.setLoggedUser(user: user)
@@ -207,6 +220,8 @@ class RideDetailsViewController: BaseViewController {
         guard var user = Defaults.getLoggedUser() else { return }
         guard let rideChatId = ride?.groupChatId else { return }
         
+        KVNProgress.show(withStatus: "Deleting ride...")
+        
         let parameters: Parameters = [
             "rideId": rideId,
             "userId": user.id,
@@ -218,8 +233,10 @@ class RideDetailsViewController: BaseViewController {
         Alamofire
             .request(url.absoluteString, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .response { response in
+                
+                KVNProgress.dismiss()
+                
                 if  response.response?.statusCode == 200  {
-                    //TODO add KVN
                     
                     user.joinedRides?["\(rideId)"] = false
                     Defaults.setLoggedUser(user: user)

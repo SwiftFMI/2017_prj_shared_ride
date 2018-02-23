@@ -18,10 +18,13 @@ class RideMKAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     
-    init(latitute: CLLocationDegrees, longitude: CLLocationDegrees, title: String? = nil, subtitle: String? = nil) {
+    var rideId: String?
+    
+    init(latitute: CLLocationDegrees, longitude: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, rideId: String?) {
         self.coordinate = CLLocationCoordinate2DMake(latitute, longitude)
         self.title = title
         self.subtitle = subtitle
+        self.rideId = rideId
     }
     
     override func isEqual(_ object: Any?) -> Bool {

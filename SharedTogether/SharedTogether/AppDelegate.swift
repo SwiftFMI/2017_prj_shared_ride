@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import KVNProgress
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -88,6 +89,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 })
         }
         print("FCM token: \(token ?? "")")
+        
+        // KVNProgress
+        let configuration = KVNProgressConfiguration()
+        configuration.isFullScreen = true
+        let color = UIColor(red: 86/255, green: 190/255, blue: 197/255, alpha: 1.0)
+        configuration.circleStrokeForegroundColor = color
+        configuration.circleStrokeBackgroundColor = UIColor.lightGray
+        configuration.statusColor = UIColor.darkText
+        
+        KVNProgress.setConfiguration(configuration)
         
         return true
     }
